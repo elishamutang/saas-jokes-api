@@ -3,6 +3,7 @@
 use App\Models\Joke;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\Fluent\AssertableJson;
 use function Spatie\PestPluginTestTime\testTime;
 
 uses(RefreshDatabase::class);
@@ -10,59 +11,67 @@ testTime()->freeze('2025-09-28 16:37:00');
 
 // Browse all jokes
 test('get all jokes', function () {
-    // Create users
-    User::factory(5)->create();
-
     // Create jokes
-    $jokes = [
-        [
-            'title' => fake()->word,
-            'content' => fake()->text,
-            'user_id' => 1,
-        ],
-        [
-            'title' => fake()->word,
-            'content' => fake()->text,
-            'user_id' => 2,
-        ],
-    ];
+    Joke::factory(5)->create();
 
-    foreach($jokes as $joke) {
-        Joke::create($joke);
-    }
-
-    // Mock result
-    $result = [
-        'success' => true,
-        'message' => 'Jokes retrieved successfully',
-        'data' => $jokes,
-    ];
-
-    // Get response
+    // Get all jokes
     $response = $this->getJson('/api/v2/jokes');
 
     // Assert
     $response->assertStatus(200)
-        ->assertJsonCount(2, 'data')
-        ->assertJson($result);
+        ->assertJson(fn(AssertableJson $json) =>
+            $json->hasAll(['success', 'message', 'data'])
+                ->where('success', true)
+                ->where('data.current_page', 1)
+                ->where('data.per_page', 5)
+                ->has('data.data', 5)
+        );
 });
 
-// Read a single joke
-test('get a single joke', function () {
+test('get specific number of jokes per page', function () {
+    // Create jokes
+    Joke::factory(10)->create();
+
+    // Get jokes
+    $perPage = 2;
+    $response = $this->getJson("/api/v2/jokes?per_page=$perPage");
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson(fn(AssertableJson $json) =>
+            $json->hasAll(['success', 'message', 'data'])
+                ->where('success', true)
+                ->where('data.current_page', 1)
+                ->where('data.per_page', 2)
+                ->has('data.data', $perPage)
+        );
+});
+
+test('search for a joke based on title', function () {
     // Create users
-    User::factory(5)->create();
+    User::factory(10)->create();
 
     // Create jokes
     $jokes = [
         [
-            'title' => fake()->word,
-            'content' => fake()->text,
+            'title' => 'Joke 1',
+            'content' => 'Joke 1 content',
             'user_id' => 1,
         ],
         [
-            'title' => fake()->word,
-            'content' => fake()->text,
+            'title' => 'Joke 2',
+            'content' => 'Joke 2 content',
             'user_id' => 2,
+        ],
+        [
+            'title' => 'Joke 3',
+            'content' => 'Joke 3 content',
+            'user_id' => 3,
+        ],
+        [
+            'title' => 'This is Joke 4',
+            'content' => 'Joke 4 content',
+            'user_id' => 4,
         ],
     ];
 
@@ -70,18 +79,40 @@ test('get a single joke', function () {
         Joke::create($joke);
     }
 
+    // Get joke
+    $searchKeyword = 'this';
+    $response = $this->getJson("/api/v2/jokes?search=$searchKeyword");
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson(fn(AssertableJson $json) =>
+            $json->hasAll(['success', 'message', 'data'])
+                ->where('success', true)
+                ->where('data.data.0.title', 'This is Joke 4')
+                ->has('data.data', 1)
+        );
+});
+
+// Read a single joke
+test('get a single joke', function () {
+    // Create jokes
+    Joke::factory(5)->create();
+
+    $joke = Joke::limit(1)->get();
+    $jokeId = $joke[0]->id;
+
     // Mock result
-    $result = [
+    $data = [
         'success' => true,
-        'message' => 'Joke retrieved successfully',
-        'data' => $jokes[1],
+        'message' => "Joke retrieved successfully",
+        'data' => $joke[0]->toArray(),
     ];
 
     // Get response
-    $response = $this->getJson('/api/v2/jokes/2');
+    $response = $this->getJson("/api/v2/jokes/$jokeId");
 
     // Assert
-    $response->assertStatus(200)->assertJson($result);
+    $response->assertStatus(200)->assertJson($data);
 });
 
 // Update a single joke
