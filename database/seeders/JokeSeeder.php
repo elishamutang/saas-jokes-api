@@ -29,6 +29,36 @@ class JokeSeeder extends Seeder
                 'user_id' => 100,
                 'categories' => ['Pirate', 'Maths'],
             ],
+            [
+                'title' => 'SQL Bar',
+                'content' => 'An SQL query walks into a bar, sees two tables, and asks: "Can I join you?"',
+                'user_id' => 100,
+                'categories' => ['SQL', 'Database', 'Programming'],
+            ],
+            [
+                'title' => 'Light Bulb',
+                'content' => 'How many programmers does it take to change a light bulb? None. That’s a hardware problem.',
+                'user_id' => 100,
+                'categories' => ['Hardware', 'Programming', 'Devices'],
+            ],
+            [
+                'title' => 'Java Divorce',
+                'content' => 'Why did the two Java methods get a divorce? Because they had constant arguments.',
+                'user_id' => 100,
+                'categories' => ['Java', 'Programming'],
+            ],
+            [
+                'title' => 'Halloween vs Christmas',
+                'content' => 'Why do programmers always mix up Christmas and Halloween? Because Dec 25 == Oct 31.',
+                'user_id' => 100,
+                'categories' => ['Programming', 'Dates', 'Logic'],
+            ],
+            [
+                'title' => 'Cache Bankruptcy',
+                'content' => 'Why did the edge server go bankrupt? Because it ran out of cache.',
+                'user_id' => 100,
+                'categories' => ['Server', 'Caching', 'Programming'],
+            ],
         ];
 
         $users = User::all()->pluck('id', 'id')->toArray();

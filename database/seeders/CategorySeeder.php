@@ -33,6 +33,46 @@ class CategorySeeder extends Seeder
                 'title' => 'Pirate',
                 'description' => 'Aaaaarrrrrrrrgh, me hearties!',
             ],
+            [
+                'title' => 'Skeleton',
+                'description' => 'Jokes about skeletons and bones.',
+            ],
+            [
+                'title' => 'Maths',
+                'description' => 'Jokes related to mathematics.',
+            ],
+            [
+                'title' => 'Programming',
+                'description' => 'Jokes related to programming and software development.',
+            ],
+            [
+                'title' => 'SQL',
+                'description' => 'Database and SQL related humor.',
+            ],
+            [
+                'title' => 'Hardware',
+                'description' => 'Jokes about computer hardware and devices.',
+            ],
+            [
+                'title' => 'Java',
+                'description' => 'Jokes related to the Java programming language.',
+            ],
+            [
+                'title' => 'Dates',
+                'description' => 'Jokes related to date/time and formatting.',
+            ],
+            [
+                'title' => 'Logic',
+                'description' => 'Logical and programming-related humor.',
+            ],
+            [
+                'title' => 'Server',
+                'description' => 'Jokes about servers and hosting.',
+            ],
+            [
+                'title' => 'Caching',
+                'description' => 'Humor based on caching mechanisms.',
+            ],
         ];
 
         // Shuffle the categories for fun ;)
