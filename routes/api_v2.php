@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\v1\AuthController as AuthControllerV1;
+use App\Http\Controllers\Api\v2\AuthController as AuthControllerV2;
 use App\Http\Controllers\Api\v2\CategoryController as CategoryControllerV2;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\v2\JokeController as JokeControllerV2;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -17,15 +17,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')
     ->group(function () {
-        Route::post('register', [AuthControllerV1::class, 'register']);
-        Route::post('login', [AuthControllerV1::class, 'login']);
+        Route::post('register', [AuthControllerV2::class, 'register']);
+        Route::post('login', [AuthControllerV2::class, 'login']);
 
-        Route::get('profile', [AuthControllerV1::class, 'profile'])
+        Route::get('profile', [AuthControllerV2::class, 'profile'])
             ->middleware(['auth:sanctum',]);
-        Route::post('logout', [AuthControllerV1::class, 'logout'])
+        Route::post('logout', [AuthControllerV2::class, 'logout'])
             ->middleware(['auth:sanctum',]);
 
     });
+
+// Jokes Routes
+Route::apiResource('/jokes', JokeControllerV2::class);
+
 
 /* Categories Routes ------------------------------------------------------ */
 Route::get('categories/trash', [CategoryControllerV2::class, 'trash'])
