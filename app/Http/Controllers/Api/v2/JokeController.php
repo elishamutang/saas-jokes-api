@@ -8,16 +8,42 @@ use App\Http\Requests\UpdateJokeRequest;
 use App\Models\Joke;
 use App\Responses\ApiResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class JokeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        // Get all jokes
-        $jokes = Joke::all();
+        // Check for per_page query.
+        $perPage = (int) $request->query('per_page', 5);
+
+        if ($perPage < 1) {
+            return ApiResponse::error(
+                [],
+                'Per page must be an integer greater than 0.',
+                400,
+            );
+        }
+
+        // Search
+        $validated = $request->validate([
+            'search' => ['nullable', 'string'],
+        ]);
+
+        $search = $validated['search'] ?? '';
+        if (!empty($search)) {
+            $jokes = Joke::whereAny(
+                ['title'], 'LIKE', "%$search%")
+                ->paginate($perPage);
+        } else {
+            // Get all jokes
+            $jokes = Joke::paginate($perPage);
+        }
+
         return ApiResponse::success($jokes, "Jokes retrieved successfully");
     }
 
