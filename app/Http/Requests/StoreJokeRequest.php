@@ -11,7 +11,7 @@ class StoreJokeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class StoreJokeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:96'],
+            'content' => ['nullable', 'string'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'Joke title is required',
+            'title.max' => 'Joke title must be less than 96 characters.',
         ];
     }
 }
