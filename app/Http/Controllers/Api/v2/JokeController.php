@@ -8,9 +8,6 @@ use App\Http\Requests\UpdateJokeRequest;
 use App\Models\Joke;
 use App\Responses\ApiResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 
 class JokeController extends Controller
 {
@@ -22,14 +19,6 @@ class JokeController extends Controller
         // Get all jokes
         $jokes = Joke::all();
         return ApiResponse::success($jokes, "Jokes retrieved successfully");
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
