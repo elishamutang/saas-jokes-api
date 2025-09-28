@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Api\v2\AuthController as AuthControllerV2;
 use App\Http\Controllers\Api\v2\CategoryController as CategoryControllerV2;
 use App\Http\Controllers\Api\v2\JokeController as JokeControllerV2;
@@ -26,6 +27,9 @@ Route::prefix('auth')
             ->middleware(['auth:sanctum',]);
 
     });
+
+// User Routes
+Route::apiResource('/users', UserController::class);
 
 // Jokes Routes
 Route::apiResource('/jokes', JokeControllerV2::class);
