@@ -11,7 +11,7 @@ class UpdateJokeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class UpdateJokeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['sometimes', 'string', 'max:96'],
+            'content' => ['sometimes', 'string'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'title.max' => 'Joke title must be less than 96 characters.',
         ];
     }
 }
