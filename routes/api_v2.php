@@ -34,8 +34,9 @@ Route::apiResource('/users', UserController::class);
 // Jokes Routes
 Route::apiResource('/jokes', JokeControllerV2::class);
 
+// Categories routes
+Route::apiResource("/categories", CategoryControllerV2::class);
 
-/* Categories Routes ------------------------------------------------------ */
 Route::get('categories/trash', [CategoryControllerV2::class, 'trash'])
     ->name('categories.trash');
 
@@ -53,8 +54,6 @@ Route::post('categories/trash/{id}/recover', [CategoryControllerV2::class, 'reco
 
 /** Stop people trying to "GET" admin/categories/trash/1234/delete or similar */
 Route::get('categories/trash/{id}/{method}', [CategoryControllerV2::class, 'trash']);
-
-Route::resource("categories", CategoryControllerV2::class);
 
 Route::post('categories/{category}/delete', [CategoryControllerV2::class, 'delete'])
     ->name('categories.delete');
