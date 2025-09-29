@@ -22,8 +22,8 @@ class UpdateJokeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['sometimes', 'string', 'max:96'],
-            'content' => ['sometimes', 'string'],
+            'title' => ['sometimes', 'required', 'string', 'max:96'],
+            'content' => ['sometimes', 'required', 'string'],
         ];
     }
 
