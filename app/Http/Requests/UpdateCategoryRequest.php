@@ -11,7 +11,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['sometimes', 'required', 'string'],
+            'description' => ['sometimes', 'required', 'string'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'Title cannot be empty.',
+            'description.required' => 'Description cannot be empty.',
         ];
     }
 }
