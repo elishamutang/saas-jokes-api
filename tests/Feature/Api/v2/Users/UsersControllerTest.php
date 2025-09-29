@@ -2,6 +2,8 @@
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Testing\Fluent\AssertableJson;
 use function Spatie\PestPluginTestTime\testTime;
 
@@ -109,17 +111,98 @@ test('get a single user', function() {
         ->assertJson($data);
 });
 
-// TODO: Create a single user
+// Create a single user
 test('create a single user', function() {
-    // Pending
+    // Prepare user
+    $user = [
+        'name' => 'New User',
+        'email' => 'new@example.com',
+        'password' => 'password1',
+    ];
+
+    // Create user
+    $response = $this->postJson("/api/v2/users", $user);
+
+    // Assert
+    $response->assertStatus(200);
+
+    $this->assertDatabaseHas('users', ['email' => 'new@example.com']);
 });
 
-// TODO: Update a single user
-test('update a single user', function() {
-    // Pending
+// Update an existing user's name and email
+test("update an existing user's name and email", function() {
+    // Prepare user
+    $user = User::factory(1)->create();
+
+    // Get user id
+    $userId = $user[0]->id;
+
+    // Prepare updated data
+    $updatedUser = [
+        'name' => 'Updated user',
+        'email' => 'updated@example.com',
+    ];
+
+    // Update user
+    $response = $this->putJson("/api/v2/users/$userId", $updatedUser);
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => 'User updated successfully',
+            'data' => $updatedUser,
+        ]);
+
+    $this->assertDatabaseHas('users', [
+        'id' => $userId,
+        'name' => $updatedUser['name'],
+        'email' => $updatedUser['email'],
+    ]);
 });
 
-// TODO: Delete a single user
+// Update an existing user's password
+test("update an existing user's password", function() {
+    // Prepare user
+    $user = User::factory()->create(['password' => Hash::make('oldpassword')]);
+
+    // Get user id
+    $userId = $user->id;
+
+    // Prepare updated password
+    $newPassword = 'newpassword';
+
+    // Update user
+    $response = $this->putJson("/api/v2/users/$userId", ['password' => $newPassword]);
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "User updated successfully",
+        ]);
+
+    // Reload from database because $user variable still holds old data in memory.
+    $user->refresh();
+
+    // Assert password was changed and hashed properly
+    assert(Hash::check($newPassword, $user->password));
+});
+
+// Delete a single user
 test('delete a single user', function() {
-    // Pending
+    // Prepare users
+    User::factory(5)->create();
+
+    // Get user to be deleted
+    $user = User::limit(1)->get();
+    $userId = $user[0]->id;
+
+    // Delete user
+    $response = $this->deleteJson("/api/v2/users/$userId");
+
+    // Assert
+    $response->assertStatus(200);
+
+    $this->assertSoftDeleted('users', ['id' => $userId]);
 });
