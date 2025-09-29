@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Responses\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -47,9 +49,14 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        // Validate request
+        $validated = $request->validated();
+
+        // Create user
+        $user = User::create($validated);
+        return ApiResponse::success($user, "User created successfully");
     }
 
     /**
@@ -64,9 +71,16 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+        // Validate request
+        $validated = $request->validated();
+
+        // Find user and update
+        $user = User::findOrFail((int) $id);
+        $user->update($validated);
+
+        return ApiResponse::success($user, "User updated successfully");
     }
 
     /**
@@ -74,6 +88,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Find user
+        $user = User::findOrFail((int) $id);
+        $user->delete();
+
+        return ApiResponse::success('', "User deleted successfully");
     }
 }
