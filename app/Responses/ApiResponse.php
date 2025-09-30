@@ -2,6 +2,7 @@
 
 namespace App\Responses;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -23,7 +24,7 @@ class ApiResponse
     ): void
     {
         Log::error($error);
-        throw new \HttpResponseException(
+        throw new HttpResponseException(
             response()->json(['message' => $message], 500)
         );
     }
