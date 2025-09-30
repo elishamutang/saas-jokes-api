@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Responses\ApiResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,10 +17,35 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
-        return ApiResponse::success($categories, "Categories retrieved");
+        // Check if per_page query is present in request.
+        $perPage = (int) $request->query('per_page', 5);
+
+        if ($perPage < 1) {
+            return ApiResponse::error(
+                [],
+                'Per page must be more than 0.',
+                400
+            );
+        }
+
+        // Validate search if present in request.
+        $validated = $request->validate([
+            'search' => ['nullable', 'string'],
+        ]);
+
+        $search = $validated['search'] ?? '';
+
+        if (!empty($search)) {
+            $categories = Category::whereAny(
+                ['title'], 'LIKE', "%$search%")
+                ->paginate($perPage);
+        } else {
+            $categories = Category::paginate($perPage);
+        }
+
+        return ApiResponse::success($categories, "Categories retrieved successfully");
     }
 
     /**
@@ -26,16 +54,13 @@ class CategoryController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        $validated = $request->validate([
-            'title' => ['string', 'required', 'min:4'],
-            'description' => ['string', 'nullable', 'min:6'],
-        ]);
-
+        // Validate request
+        $validated = $request->validated();
         $category = Category::create($validated);
 
-        return ApiResponse::success($category, 'Category created', 201);
+        return ApiResponse::success($category, 'Category created successfully');
     }
 
     /**
@@ -46,12 +71,14 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $category = Category::whereId($id)->get();
-
-        if (count($category) === 0) {
-            return ApiResponse::error($category, "Category not found", 404);
+        try {
+            // Find category
+            $category = Category::findOrFail((int) $id);
+            return ApiResponse::success($category, "Category retrieved successfully");
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], "Category not found", 404);
         }
-        return ApiResponse::success($category, "Category retrieved");
+
     }
 
     /**
@@ -59,69 +86,115 @@ class CategoryController extends Controller
      *
      * @param Request $request
      * @param string $id
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCategoryRequest $request, string $id)
     {
-        //
+        // Validate request
+        $validated = $request->validated();
+
+        try {
+            // Find category
+            $category = Category::findOrFail((int) $id);
+            $category->update($validated);
+
+            return ApiResponse::success($category, "Category updated successfully");
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], "Category not found", 404);
+        }
     }
 
     /**
      * Remove the specified Category from storage.
      *
      * @param string $id
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            // Find category
+            $category = Category::findOrFail((int) $id);
+            $category->delete();
+
+            return ApiResponse::success('', "Category deleted successfully");
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], "Category not found", 404);
+        }
     }
 
     /**
      * Show all soft deleted Categories
      *
      * @param Request $request
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function trash(Request $request)
     {
+        // Check if per_page query is present in request.
+        $perPage = (int) $request->query('per_page', 5);
+
+        if ($perPage < 1) {
+            return ApiResponse::error(
+                [],
+                'Per page must be more than 0.',
+                400
+            );
+        }
+
+        $categories = Category::onlyTrashed()->paginate($perPage);
+        return ApiResponse::success($categories, "Deleted categories retrieved successfully");
     }
 
     /**
      * Recover all soft deleted categories from trash
      *
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function recoverAll()
     {
+        $numOfCategoriesRestored = Category::onlyTrashed()->restore();
+        return ApiResponse::success('', "$numOfCategoriesRestored categories restored successfully");
     }
 
     /**
      * Remove all soft deleted categories from trash
      *
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function removeAll()
     {
+        $numOfCategoriesRemoved = Category::onlyTrashed()->forceDelete();
+        return ApiResponse::success('', "$numOfCategoriesRemoved categories removed successfully");
     }
 
     /**
      * Recover specified soft deleted category from trash
      *
      * @param string $id
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function recoverOne(string $id)
     {
+        // Find soft deleted category
+        $category = Category::onlyTrashed()->find((int) $id);
+        $category->restore();
+
+        return ApiResponse::success('', "Category restored successfully");
     }
 
     /**
      * Remove specified soft deleted category from trash
      *
      * @param string $id
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function removeOne(string $id)
     {
+        // Find soft deleted category
+        $category = Category::onlyTrashed()->find((int) $id);
+        $category->forceDelete();
+
+        return ApiResponse::success('', "Category permanently deleted successfully");
     }
 }
