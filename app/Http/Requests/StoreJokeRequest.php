@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreJokeRequest extends FormRequest
 {
@@ -23,7 +25,8 @@ class StoreJokeRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:96'],
-            'content' => ['nullable', 'string'],
+            'content' => ['required', 'string'],
+            'reference' => ['nullable', 'string'],
         ];
     }
 
@@ -32,6 +35,19 @@ class StoreJokeRequest extends FormRequest
         return [
             'title.required' => 'Joke title is required',
             'title.max' => 'Joke title must be less than 96 characters.',
+            'content.required' => 'Joke content is required.',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json(
+                [
+                    'message' => "Please fix validation errors",
+                    'success' => false,
+                    'errors' => $validator->errors(),
+                ], 422)
+        );
     }
 }
