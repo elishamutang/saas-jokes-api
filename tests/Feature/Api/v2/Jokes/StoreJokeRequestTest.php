@@ -42,6 +42,23 @@ test('fails validation for store joke request with missing title', function () {
     expect($validator->errors()->has('title'))->toBeTrue();
 });
 
+test('fails validation for store joke request with missing content', function () {
+    // Get instance of StoreJokeRequest
+    $request = new StoreJokeRequest();
+
+    // Prepare data
+    $data = [
+        'title' => 'Joke title',
+    ];
+
+    // Validate
+    $validator = Validator::make($data, $request->rules());
+
+    // Assert
+    expect($validator->fails())->toBeTrue();
+    expect($validator->errors()->has('content'))->toBeTrue();
+});
+
 test('fails validation for store joke request with title exceeding max length', function () {
     // Get instance of StoreJokeRequest
     $request = new StoreJokeRequest();
