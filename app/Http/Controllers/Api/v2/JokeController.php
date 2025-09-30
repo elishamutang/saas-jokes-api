@@ -7,6 +7,7 @@ use App\Http\Requests\StoreJokeRequest;
 use App\Http\Requests\UpdateJokeRequest;
 use App\Models\Joke;
 use App\Responses\ApiResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -62,8 +63,12 @@ class JokeController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        $joke = Joke::findOrFail((int) $id);
-        return ApiResponse::success($joke, 'Joke retrieved successfully');
+        try {
+            $joke = Joke::findOrFail((int) $id);
+            return ApiResponse::success($joke, 'Joke retrieved successfully');
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], 'Joke not found', 404);
+        }
     }
 
     /**
@@ -71,15 +76,18 @@ class JokeController extends Controller
      */
     public function update(UpdateJokeRequest $request, string $id): JsonResponse
     {
-        // Find joke
-        $joke = Joke::findOrFail((int) $id);
+        try {
+            $joke = Joke::findOrFail((int) $id);
 
-        // Validate request
-        $validated = $request->validated();
+            // Validate request
+            $validated = $request->validated();
 
-        // Update joke
-        $joke->update($validated);
-        return ApiResponse::success($joke, 'Joke updated successfully');
+            // Update joke
+            $joke->update($validated);
+            return ApiResponse::success($joke, 'Joke updated successfully');
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], 'Joke not found', 404);
+        }
     }
 
     /**
@@ -87,10 +95,14 @@ class JokeController extends Controller
      */
     public function destroy(string $id): JsonResponse
     {
-        // Find joke
-        $joke = Joke::findOrFail((int) $id);
-        $joke->delete();
+        try {
+            // Find joke
+            $joke = Joke::findOrFail((int) $id);
+            $joke->delete();
 
-        return ApiResponse::success('', 'Joke deleted successfully', 204);
+            return ApiResponse::success('', 'Joke deleted successfully', 204);
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], 'Joke not found', 404);
+        }
     }
 }
