@@ -50,7 +50,7 @@ class JokeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJokeRequest $request)
+    public function store(StoreJokeRequest $request): JsonResponse
     {
         // Validate request
         $validated = $request->validated();
@@ -60,7 +60,7 @@ class JokeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
         $joke = Joke::findOrFail((int) $id);
         return ApiResponse::success($joke, 'Joke retrieved successfully');
@@ -69,7 +69,7 @@ class JokeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJokeRequest $request, string $id)
+    public function update(UpdateJokeRequest $request, string $id): JsonResponse
     {
         // Find joke
         $joke = Joke::findOrFail((int) $id);
@@ -85,7 +85,7 @@ class JokeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
         // Find joke
         $joke = Joke::findOrFail((int) $id);
