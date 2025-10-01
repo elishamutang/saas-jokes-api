@@ -207,7 +207,7 @@ test('delete a joke', function () {
     // Response
     $response = $this->deleteJson('/api/v2/jokes/2');
 
-    $response->assertStatus(204);
+    $response->assertStatus(200);
 
     // Verify company is no longer in the database
     $this->assertSoftDeleted('jokes', ['id' => $jokeId]);
