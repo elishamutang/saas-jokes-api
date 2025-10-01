@@ -14,6 +14,13 @@ test('get all jokes', function () {
     // Create jokes
     Joke::factory(5)->create();
 
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
+
     // Get all jokes
     $response = $this->getJson('/api/v2/jokes');
 
@@ -31,6 +38,13 @@ test('get all jokes', function () {
 test('get specific number of jokes per page', function () {
     // Create jokes
     Joke::factory(10)->create();
+
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
 
     // Get jokes
     $perPage = 2;
@@ -50,6 +64,13 @@ test('get specific number of jokes per page', function () {
 test('search for a joke based on title', function () {
     // Create users
     User::factory(10)->create();
+
+    // Create authenticated user
+    $user = User::first();
+    $user->update(['email_verified_at' => now()]);
+    $user->refresh();
+
+    $this->actingAs($user);
 
     // Create jokes
     $jokes = [
@@ -98,6 +119,13 @@ test('get a single joke', function () {
     // Create jokes
     Joke::factory(5)->create();
 
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
+
     $joke = Joke::limit(1)->get();
     $jokeId = $joke[0]->id;
 
@@ -119,6 +147,13 @@ test('get a single joke', function () {
 test('update a single joke', function () {
     // Create users
     User::factory(5)->create();
+
+    // Create authenticated user
+    $user = User::first();
+    $user->update(['email_verified_at' => now()]);
+    $user->refresh();
+
+    $this->actingAs($user);
 
     // Create joke
     Joke::create([
@@ -153,6 +188,13 @@ test('add a joke', function () {
     // Populate users in DB
     User::factory(5)->create();
 
+    // Create authenticated user
+    $user = User::first();
+    $user->update(['email_verified_at' => now()]);
+    $user->refresh();
+
+    $this->actingAs($user);
+
     // Create joke
     $joke = [
         'title' => 'New joke',
@@ -182,6 +224,13 @@ test('add a joke', function () {
 test('delete a joke', function () {
     // Populate users in DB
     User::factory(5)->create();
+
+    // Create authenticated user
+    $user = User::first();
+    $user->update(['email_verified_at' => now()]);
+    $user->refresh();
+
+    $this->actingAs($user);
 
     // Create jokes
     $jokes = [
