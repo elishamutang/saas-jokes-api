@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Api\v2\AuthController as AuthControllerV2;
 use App\Http\Controllers\Api\v2\CategoryController as CategoryControllerV2;
 use App\Http\Controllers\Api\v2\JokeController as JokeControllerV2;
+use App\Http\Controllers\Api\v2\VerifyEmailController as VerifyEmailControllerV2;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -16,27 +17,44 @@ use Illuminate\Support\Facades\Route;
  * - Profile, Logout, User details (authentication required)
  */
 
+// User authentication routes
 Route::prefix('auth')
     ->group(function () {
         Route::post('register', [AuthControllerV2::class, 'register']);
         Route::post('login', [AuthControllerV2::class, 'login']);
-
-        Route::get('profile', [AuthControllerV2::class, 'profile'])
-            ->middleware(['auth:sanctum',]);
         Route::post('logout', [AuthControllerV2::class, 'logout'])
-            ->middleware(['auth:sanctum',]);
+            ->middleware(['auth:sanctum', 'verified']);
 
+        // The Email Verification Notice route
+        Route::get('/email/verify', [VerifyEmailControllerV2::class, 'checkEmailVerified'])
+            ->middleware(['auth:sanctum'])->name('verification.notice');
+
+        // The Email Verification Handler
+        Route::get('/email/verify/{id}/{hash}', [VerifyEmailControllerV2::class, 'verifyEmailHandler'])
+            ->middleware(['auth:sanctum', 'signed'])->name('verification.verify');
+
+        // Resending the verification email
+        Route::post('/email/verification-notification', [VerifyEmailControllerV2::class, 'resendEmailVerification'])
+            ->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
     });
 
-// User Routes
-Route::apiResource('/users', UserController::class);
+// Routes for authenticated and verified users
+Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
-// Jokes Routes
-Route::apiResource('/jokes', JokeControllerV2::class);
+    // Get own user profile
+    Route::get('/profile', [AuthControllerV2::class, 'profile']);
 
-// Categories routes
-Route::apiResource("/categories", CategoryControllerV2::class);
+    // Users routes
+    Route::apiResource('/users', UserController::class);
 
+    // Jokes Routes
+    Route::apiResource('/jokes', JokeControllerV2::class);
+
+    // Categories routes
+    Route::apiResource("/categories", CategoryControllerV2::class);
+});
+
+// TODO: Complete other routes below
 Route::get('categories/trash', [CategoryControllerV2::class, 'trash'])
     ->name('categories.trash');
 
