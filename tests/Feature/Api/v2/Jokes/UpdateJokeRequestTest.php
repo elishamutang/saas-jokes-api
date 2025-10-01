@@ -24,7 +24,7 @@ test('validates the joke with valid data', function () {
     expect($validator->passes())->toBeTrue();
 });
 
-test('validates the update joke request with empty title field', function () {
+test('fails validation for update joke request with empty title field', function () {
     // Get instance of UpdateJokeRequest
     $request = new UpdateJokeRequest();
 
@@ -37,7 +37,8 @@ test('validates the update joke request with empty title field', function () {
     $validator = Validator::make($data, $request->rules());
 
     // Assert
-    expect($validator->passes())->toBeTrue();
+    expect($validator->fails())->toBeTrue();
+    expect($validator->errors()->has('title'))->toBeTrue();
 });
 
 test('validates the update joke request with missing title field', function () {
