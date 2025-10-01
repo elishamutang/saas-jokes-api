@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api\v2;
 use App\Responses\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -33,7 +35,6 @@ class AuthController extends Controller
      */
     public function register(Request $request): JsonResponse
     {
-        //  check https://laravel.com/docs/12.x/validation#rule-email
         $validator = Validator::make(
             $request->all(),
             [
@@ -47,7 +48,7 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return ApiResponse::error(
                 ['error' => $validator->errors()],
-                'Registration details error',
+                'Registration failed.',
                 401
             );
         }
@@ -60,7 +61,10 @@ class AuthController extends Controller
             ),
         ]);
 
-        $token = $user->createToken('MyAppToken')->plainTextToken;
+        // Dispatch successful user registration event to allow Laravel to send verification email.
+        event(new Registered($user));
+
+        $token = $user->createToken($user->name)->plainTextToken;
 
         return ApiResponse::success(
             [
@@ -84,10 +88,11 @@ class AuthController extends Controller
     public function login(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'email' => ['required', 'string', 'email', 'max:255',],
+            'email' => ['required', 'string', 'email', 'max:255', 'exists:users'],
             'password' => ['required', 'string',],
         ]);
 
+        // Validation check
         if ($validator->fails()) {
             return ApiResponse::error(
                 [
@@ -98,6 +103,7 @@ class AuthController extends Controller
             );
         }
 
+        // Checks if credentials are correct and matches a user in the DB.
         if (!Auth::attempt($request->only('email', 'password'))) {
             return ApiResponse::error(
                 [],
@@ -105,8 +111,9 @@ class AuthController extends Controller
                 401);
         }
 
+        // Get authenticated user and generate API token.
         $user = Auth::user();
-        $token = $user->createToken('MyAppToken')->plainTextToken;
+        $token = $user->createToken($user->name)->plainTextToken;
 
         return ApiResponse::success(
             [
@@ -124,6 +131,7 @@ class AuthController extends Controller
      * - name,
      * - email,
      * - email verified,
+     * - status,
      * - created at, and
      * - updated at.
      *
