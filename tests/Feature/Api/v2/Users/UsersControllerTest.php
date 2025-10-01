@@ -16,6 +16,15 @@ test('get all users', function() {
     // Prepare users
     User::factory(10)->create();
 
+    // Create authenticated user
+    $user = User::first();
+    $user->update([
+        'email_verified_at' => now(),
+    ]);
+    $user->refresh();
+
+    $this->actingAs($user);
+
     // Get users
     $response = $this->getJson('/api/v2/users');
 
@@ -33,6 +42,15 @@ test('get all users', function() {
 test('get specific number of users', function() {
     // Prepare users
     User::factory(10)->create();
+
+    // Create authenticated user
+    $user = User::first();
+    $user->update([
+        'email_verified_at' => now(),
+    ]);
+    $user->refresh();
+
+    $this->actingAs($user);
 
     // Get users
     $perPage = 2;
@@ -78,6 +96,13 @@ test('search for user based on name or email', function() {
         User::create($user);
     }
 
+    // Create authenticated user
+    $authUser = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($authUser);
+
     // Get user
     $searchKeyword = 'Doe';
     $response = $this->getJson("/api/v2/users?search=$searchKeyword");
@@ -94,7 +119,11 @@ test('search for user based on name or email', function() {
 // Read a single user
 test('get a single user', function() {
     // Prepare user
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
 
     // Mock result
     $data = [
@@ -113,12 +142,19 @@ test('get a single user', function() {
 
 // Create a single user
 test('create a single user', function() {
-    // Prepare user
+    // Prepare user to be created
     $user = [
         'name' => 'New User',
         'email' => 'new@example.com',
         'password' => 'password1',
     ];
+
+    // Act as another authenticated user
+    $authUser = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($authUser);
 
     // Create user
     $response = $this->postJson("/api/v2/users", $user);
@@ -132,10 +168,14 @@ test('create a single user', function() {
 // Update an existing user's name and email
 test("update an existing user's name and email", function() {
     // Prepare user
-    $user = User::factory(1)->create();
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
 
     // Get user id
-    $userId = $user[0]->id;
+    $userId = $user->id;
 
     // Prepare updated data
     $updatedUser = [
@@ -164,7 +204,12 @@ test("update an existing user's name and email", function() {
 // Update an existing user's password
 test("update an existing user's password", function() {
     // Prepare user
-    $user = User::factory()->create(['password' => Hash::make('oldpassword')]);
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+        'password' => Hash::make('oldpassword'),
+    ]);
+
+    $this->actingAs($user);
 
     // Get user id
     $userId = $user->id;
@@ -195,8 +240,15 @@ test('delete a single user', function() {
     User::factory(5)->create();
 
     // Get user to be deleted
-    $user = User::limit(1)->get();
-    $userId = $user[0]->id;
+    $user = User::first();
+
+    // Authenticate user
+    $user->update(['email_verified_at' => now()]);
+    $user->refresh();
+
+    $userId = $user->id;
+
+    $this->actingAs($user);
 
     // Delete user
     $response = $this->deleteJson("/api/v2/users/$userId");
