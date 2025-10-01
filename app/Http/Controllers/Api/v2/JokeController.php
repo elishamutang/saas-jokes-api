@@ -37,12 +37,13 @@ class JokeController extends Controller
 
         $search = $validated['search'] ?? '';
         if (!empty($search)) {
-            $jokes = Joke::whereAny(
-                ['title'], 'LIKE', "%$search%")
+            // Eagerly load Jokes with its categories and votes.
+            $jokes = Joke::with(['categories', 'votes'])
+                ->whereAny(['title'], 'LIKE', "%$search%")
                 ->paginate($perPage);
         } else {
-            // Get all jokes
-            $jokes = Joke::paginate($perPage);
+            // Get all jokes + its categories and votes.
+            $jokes = Joke::with(['categories', 'votes'])->paginate($perPage);
         }
 
         return ApiResponse::success($jokes, "Jokes retrieved successfully");
@@ -55,7 +56,10 @@ class JokeController extends Controller
     {
         // Validate request
         $validated = $request->validated();
-        return ApiResponse::success($validated, 'Joke created successfully');
+
+        // Create new joke
+        $joke = $request->user()->jokes()->create($validated);
+        return ApiResponse::success($joke, 'Joke created successfully');
     }
 
     /**
@@ -100,7 +104,7 @@ class JokeController extends Controller
             $joke = Joke::findOrFail((int) $id);
             $joke->delete();
 
-            return ApiResponse::success('', 'Joke deleted successfully', 204);
+            return ApiResponse::success([], 'Joke deleted successfully');
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], 'Joke not found', 404);
         }
