@@ -1,6 +1,7 @@
 <?php
 
 use \App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
 use function Spatie\PestPluginTestTime\testTime;
@@ -12,6 +13,13 @@ testTime()->freeze('2025-09-28 16:37:00');
 test('get all categories', function () {
     // Arrange
     Category::factory(5)->create();
+
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
 
     // Act
     $response = $this->getJson("/api/v2/categories");
@@ -35,6 +43,13 @@ test('retrieve one category', function () {
     $category = Category::factory()->create();
     $categoryId = $category->id;
 
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
+
     $data = [
         'message' => "Category retrieved successfully",
         'success' => true,
@@ -56,6 +71,13 @@ test('retrieve one category', function () {
 test('return error on missing category', function () {
     // Arrange
     Category::factory()->create();
+
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
 
     // Mock result
     $data = [
@@ -81,6 +103,13 @@ test('create a new category', function () {
         'description' => 'Fake Category Description',
     ];
 
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
+
     $dataResponse = [
         'message' => "Category created successfully",
         'success' => true,
@@ -99,10 +128,18 @@ test('create a new category', function () {
 
 // Validation tests
 test('create category with empty title and description', function () {
+    // Arrange
     $data = [
         'title' => '',
         'description' => '',
     ];
+
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
 
     $response = $this->postJson("/api/v2/categories", $data);
 
@@ -129,6 +166,13 @@ test('update a single category', function() {
         'description' => 'Update description title',
     ];
 
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
+
     $result = [
         'success' => true,
         'message' => "Category updated successfully",
@@ -147,6 +191,13 @@ test('update a single category', function() {
 test('delete a category', function() {
     // Prepare data
     $categories = Category::factory(2)->create();
+
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    $this->actingAs($user);
 
     // Get category to be deleted
     $category = $categories->first();
