@@ -26,6 +26,7 @@ class StoreJokeRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:96'],
             'content' => ['required', 'string'],
+            'categories' => ['sometimes', 'string'],
             'reference' => ['nullable', 'string'],
         ];
     }
