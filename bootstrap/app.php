@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Joke;
+use App\Responses\ApiResponse;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -37,6 +40,15 @@ return Application::configure(basePath: dirname(__DIR__))
                     ],
                     404
                 );
+            }
+        });
+
+        // Handle unauthenticated user when visiting /api/v2/jokes endpoint
+        $exceptions->render(function(AuthenticationException $error, Illuminate\Http\Request $request) {
+            if ($request->wantsJson() || $request->is('api/v2/jokes')) {
+                // Render random joke for unauthenticated users or 'guests'.
+                $randomJoke = Joke::inRandomOrder()->first();
+                return ApiResponse::error($randomJoke, "Please log into your account.", 401);
             }
         });
     })->create();
