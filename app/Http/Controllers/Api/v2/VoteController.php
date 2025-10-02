@@ -87,7 +87,7 @@ class VoteController extends Controller
      * @param string $id
      * @return JsonResponse
      */
-    public function removeVote(Request $request, string $id)
+    public function removeVote(Request $request, string $id): JsonResponse
     {
         // Get joke and user
         $joke = Joke::with('votes')->findOrFail((int) $id);
