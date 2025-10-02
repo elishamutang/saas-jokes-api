@@ -36,12 +36,12 @@ class UserController extends Controller
 
         $search = $validated['search'] ?? '';
         if (!empty($search)) {
-            $users = User::whereAny(
+            $users = User::with(['jokes', 'votes'])->whereAny(
                 ['name', 'email'], 'LIKE', "%$search%")
                 ->paginate($perPage);
         } else {
             // Get all jokes
-            $users = User::paginate($perPage);
+            $users = User::with(['jokes', 'votes'])->paginate($perPage);
         }
 
         return ApiResponse::success($users, "Users retrieved successfully");
@@ -57,7 +57,7 @@ class UserController extends Controller
 
         // Create user
         $user = User::create($validated);
-        return ApiResponse::success($user, "User created successfully");
+        return ApiResponse::success($user, "User created successfully. Please verify the email address.");
     }
 
     /**
@@ -65,8 +65,10 @@ class UserController extends Controller
      */
     public function show(Request $request, string $id)
     {
+        // TODO: Normal users cannot search other users
+
         try {
-            $user = User::findOrFail((int) $id);
+            $user = User::with(['jokes', 'votes'])->findOrFail((int) $id);
             return ApiResponse::success($user, "User retrieved successfully");
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], "User not found", 404);
