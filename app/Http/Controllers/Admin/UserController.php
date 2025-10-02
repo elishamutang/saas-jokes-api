@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Responses\ApiResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -62,10 +63,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        $user = User::findOrFail((int) $id);
-        return ApiResponse::success($user, "User retrieved successfully");
+        try {
+            $user = User::findOrFail((int) $id);
+            return ApiResponse::success($user, "User retrieved successfully");
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], "User not found", 404);
+        }
     }
 
     /**
@@ -76,11 +81,15 @@ class UserController extends Controller
         // Validate request
         $validated = $request->validated();
 
-        // Find user and update
-        $user = User::findOrFail((int) $id);
-        $user->update($validated);
+        try {
+            // Find user and update
+            $user = User::findOrFail((int) $id);
+            $user->update($validated);
 
-        return ApiResponse::success($user, "User updated successfully");
+            return ApiResponse::success($user, "User updated successfully");
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], "User not found", 404);
+        }
     }
 
     /**
@@ -88,10 +97,14 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        // Find user
-        $user = User::findOrFail((int) $id);
-        $user->delete();
+        try {
+            // Find user
+            $user = User::findOrFail((int) $id);
+            $user->delete();
 
-        return ApiResponse::success('', "User deleted successfully");
+            return ApiResponse::success('', "User deleted successfully");
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], "User not found", 404);
+        }
     }
 }
