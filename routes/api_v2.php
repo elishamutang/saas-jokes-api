@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Api\v2\AuthController as AuthControllerV2;
 use App\Http\Controllers\Api\v2\CategoryController as CategoryControllerV2;
 use App\Http\Controllers\Api\v2\JokeController as JokeControllerV2;
+use App\Http\Controllers\Api\v2\ProfileController as ProfileControllerV2;
 use App\Http\Controllers\Api\v2\VerifyEmailController as VerifyEmailControllerV2;
 use Illuminate\Support\Facades\Route;
 
@@ -40,9 +41,10 @@ Route::prefix('auth')
 
 // Routes for authenticated and verified users
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
-
     // Get own user profile
     Route::get('/profile', [AuthControllerV2::class, 'profile']);
+    Route::put('/profile', [ProfileControllerV2::class, 'update']);
+    Route::delete('/profile/delete', [ProfileControllerV2::class, 'destroy']);
 
     // Users routes
     Route::apiResource('/users', UserController::class);
