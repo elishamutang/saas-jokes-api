@@ -107,6 +107,6 @@ class VoteController extends Controller
             return ApiResponse::success($joke, "Vote removed successfully");
         }
 
-        return ApiResponse::error([], "You have already removed your vote from this joke", 409);
+        return ApiResponse::error([], "Unable to remove non-existent vote. You have not voted on this joke.", 409);
     }
 }
