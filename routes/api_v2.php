@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\v2\CategoryController as CategoryControllerV2;
 use App\Http\Controllers\Api\v2\JokeController as JokeControllerV2;
 use App\Http\Controllers\Api\v2\ProfileController as ProfileControllerV2;
 use App\Http\Controllers\Api\v2\VerifyEmailController as VerifyEmailControllerV2;
+use App\Http\Controllers\Api\v2\VoteController as VoteControllerV2;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -51,6 +52,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     // Jokes Routes
     Route::apiResource('/jokes', JokeControllerV2::class);
+    Route::post('/jokes/{id}/like', [VoteControllerV2::class, 'like']);
+    Route::post('/jokes/{id}/dislike', [VoteControllerV2::class, 'dislike']);
+    Route::post('/jokes/{id}/remove-vote', [VoteControllerV2::class, 'removeVote']);
 
     // Categories routes
     Route::apiResource("/categories", CategoryControllerV2::class);
