@@ -64,22 +64,8 @@ class RolesAndPermissionsSeeder extends Seeder
                 'name' => 'super-admin',
                 'level' => 999,
                 'permissions' => [
-                    'can create a joke', 'can read any joke', 'can browse all jokes', 'can search a joke',
-                    'can edit any joke', 'can delete any joke', 'can remove jokes', 'can restore jokes',
-                    'can create a category', 'can read any category', 'can browse all categories', 'can edit any category',
-                    'can delete any category', 'can search any category', 'can remove categories', 'can restore categories',
-                    'can browse all users', 'can read any user', 'can edit any user', 'can delete any user', 'can search any user',
-                    'can vote', 'can remove own vote', 'can remove all votes from client or staff user', 'can read own user profile',
-                    'can edit own user profile', 'can delete own user profile', 'can edit client or staff users only',
-                    'can edit client or staff roles only', 'can mark a client or staff user as banned or suspended',
-                    'can revert a client or staff user from banned to suspended', 'can revert a client or staff user from suspended to active',
-                    'can logout all users', 'can reset passwords for any user', 'can browse all roles', 'can delete any role',
-                    'can read any role', 'can edit any role', 'can create a role', 'can search any role', 'can browse all permissions',
-                    'can read any permission', 'can edit any permission', 'can create a permission', 'can search any permission',
-                    'can backup joke data to external location', 'can backup category data to external location', 'can reset votes for all users',
-                    'can reset votes for any user', 'can backup user data to external location', 'can assign user role', 'can update user role',
-                    'can delete user role',
-                ],
+                        // Super-Admin implemented using Gate::before to assign all permissions
+                    ],
             ],
         ];
 
@@ -88,7 +74,6 @@ class RolesAndPermissionsSeeder extends Seeder
             $seedRolesAndPermissions[0]['permissions'],
             $seedRolesAndPermissions[1]['permissions'],
             $seedRolesAndPermissions[2]['permissions'],
-            $seedRolesAndPermissions[3]['permissions'],
         );
 
         // Remove duplicates
@@ -100,11 +85,9 @@ class RolesAndPermissionsSeeder extends Seeder
         }
 
         foreach ($seedRolesAndPermissions as $rolesAndPermissions) {
-
             $roleName = $rolesAndPermissions['name'];
             $roleLevel = $rolesAndPermissions['level'];
             $rolePermissions = $rolesAndPermissions['permissions'];
-
 
             // Create role
             $role = Role::updateOrCreate(
@@ -112,8 +95,10 @@ class RolesAndPermissionsSeeder extends Seeder
                 ['level' => $roleLevel]
             );
 
-            // Sync permissions with role
-            $role->syncPermissions($rolePermissions);
+            // Sync permissions with role that's not a super-admin
+            if (!empty($rolePermissions)) {
+                $role->syncPermissions($rolePermissions);
+            }
         }
     }
 }
