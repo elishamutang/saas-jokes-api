@@ -12,90 +12,76 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-//        $seedUsers = [
-//            [
-//                'id' => 99,
-//                'name' => 'Super Admin',
-//                'email' => 'supervisor@example.com',
-//                'password' => 'Password1',
-//                'email_verified_at' => now(),
-//                'roles' => ['super-user', 'admin'],
-//                'permissions' => [],
-//            ],
-//
-//            [
-//                'id' => 100,
-//                'name' => 'Admin I Strator',
-//                'email' => 'admin@example.com',
-//                'password' => 'Password1',
-//                'email_verified_at' => now(),
-//                'roles' => ['admin'],
-//                'permissions' => [],
-//            ],
-//
-//            [
-//                'id' => 200,
-//                'name' => 'Staff User',
-//                'email' => 'staff@example.com',
-//                'password' => 'Password1',
-//                'email_verified_at' => now(),
-//                'roles' => ['staff'],
-//                'permissions' => [],
-//            ],
-//
-//            [
-//                'id' => 300,
-//                'name' => 'Client User',
-//                'email' => 'client@example.com',
-//                'password' => 'Password1',
-//                'email_verified_at' => now(),
-//                'roles' => ['client'],
-//                'permissions' => [],
-//            ],
-//
-//            [
-//                'id' => 301,
-//                'name' => 'Client User II',
-//                'email' => 'client2@example.com',
-//                'password' => 'Password1',
-//                'email_verified_at' => null,
-//                'roles' => ['client'],
-//                'permissions' => [],
-//            ],
-//
-//            [
-//                'id' => 302,
-//                'name' => 'Client User III',
-//                'email' => 'client3@example.com',
-//                'password' => 'Password1',
-//                'email_verified_at' => null,
-//                'roles' => ['client'],
-//                'permissions' => [],
-//            ],
-//        ];
-//
-//        foreach ($seedUsers as $newUser) {
-//
-//            // grab the roles & additional permissions from the seed users
-//            $roles = $newUser['roles'];
-//            unset($newUser['roles']);
-//
-//            $permissions = $newUser['permissions'];
-//            unset($newUser['permissions']);
-//
-//            $user = User::updateOrCreate(
-//                ['id' => $newUser['id']],
-//                $newUser
-//            );
-//
-//            // Uncomment this line when using Spatie Permissions
-//            // $user->assignRole($roles);
-//            // $user->assignPermissions($permissions);
-//
-//        }
+        $seedUsers = [
+            [
+                'id' => 1,
+                'name' => 'Super Admin',
+                'email' => 'superadmin@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => now(),
+                'roles' => ['super-admin', 'admin'],
+            ],
 
-        // Uncomment the line below to create (10) randomly named users using the User Factory.
-         User::factory(10)->create();
+            [
+                'id' => 2,
+                'name' => 'Admin',
+                'email' => 'admin@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => now(),
+                'roles' => ['admin'],
+            ],
+
+            [
+                'id' => 3,
+                'name' => 'Staff User',
+                'email' => 'staff@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => now(),
+                'roles' => ['staff'],
+            ],
+
+            [
+                'id' => 4,
+                'name' => 'Client User',
+                'email' => 'client@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => now(),
+                'roles' => ['client'],
+            ],
+
+            [
+                'id' => 5,
+                'name' => 'Client User 2',
+                'email' => 'client2@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => null,
+                'roles' => ['client'],
+            ],
+
+            [
+                'id' => 6,
+                'name' => 'Client User 3',
+                'email' => 'client3@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => null,
+                'roles' => ['client'],
+            ],
+        ];
+
+        foreach ($seedUsers as $newUser) {
+            // Grab user role
+            $roles = $newUser['roles'];
+            unset($newUser['roles']);
+
+            // Update or create user in DB.
+            $user = User::updateOrCreate(
+                ['email' => $newUser['email']],
+                $newUser
+            );
+
+            // Assign user role
+             $user->assignRole($roles);
+        }
 
     }
 }
