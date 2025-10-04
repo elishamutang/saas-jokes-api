@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v2;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJokeRequest;
 use App\Http\Requests\UpdateJokeRequest;
+use App\Models\Category;
 use App\Models\Joke;
 use App\Responses\ApiResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -59,6 +60,36 @@ class JokeController extends Controller
 
         // Create new joke
         $joke = $request->user()->jokes()->create($validated);
+
+        // Check if categories are present in the request
+        $categories = $validated['categories'];
+
+        // Get ID for "Unknown" category
+        $unknownCategory = Category::where('title', 'Unknown')->first();
+
+        // If $categories are empty, set the joke category to "Unknown".
+        // Else, find the category from the DB and attach to joke.
+        if (empty($categories)) {
+            $joke->categories()->attach($unknownCategory);
+        } else {
+            // Assuming "categories" is a string like "pirate, maths, server".
+            $categoriesStr = str_replace(' ', '', $categories);
+
+            $categoriesArr = array_map(function($category) {
+                return ucfirst($category);
+            }, explode(',', $categoriesStr));
+
+            // Get corresponding category IDs.
+            $categoryIds = Category::whereIn('title', $categoriesArr)->pluck('id')->toArray();
+
+            // If none of the categories correspond to the ones in the DB, then set to Unknown.
+            if (empty($categoryIds)) {
+                $joke->categories()->attach($unknownCategory);
+            } else {
+                $joke->categories()->attach($categoryIds);
+            }
+        }
+
         return ApiResponse::success($joke, 'Joke created successfully');
     }
 
@@ -68,7 +99,7 @@ class JokeController extends Controller
     public function show(string $id): JsonResponse
     {
         try {
-            $joke = Joke::findOrFail((int) $id);
+            $joke = Joke::with(['categories', 'votes'])->findOrFail((int) $id);
             return ApiResponse::success($joke, 'Joke retrieved successfully');
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], 'Joke not found', 404);
