@@ -73,7 +73,9 @@ class CategoryController extends Controller
     {
         try {
             // Find category
-            $category = Category::findOrFail((int) $id);
+            $category = Category::with(['jokes' => function ($query) {
+                $query->inRandomOrder()->limit(5)->get();
+            }])->findOrFail((int) $id);
             return ApiResponse::success($category, "Category retrieved successfully");
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], "Category not found", 404);
