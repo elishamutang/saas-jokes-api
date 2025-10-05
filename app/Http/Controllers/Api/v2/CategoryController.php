@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function index(Request $request): JsonResponse
     {
         // Check if user has the appropriate permissions.
-        if (!auth()->user()->hasPermissionTo('browse all categories')) {
+        if (!auth()->user()->hasAllPermissions(['browse all categories', 'search any category'])) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
