@@ -48,12 +48,22 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::delete('/profile/delete', [ProfileControllerV2::class, 'destroy'])->name('delete.profile');
 
     // Users routes
-    Route::apiResource('/users', UserController::class);
+    Route::prefix('admin/users')->group(function() {
+        Route::prefix('trash')->group(function() {
+            Route::post('/recover/{id}', [UserController::class, 'recoverOne'])->name('users.recoverOne');
+            Route::post('/remove/{id}', [UserController::class, 'removeOne'])->name('users.removeOne');
+            Route::post('/recover-all', [UserController::class, 'recoverAll'])->name('users.recoverAll');
+            Route::post('/remove-all', [UserController::class, 'removeAll'])->name('users.removeAll');
+            Route::get('/', [UserController::class, 'trash'])->name('users.trash');
+        });
+
+        Route::apiResource('/', UserController::class);
+    });
 
     // Jokes Routes
-    Route::post('/jokes/{id}/like', [VoteControllerV2::class, 'like'])->name('like.joke');
-    Route::post('/jokes/{id}/dislike', [VoteControllerV2::class, 'dislike'])->name('dislike.joke');
-    Route::post('/jokes/{id}/remove-vote', [VoteControllerV2::class, 'removeVote'])->name('remote.vote');
+    Route::post('/jokes/{id}/like', [VoteControllerV2::class, 'like'])->name('jokes.like');
+    Route::post('/jokes/{id}/dislike', [VoteControllerV2::class, 'dislike'])->name('jokes.dislike');
+    Route::post('/jokes/{id}/remove-vote', [VoteControllerV2::class, 'removeVote'])->name('vote.remove');
 
     Route::prefix('jokes/trash')->group(function() {
         Route::post('/recover/{id}', [JokeControllerV2::class, 'recoverOne'])->name('jokes.recoverOne');
