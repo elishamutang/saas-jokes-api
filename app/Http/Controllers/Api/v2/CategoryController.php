@@ -160,6 +160,11 @@ class CategoryController extends Controller
      */
     public function trash(Request $request): JsonResponse
     {
+        // Check if current user has permission to access soft-deleted categories.
+        if (!auth()->user()->hasPermissionTo('browse soft-deleted categories')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
         // Check if per_page query is present in request.
         $perPage = (int) $request->query('per_page', 5);
 
@@ -182,8 +187,14 @@ class CategoryController extends Controller
      */
     public function recoverAll(): JsonResponse
     {
+        if (!auth()->user()->hasPermissionTo('restore soft-deleted categories')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
+        $deletedCategories = Category::onlyTrashed()->get();
         $numOfCategoriesRestored = Category::onlyTrashed()->restore();
-        return ApiResponse::success('', "$numOfCategoriesRestored categories restored successfully");
+
+        return ApiResponse::success($deletedCategories, "$numOfCategoriesRestored categories restored successfully");
     }
 
     /**
@@ -193,6 +204,10 @@ class CategoryController extends Controller
      */
     public function removeAll(): JsonResponse
     {
+        if (!auth()->user()->hasPermissionTo('remove soft-deleted categories')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
         $numOfCategoriesRemoved = Category::onlyTrashed()->forceDelete();
         return ApiResponse::success('', "$numOfCategoriesRemoved categories removed successfully");
     }
@@ -205,11 +220,20 @@ class CategoryController extends Controller
      */
     public function recoverOne(string $id): JsonResponse
     {
-        // Find soft deleted category
-        $category = Category::onlyTrashed()->find((int) $id);
-        $category->restore();
+        if (!auth()->user()->hasPermissionTo('restore soft-deleted categories')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
 
-        return ApiResponse::success('', "Category restored successfully");
+        try {
+            // Find soft deleted category
+            $category = Category::onlyTrashed()->findOrFail((int) $id);
+            $category->restore();
+
+            return ApiResponse::success($category, "Category restored successfully");
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], "Category not found.", 404);
+        }
+
     }
 
     /**
@@ -220,10 +244,18 @@ class CategoryController extends Controller
      */
     public function removeOne(string $id): JsonResponse
     {
-        // Find soft deleted category
-        $category = Category::onlyTrashed()->find((int) $id);
-        $category->forceDelete();
+        if (!auth()->user()->hasPermissionTo('remove soft-deleted categories')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
 
-        return ApiResponse::success('', "Category permanently deleted successfully");
+        try {
+            // Find soft deleted category
+            $category = Category::onlyTrashed()->findOrFail((int) $id);
+            $category->forceDelete();
+
+            return ApiResponse::success('', "Category permanently deleted successfully");
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], "Category not found.", 404);
+        }
     }
 }
