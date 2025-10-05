@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Responses\ApiResponse;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCategoryRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->hasPermissionTo('create a category');
     }
 
     /**
