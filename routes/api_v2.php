@@ -43,45 +43,52 @@ Route::prefix('auth')
 // Routes for authenticated and verified users
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     // Get own user profile
-    Route::get('/profile', [AuthControllerV2::class, 'profile']);
-    Route::put('/profile', [ProfileControllerV2::class, 'update']);
-    Route::delete('/profile/delete', [ProfileControllerV2::class, 'destroy']);
+    Route::get('/profile', [AuthControllerV2::class, 'profile'])->name('get.profile');
+    Route::put('/profile', [ProfileControllerV2::class, 'update'])->name('update.profile');
+    Route::delete('/profile/delete', [ProfileControllerV2::class, 'destroy'])->name('delete.profile');
 
     // Users routes
     Route::apiResource('/users', UserController::class);
 
     // Jokes Routes
+    Route::post('/jokes/{id}/like', [VoteControllerV2::class, 'like'])->name('like.joke');
+    Route::post('/jokes/{id}/dislike', [VoteControllerV2::class, 'dislike'])->name('dislike.joke');
+    Route::post('/jokes/{id}/remove-vote', [VoteControllerV2::class, 'removeVote'])->name('remote.vote');
     Route::apiResource('/jokes', JokeControllerV2::class);
-    Route::post('/jokes/{id}/like', [VoteControllerV2::class, 'like']);
-    Route::post('/jokes/{id}/dislike', [VoteControllerV2::class, 'dislike']);
-    Route::post('/jokes/{id}/remove-vote', [VoteControllerV2::class, 'removeVote']);
 
-    // Categories routes
+    // Category routes
+    Route::prefix('categories/trash')->group(function () {
+        Route::post('/recover/{id}', [CategoryControllerV2::class, 'recoverOne'])->name('categories.recoverOne');
+        Route::post('/remove/{id}', [CategoryControllerV2::class, 'removeOne'])->name('categories.removeOne');
+        Route::post('/recover-all', [CategoryControllerV2::class, 'recoverAll'])->name('categories.recoverAll');
+        Route::post('/remove-all', [CategoryControllerV2::class, 'removeAll'])->name('categories.removeAll');
+        Route::get('/', [CategoryControllerV2::class, 'trash'])->name('categories.trash');
+    });
     Route::apiResource("/categories", CategoryControllerV2::class);
 });
 
 // TODO: Complete other routes below
-Route::get('categories/trash', [CategoryControllerV2::class, 'trash'])
-    ->name('categories.trash');
-
-Route::delete('categories/trash/empty', [CategoryControllerV2::class, 'removeAll'])
-    ->name('categories.trash.remove.all');
-
-Route::post('categories/trash/recover', [CategoryControllerV2::class, 'recoverAll'])
-    ->name('categories.trash.recover.all');
-
-Route::delete('categories/trash/{id}/remove', [CategoryControllerV2::class, 'removeOne'])
-    ->name('categories.trash.remove.one');
-
-Route::post('categories/trash/{id}/recover', [CategoryControllerV2::class, 'recoverOne'])
-    ->name('categories.trash.recover.one');
-
-/** Stop people trying to "GET" admin/categories/trash/1234/delete or similar */
-Route::get('categories/trash/{id}/{method}', [CategoryControllerV2::class, 'trash']);
-
-Route::post('categories/{category}/delete', [CategoryControllerV2::class, 'delete'])
-    ->name('categories.delete');
-
-Route::get('categories/{category}/delete', function () {
-    return redirect()->route('admin.categories.index');
-});
+//Route::get('categories/trash', [CategoryControllerV2::class, 'trash'])
+//    ->name('categories.trash');
+//
+//Route::delete('categories/trash/empty', [CategoryControllerV2::class, 'removeAll'])
+//    ->name('categories.trash.remove.all');
+//
+//Route::post('categories/trash/recover', [CategoryControllerV2::class, 'recoverAll'])
+//    ->name('categories.trash.recover.all');
+//
+//Route::delete('categories/trash/{id}/remove', [CategoryControllerV2::class, 'removeOne'])
+//    ->name('categories.trash.remove.one');
+//
+//Route::post('categories/trash/{id}/recover', [CategoryControllerV2::class, 'recoverOne'])
+//    ->name('categories.trash.recover.one');
+//
+///** Stop people trying to "GET" admin/categories/trash/1234/delete or similar */
+//Route::get('categories/trash/{id}/{method}', [CategoryControllerV2::class, 'trash']);
+//
+//Route::post('categories/{category}/delete', [CategoryControllerV2::class, 'delete'])
+//    ->name('categories.delete');
+//
+//Route::get('categories/{category}/delete', function () {
+//    return redirect()->route('admin.categories.index');
+//});
