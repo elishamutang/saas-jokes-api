@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Responses\ApiResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -17,8 +18,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
+        // Check if user has the appropriate permissions.
+        if (!auth()->user()->hasPermissionTo('browse all categories')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
         // Check if per_page query is present in request.
         $perPage = (int) $request->query('per_page', 5);
 
@@ -56,6 +62,11 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        // Check if user has permission
+        if (!auth()->user()->hasPermissionTo('create a category')) {
+            return ApiResponse::error([], 'You are not authorized to perform this action.', 403);
+        }
+
         // Validate request
         $validated = $request->validated();
         $category = Category::create($validated);
@@ -69,8 +80,13 @@ class CategoryController extends Controller
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
+        // Check if user has permission
+        if (!auth()->user()->hasPermissionTo('read any category')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
         try {
             // Find category
             $category = Category::with(['jokes' => function ($query) {
@@ -92,6 +108,11 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, string $id)
     {
+        // Check if user has permission
+        if (!auth()->user()->hasPermissionTo('edit any category')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
         // Validate request
         $validated = $request->validated();
 
@@ -112,14 +133,20 @@ class CategoryController extends Controller
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
+        // Check if current user has permission to delete a category.
+        if (!auth()->user()->hasPermissionTo('delete any category')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
         try {
             // Find category
             $category = Category::findOrFail((int) $id);
             $category->delete();
+            $category->jokes()->detach();
 
-            return ApiResponse::success('', "Category deleted successfully");
+            return ApiResponse::success([], "Category deleted successfully");
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], "Category not found", 404);
         }
@@ -131,7 +158,7 @@ class CategoryController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function trash(Request $request)
+    public function trash(Request $request): JsonResponse
     {
         // Check if per_page query is present in request.
         $perPage = (int) $request->query('per_page', 5);
@@ -153,7 +180,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function recoverAll()
+    public function recoverAll(): JsonResponse
     {
         $numOfCategoriesRestored = Category::onlyTrashed()->restore();
         return ApiResponse::success('', "$numOfCategoriesRestored categories restored successfully");
@@ -164,7 +191,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removeAll()
+    public function removeAll(): JsonResponse
     {
         $numOfCategoriesRemoved = Category::onlyTrashed()->forceDelete();
         return ApiResponse::success('', "$numOfCategoriesRemoved categories removed successfully");
@@ -176,7 +203,7 @@ class CategoryController extends Controller
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function recoverOne(string $id)
+    public function recoverOne(string $id): JsonResponse
     {
         // Find soft deleted category
         $category = Category::onlyTrashed()->find((int) $id);
@@ -191,7 +218,7 @@ class CategoryController extends Controller
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removeOne(string $id)
+    public function removeOne(string $id): JsonResponse
     {
         // Find soft deleted category
         $category = Category::onlyTrashed()->find((int) $id);
