@@ -67,7 +67,7 @@ class JokeController extends Controller
         $joke = $request->user()->jokes()->create($validated);
 
         // Check if categories are present in the request
-        $categories = $validated['categories'];
+        $categories = $validated['categories'] ?? [];
 
         // Get ID for "Unknown" category
         $unknownCategory = Category::where('title', 'Unknown')->first();
@@ -150,14 +150,24 @@ class JokeController extends Controller
      */
     public function destroy(string $id): JsonResponse
     {
+        // Get current authenticated user
+        $user = auth()->user();
+
         // Check if current user has permission to delete a joke.
-        if (!auth()->user()->hasPermissionTo('delete any joke')) {
+        if (!$user->hasAnyPermission(['delete any joke', 'delete own joke'])) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
         try {
             // Find joke
             $joke = Joke::findOrFail((int) $id);
+
+            // Check if user can delete other user's jokes.
+            if ($user->id !== $joke->user_id && !$user->hasPermissionTo('delete any joke')) {
+                return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+            }
+
+            // Delete joke
             $joke->delete();
 
             return ApiResponse::success([], 'Joke deleted successfully');
@@ -207,9 +217,9 @@ class JokeController extends Controller
         }
 
         $deletedJokes = Joke::onlyTrashed()->get();
-        $numOfJokesRestored = Joke::onlyTrashed()->restore();
+        $numOfJokesRecovered = Joke::onlyTrashed()->restore();
 
-        return ApiResponse::success($deletedJokes, "$numOfJokesRestored jokes restored successfully");
+        return ApiResponse::success($deletedJokes, "$numOfJokesRecovered jokes recovered successfully");
     }
 
     /**
@@ -224,12 +234,12 @@ class JokeController extends Controller
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
-        $numOfJokesRestored = Category::onlyTrashed()->forceDelete();
-        return ApiResponse::success('', "$numOfJokesRestored jokes removed successfully");
+        $numOfJokesRemoved = Joke::onlyTrashed()->forceDelete();
+        return ApiResponse::success('', "$numOfJokesRemoved jokes removed successfully");
     }
 
     /**
-     * Recover specified soft deleted category from trash
+     * Recover specified soft deleted joke from trash
      *
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
@@ -246,7 +256,7 @@ class JokeController extends Controller
             $joke = Joke::onlyTrashed()->findOrFail((int) $id);
             $joke->restore();
 
-            return ApiResponse::success($joke, "Joke restored successfully");
+            return ApiResponse::success($joke, "Joke recovered successfully");
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], "Joke not found.", 404);
         }
