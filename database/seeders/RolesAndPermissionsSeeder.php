@@ -22,7 +22,7 @@ class RolesAndPermissionsSeeder extends Seeder
                 'level' => 100,
                 'permissions' => [
                     'create a joke', 'read any joke', 'browse all jokes', 'search a joke',
-                    'edit own joke', 'delete own joke', 'read a category', 'browse categories',
+                    'edit own joke', 'delete own joke', 'read a category', 'browse all categories',
                     'search a category', 'vote', 'remove own vote', 'edit own vote',
                     'read own user profile', 'edit own user profile', 'delete own user profile',
                 ],
@@ -38,7 +38,8 @@ class RolesAndPermissionsSeeder extends Seeder
                     'search any user', 'vote', 'remove own vote', 'edit own vote', 'read own user profile',
                     'edit own user profile', 'delete own user profile', 'logout client users only',
                     'reset client user passwords only', 'edit client user profile only', 'mark a client user as banned or suspended',
-                    'revert a client user from suspended to active',
+                    'revert a client user from suspended to active', 'browse soft-deleted categories', 'restore soft-deleted categories',
+                    'browse soft-deleted jokes', 'restore soft-deleted jokes',
                 ],
             ],
             [
@@ -46,7 +47,7 @@ class RolesAndPermissionsSeeder extends Seeder
                 'level' => 750,
                 'permissions' => [
                     'create a joke', 'read any joke', 'browse all jokes', 'search a joke',
-                    'edit any joke', 'delete any joke', 'remove jokes', 'restore jokes',
+                    'edit any joke', 'delete any joke', 'browse soft-deleted jokes', 'restore soft-deleted jokes', 'remove soft-deleted jokes',
                     'create a category', 'read any category', 'browse all categories', 'edit any category',
                     'delete any category', 'search any category', 'remove categories', 'restore categories',
                     'browse all users', 'read any user', 'edit any user', 'delete client and staff users only', 'create a user',
@@ -57,6 +58,7 @@ class RolesAndPermissionsSeeder extends Seeder
                     'logout all staff and client users', 'reset client or staff user passwords', 'browse all roles',
                     'read any role', 'edit any role', 'create a role', 'search any role', 'delete any role', 'browse all permissions',
                     'read any permission', 'search any permission', 'assign user role', 'update user role', 'delete user role',
+                    'browse soft-deleted categories', 'restore soft-deleted categories', 'remove soft-deleted categories',
                 ],
             ],
             [
