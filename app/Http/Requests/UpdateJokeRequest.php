@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Joke;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Log;
 
 class UpdateJokeRequest extends FormRequest
 {
@@ -13,7 +15,16 @@ class UpdateJokeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // Staff level and higher can edit any joke.
+        if (auth()->user()->hasPermissionTo('edit any joke')) {
+            return true;
+        }
+
+        // Client users can only update jokes belonging to themselves.
+        $jokeId = (int) $this->route('joke');
+        $userId = Joke::find($jokeId)->user_id;
+
+        return auth()->user()->hasPermissionTo('edit own joke') && auth()->user()->id === $userId;
     }
 
     /**

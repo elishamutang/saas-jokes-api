@@ -13,7 +13,7 @@ class StoreJokeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->hasPermissionTo('create a joke');
     }
 
     /**
