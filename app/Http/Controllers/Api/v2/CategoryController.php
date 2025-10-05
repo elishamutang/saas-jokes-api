@@ -10,6 +10,7 @@ use App\Responses\ApiResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -62,12 +63,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        // Check if user has permission
-        if (!auth()->user()->hasPermissionTo('create a category')) {
-            return ApiResponse::error([], 'You are not authorized to perform this action.', 403);
-        }
-
-        // Validate request
+        // Validate request and whether user is authorized to perform this action.
         $validated = $request->validated();
         $category = Category::create($validated);
 
@@ -108,12 +104,7 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, string $id)
     {
-        // Check if user has permission
-        if (!auth()->user()->hasPermissionTo('edit any category')) {
-            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
-        }
-
-        // Validate request
+        // Validate request and whether user is authorized to perform this action.
         $validated = $request->validated();
 
         try {
