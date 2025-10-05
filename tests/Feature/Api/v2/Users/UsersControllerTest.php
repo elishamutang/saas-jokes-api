@@ -26,7 +26,7 @@ test('get all users', function() {
     $this->actingAs($user);
 
     // Get users
-    $response = $this->getJson('/api/v2/users');
+    $response = $this->getJson('/api/v2/admin/users');
 
     // Assert
     $response->assertStatus(200)
@@ -54,7 +54,7 @@ test('get specific number of users', function() {
 
     // Get users
     $perPage = 2;
-    $response = $this->getJson("/api/v2/users?per_page=$perPage");
+    $response = $this->getJson("/api/v2/admin/users?per_page=$perPage");
 
     // Assert
     $response->assertStatus(200)
@@ -105,7 +105,7 @@ test('search for user based on name or email', function() {
 
     // Get user
     $searchKeyword = 'Doe';
-    $response = $this->getJson("/api/v2/users?search=$searchKeyword");
+    $response = $this->getJson("/api/v2/admin/users?search=$searchKeyword");
 
     // Assert
     $response->assertStatus(200)
@@ -133,7 +133,7 @@ test('get a single user', function() {
     ];
 
     // Get user
-    $response = $this->getJson("/api/v2/users/1");
+    $response = $this->getJson("/api/v2/admin/users/1");
 
     // Assert
     $response->assertStatus(200)
@@ -157,7 +157,7 @@ test('create a single user', function() {
     $this->actingAs($authUser);
 
     // Create user
-    $response = $this->postJson("/api/v2/users", $user);
+    $response = $this->postJson("/api/v2/admin/users", $user);
 
     // Assert
     $response->assertStatus(200);
@@ -184,7 +184,7 @@ test("update an existing user's name and email", function() {
     ];
 
     // Update user
-    $response = $this->putJson("/api/v2/users/$userId", $updatedUser);
+    $response = $this->putJson("/api/v2/admin/users/$userId", $updatedUser);
 
     // Assert
     $response->assertStatus(200)
@@ -218,7 +218,7 @@ test("update an existing user's password", function() {
     $newPassword = 'newpassword';
 
     // Update user
-    $response = $this->putJson("/api/v2/users/$userId", ['password' => $newPassword]);
+    $response = $this->putJson("/api/v2/admin/users/$userId", ['password' => $newPassword]);
 
     // Assert
     $response->assertStatus(200)
@@ -251,7 +251,7 @@ test('delete a single user', function() {
     $this->actingAs($user);
 
     // Delete user
-    $response = $this->deleteJson("/api/v2/users/$userId");
+    $response = $this->deleteJson("/api/v2/admin/users/$userId");
 
     // Assert
     $response->assertStatus(200);
