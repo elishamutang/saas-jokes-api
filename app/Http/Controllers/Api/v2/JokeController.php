@@ -20,6 +20,11 @@ class JokeController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        // Check if user has the appropriate permissions.
+        if (!auth()->user()->hasAllPermissions(['browse all jokes', 'search a joke'])) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
         // Check for per_page query.
         $perPage = (int) $request->query('per_page', 5);
 
@@ -55,7 +60,7 @@ class JokeController extends Controller
      */
     public function store(StoreJokeRequest $request): JsonResponse
     {
-        // Validate request
+        // Validate request and whether user is authorized to perform this action.
         $validated = $request->validated();
 
         // Create new joke
@@ -98,8 +103,23 @@ class JokeController extends Controller
      */
     public function show(string $id): JsonResponse
     {
+        // Check if user has the appropriate permissions.
+        if (!auth()->user()->hasPermissionTo('read any joke')) {
+            return ApiResponse::error([], 'You are not authorized to perform this action.', 403);
+        }
+
         try {
             $joke = Joke::with(['categories', 'votes'])->findOrFail((int) $id);
+
+            $isCategoryEmpty = $joke->categories()->get()->isEmpty();
+            $isCategoryUnknown = $joke->categories()->where('title', 'Unknown')->exists();
+            $user = auth()->user();
+
+            // Clients cannot see jokes with "Unknown" or empty category.
+            if (($isCategoryEmpty || $isCategoryUnknown) && $user->hasRole('client')) {
+                return ApiResponse::error([], 'Joke not found', 404);
+            }
+
             return ApiResponse::success($joke, 'Joke retrieved successfully');
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], 'Joke not found', 404);
@@ -114,7 +134,7 @@ class JokeController extends Controller
         try {
             $joke = Joke::findOrFail((int) $id);
 
-            // Validate request
+            // Validate request and whether user is authorized to perform this action.
             $validated = $request->validated();
 
             // Update joke
@@ -130,6 +150,11 @@ class JokeController extends Controller
      */
     public function destroy(string $id): JsonResponse
     {
+        // Check if current user has permission to delete a joke.
+        if (!auth()->user()->hasPermissionTo('delete any joke')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
         try {
             // Find joke
             $joke = Joke::findOrFail((int) $id);
@@ -138,6 +163,117 @@ class JokeController extends Controller
             return ApiResponse::success([], 'Joke deleted successfully');
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], 'Joke not found', 404);
+        }
+    }
+
+    /**
+     * Show all soft deleted jokes
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function trash(Request $request): JsonResponse
+    {
+        // Check if current user has permission to access soft-deleted jokes.
+        if (!auth()->user()->hasPermissionTo('browse soft-deleted jokes')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
+        // Check if per_page query is present in request.
+        $perPage = (int) $request->query('per_page', 5);
+
+        if ($perPage < 1) {
+            return ApiResponse::error(
+                [],
+                'Per page must be more than 0.',
+                400
+            );
+        }
+
+        $jokes = Joke::onlyTrashed()->paginate($perPage);
+        return ApiResponse::success($jokes, "Deleted jokes retrieved successfully");
+    }
+
+    /**
+     * Recover all soft deleted jokes from trash
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function recoverAll(): JsonResponse
+    {
+        // Check if current user has permission to recover all soft-deleted jokes.
+        if (!auth()->user()->hasPermissionTo('restore soft-deleted jokes')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
+        $deletedJokes = Joke::onlyTrashed()->get();
+        $numOfJokesRestored = Joke::onlyTrashed()->restore();
+
+        return ApiResponse::success($deletedJokes, "$numOfJokesRestored jokes restored successfully");
+    }
+
+    /**
+     * Remove all soft deleted jokes from trash
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeAll(): JsonResponse
+    {
+        // Check if current user has permission to remove all soft-deleted jokes.
+        if (!auth()->user()->hasPermissionTo('remove soft-deleted jokes')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
+        $numOfJokesRestored = Category::onlyTrashed()->forceDelete();
+        return ApiResponse::success('', "$numOfJokesRestored jokes removed successfully");
+    }
+
+    /**
+     * Recover specified soft deleted category from trash
+     *
+     * @param string $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function recoverOne(string $id): JsonResponse
+    {
+        // Check if current user has permission to recover soft-deleted jokes.
+        if (!auth()->user()->hasPermissionTo('restore soft-deleted jokes')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
+        try {
+            // Find soft deleted joke
+            $joke = Joke::onlyTrashed()->findOrFail((int) $id);
+            $joke->restore();
+
+            return ApiResponse::success($joke, "Joke restored successfully");
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], "Joke not found.", 404);
+        }
+
+    }
+
+    /**
+     * Remove specified soft deleted category from trash
+     *
+     * @param string $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeOne(string $id): JsonResponse
+    {
+        // Check if current user has permission to remove soft-deleted jokes.
+        if (!auth()->user()->hasPermissionTo('remove soft-deleted jokes')) {
+            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+        }
+
+        try {
+            // Find soft deleted joke
+            $joke = Joke::onlyTrashed()->findOrFail((int) $id);
+            $joke->forceDelete();
+
+            return ApiResponse::success('', "Joke permanently deleted successfully");
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error([], "Joke not found.", 404);
         }
     }
 }
