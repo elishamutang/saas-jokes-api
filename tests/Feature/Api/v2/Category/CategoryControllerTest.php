@@ -394,7 +394,7 @@ test('staff level and higher can see deleted categories', function() {
 });
 
 // Staff can recover soft-deleted categories from trash
-test('staff can recover categories from trash', function() {
+test('staff can recover all categories from trash', function() {
     // Prepare
     $this->seed(RolesAndPermissionsSeeder::class);
     Category::factory(3)->create();
@@ -418,8 +418,39 @@ test('staff can recover categories from trash', function() {
     $response->assertStatus(200);
 });
 
+test('staff can recover one deleted category from trash', function() {
+    // Prepare
+    $this->seed(RolesAndPermissionsSeeder::class);
+    $category = Category::factory()->create();
+
+    // Delete category
+    $category->delete();
+
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    // Assign staff role
+    $user->assignRole('staff');
+    $this->actingAs($user);
+
+    // Restore categories from trash
+    $response = $this->postJson("/api/v2/categories/trash/recover/{$category->id}");
+
+    $category->refresh();
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Category restored successfully",
+            'data' => $category->toArray(),
+        ]);
+});
+
 // Staff cannot remove categories from trash
-test('staff cannot remove categories from trash', function() {
+test('staff cannot remove all categories from trash', function() {
     // Prepare
     $this->seed(RolesAndPermissionsSeeder::class);
     Category::factory(3)->create();
@@ -449,7 +480,7 @@ test('staff cannot remove categories from trash', function() {
 });
 
 // Admin can remove categories from trash
-test('admin level and higher can remove categories from trash', function() {
+test('admin level and higher can all remove categories from trash', function() {
     // Prepare
     $this->seed(RolesAndPermissionsSeeder::class);
     Category::factory(3)->create();
@@ -471,4 +502,33 @@ test('admin level and higher can remove categories from trash', function() {
 
     // Assert
     $response->assertStatus(200);
+});
+
+test('admin level and higher can remove one deleted category from trash', function() {
+    // Prepare
+    $this->seed(RolesAndPermissionsSeeder::class);
+    $category = Category::factory()->create();
+
+    // Delete category
+    $category->delete();
+
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    // Assign admin role
+    $user->assignRole('admin');
+    $this->actingAs($user);
+
+    // Remove categories from trash
+    $response = $this->postJson("/api/v2/categories/trash/remove/{$category->id}");
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Category permanently deleted successfully",
+            'data' => '',
+        ]);
 });

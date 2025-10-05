@@ -1,8 +1,11 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Joke;
 use App\Models\User;
+use Database\Seeders\RolesAndPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Testing\Fluent\AssertableJson;
 use function Spatie\PestPluginTestTime\testTime;
 
@@ -12,6 +15,7 @@ testTime()->freeze('2025-09-28 16:37:00');
 // Browse all jokes
 test('get all jokes', function () {
     // Create jokes
+    $this->seed(RolesAndPermissionsSeeder::class);
     Joke::factory(5)->create();
 
     // Create authenticated user
@@ -19,6 +23,8 @@ test('get all jokes', function () {
         'email_verified_at' => now(),
     ]);
 
+    // Assign client role
+    $user->assignRole('client');
     $this->actingAs($user);
 
     // Get all jokes
@@ -37,6 +43,7 @@ test('get all jokes', function () {
 
 test('get specific number of jokes per page', function () {
     // Create jokes
+    $this->seed(RolesAndPermissionsSeeder::class);
     Joke::factory(10)->create();
 
     // Create authenticated user
@@ -44,6 +51,8 @@ test('get specific number of jokes per page', function () {
         'email_verified_at' => now(),
     ]);
 
+    // Assign client role
+    $user->assignRole('client');
     $this->actingAs($user);
 
     // Get jokes
@@ -63,12 +72,12 @@ test('get specific number of jokes per page', function () {
 
 test('search for a joke based on title', function () {
     // Create users
+    $this->seed(RolesAndPermissionsSeeder::class);
     User::factory(10)->create();
 
-    // Create authenticated user
-    $user = User::first();
-    $user->update(['email_verified_at' => now()]);
-    $user->refresh();
+    // Create authenticated user and assign role.
+    $user = User::factory()->create(['email_verified_at' => now()]);
+    $user->assignRole('client');
 
     $this->actingAs($user);
 
@@ -114,52 +123,126 @@ test('search for a joke based on title', function () {
         );
 });
 
-// Read a single joke
-test('get a single joke', function () {
-    // Create jokes
-    Joke::factory(5)->create();
+// Unauthenticated users cannot read a single joke
+test('unauthenticated users cannot read a single joke', function() {
+    // Prepare data
+    $this->seed(RolesAndPermissionsSeeder::class);
+    $joke = Joke::factory()->create();
+    $category = Category::factory()->create();
+
+    $joke->categories()->attach($category->id);
+
+    // Get response
+    $response = $this->getJson("/api/v2/jokes/{$joke->id}");
+
+    $response->assertStatus(401)
+        ->assertJson([
+            'success' => false,
+            'message' => "Please log into your account.",
+        ]);
+});
+
+// Client users cannot read joke with unknown category
+test('client users cannot read a joke with an unknown category', function() {
+    // Prepare data
+    $this->seed(RolesAndPermissionsSeeder::class);
+    $joke = Joke::factory()->create();
+    $category = Category::factory()->create(['title' => 'Unknown']);
+
+    $joke->categories()->attach($category->id);
 
     // Create authenticated user
     $user = User::factory()->create([
         'email_verified_at' => now(),
     ]);
 
+    // Assign role
+    $user->assignRole('client');
     $this->actingAs($user);
 
-    $joke = Joke::limit(1)->get();
-    $jokeId = $joke[0]->id;
+    // Get response
+    $response = $this->getJson("/api/v2/jokes/{$joke->id}");
+
+    $response->assertStatus(404)
+        ->assertJson([
+            'message' => "Joke not found"
+        ]);
+});
+
+// Client users cannot read joke with empty category
+test('client users cannot read a joke with empty category', function() {
+    // Preapre data
+    $this->seed(RolesAndPermissionsSeeder::class);
+    $joke = Joke::factory()->create();
+
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    // Assign role
+    $user->assignRole('client');
+    $this->actingAs($user);
+
+    // Get response
+    $response = $this->getJson("/api/v2/jokes/{$joke->id}");
+
+    $response->assertStatus(404)
+        ->assertJson([
+            'message' => "Joke not found"
+        ]);
+});
+
+
+// Read a single joke
+test('client users can read a single joke', function () {
+    // Prepare data
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    $joke = Joke::factory()->create();
+    $category = Category::factory()->create();
+
+    $joke->categories()->attach($category->id);
+
+    // Create authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+    ]);
+
+    // Assign role
+    $user->assignRole('client');
+    $this->actingAs($user);
 
     // Mock result
     $data = [
         'success' => true,
         'message' => "Joke retrieved successfully",
-        'data' => $joke[0]->toArray(),
+        'data' => Joke::with(['categories', 'votes'])->find($joke->id)->toArray(),
     ];
 
     // Get response
-    $response = $this->getJson("/api/v2/jokes/$jokeId");
+    $response = $this->getJson("/api/v2/jokes/{$joke->id}");
 
     // Assert
     $response->assertStatus(200)->assertJson($data);
 });
 
-// Update a single joke
-test('update a single joke', function () {
-    // Create users
-    User::factory(5)->create();
+// Client users cannot update other user jokes
+test('client users cannot update other user jokes', function () {
+    // Prepare
+    $this->seed(RolesAndPermissionsSeeder::class);
+    User::factory(3)->create();
 
-    // Create authenticated user
-    $user = User::first();
-    $user->update(['email_verified_at' => now()]);
-    $user->refresh();
-
+    // Create user and authenticate them.
+    $user = User::factory()->create(['email_verified_at' => now()]);
+    $user->assignRole('client');
     $this->actingAs($user);
 
     // Create joke
     Joke::create([
         'title' => fake()->word,
         'content' => fake()->text,
-        'user_id' => 1,
+        'user_id' => 3,
     ]);
 
     // Update joke
@@ -168,11 +251,37 @@ test('update a single joke', function () {
         'content' => 'Updated content',
     ];
 
-    // Mock result
-    $result = [
-        'success' => true,
-        'message' => 'Joke updated successfully',
-        'data' => $updatedJoke,
+    // Response
+    $response = $this->putJson('/api/v2/jokes/1', $updatedJoke);
+
+    // Assert
+    $response->assertStatus(403)
+        ->assertJson([
+            'message' => 'This action is unauthorized.'
+        ]);
+});
+
+// Client user can update their own jokes
+test('client users can update their own jokes', function() {
+    // Prepare
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    // Create user and authenticate them.
+    $user = User::factory()->create(['email_verified_at' => now()]);
+    $user->assignRole('client');
+    $this->actingAs($user);
+
+    // Create joke
+    Joke::create([
+        'title' => fake()->word,
+        'content' => fake()->text,
+        'user_id' => $user->id,
+    ]);
+
+    // Update joke
+    $updatedJoke = [
+        'title' => 'Updated title',
+        'content' => 'Updated content',
     ];
 
     // Response
@@ -180,21 +289,51 @@ test('update a single joke', function () {
 
     // Assert
     $response->assertStatus(200)
-        ->assertJson($result);
+        ->assertJson([
+            'success' => true,
+            'message' => "Joke updated successfully",
+            'data' => $updatedJoke,
+        ]);
 });
 
-// Add a single joke
-test('add a joke', function () {
-    // Populate users in DB
-    User::factory(5)->create();
+// Staff level and higher can update other users jokes
+test('staff level and higher can update other user jokes', function() {
+    // Prepare
+    $this->seed(RolesAndPermissionsSeeder::class);
+    User::factory(3)->create();
 
-    // Create authenticated user
-    $user = User::first();
-    $user->update(['email_verified_at' => now()]);
-    $user->refresh();
-
+    // Create user and authenticate them.
+    $user = User::factory()->create(['email_verified_at' => now()]);
+    $user->assignRole('staff');
     $this->actingAs($user);
 
+    // Create joke
+    Joke::create([
+        'title' => fake()->word,
+        'content' => fake()->text,
+        'user_id' => 3,
+    ]);
+
+    // Update joke
+    $updatedJoke = [
+        'title' => 'Updated title',
+        'content' => 'Updated content',
+    ];
+
+    // Response
+    $response = $this->putJson('/api/v2/jokes/1', $updatedJoke);
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Joke updated successfully",
+            'data' => $updatedJoke,
+        ]);
+});
+
+// Unauthenticated users cannot add a joke
+test('unauthenticated users cannot add a joke', function() {
     // Create joke
     $joke = [
         'title' => 'New joke',
@@ -202,8 +341,33 @@ test('add a joke', function () {
         'user_id' => 1,
     ];
 
-    Joke::create($joke);
-    unset($joke['user_id']);
+    // Response
+    $response = $this->postJson('/api/v2/jokes', $joke);
+
+    // Assert
+    $response->assertStatus(401)
+        ->assertJson([
+            'success' => false,
+            'message' => "Please log into your account."
+        ]);
+});
+
+// Add a single joke
+test('client users can add a joke', function () {
+    // Prepare
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    // Create authenticated user
+    $user = User::factory()->create(['email_verified_at' => now()]);
+    $user->assignRole('client');
+    $this->actingAs($user);
+
+    // Prepare joke
+    $joke = [
+        'title' => 'New joke',
+        'content' => 'New joke content',
+        'user_id' => 1,
+    ];
 
     // Mock result
     $result = [
@@ -221,15 +385,15 @@ test('add a joke', function () {
 });
 
 // Delete a single joke
-test('delete a joke', function () {
+test("client users cannot delete other user's joke", function () {
+    $this->seed(RolesAndPermissionsSeeder::class);
+
     // Populate users in DB
     User::factory(5)->create();
 
     // Create authenticated user
-    $user = User::first();
-    $user->update(['email_verified_at' => now()]);
-    $user->refresh();
-
+    $user = User::factory()->create(['email_verified_at' => now()]);
+    $user->assignRole('client');
     $this->actingAs($user);
 
     // Create jokes
@@ -254,10 +418,242 @@ test('delete a joke', function () {
     $jokeId = $jokes[1]['user_id'];
 
     // Response
-    $response = $this->deleteJson('/api/v2/jokes/2');
+    $response = $this->deleteJson("/api/v2/jokes/$jokeId");
 
-    $response->assertStatus(200);
+    $response->assertStatus(403)
+        ->assertJson([
+            'success' => false,
+            'message' => "You are not authorized to perform this action.",
+        ]);
+});
+
+// Client can delete their own jokes
+test('client users can delete their own jokes', function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    $user = User::factory()->create();
+    $user->assignRole('client');
+    $this->actingAs($user);
+
+    // Prepare joke
+    $joke = Joke::create([
+        'title' => 'New joke',
+        'content' => 'New joke content',
+        'user_id' => $user->id,
+    ]);
+
+    // Mock result
+    $result = [
+        'success' => true,
+        'message' => 'Joke deleted successfully',
+        'data' => [],
+    ];
+
+    // Response
+    $response = $this->deleteJson("/api/v2/jokes/{$joke->id}");
+
+    $response->assertStatus(200)
+        ->assertJson($result);
 
     // Verify company is no longer in the database
-    $this->assertSoftDeleted('jokes', ['id' => $jokeId]);
+    $this->assertSoftDeleted('jokes', ['id' => $joke->id]);
+});
+
+// Client users cannot access jokes trash
+test("client users cannot access jokes trash", function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    $user = User::factory()->create();
+    $user->assignRole('client');
+    $this->actingAs($user);
+
+    // Response
+    $response = $this->getJson("/api/v2/jokes/trash");
+
+    // Assert
+    $response->assertStatus(403)
+        ->assertJson([
+            'success' => false,
+            'message' => "You are not authorized to perform this action.",
+            'data' => [],
+        ]);
+});
+
+// Staff level and higher can access jokes trash
+test("staff level and higher can access jokes trash", function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    $user = User::factory()->create();
+    $user->assignRole('staff');
+    $this->actingAs($user);
+
+    // Response
+    $response = $this->getJson("/api/v2/jokes/trash");
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Deleted jokes retrieved successfully"
+        ]);
+});
+
+// Staff level and higher can delete other user's jokes
+test("staff level and higher can delete other user's jokes", function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    // Populate users in DB
+    User::factory(5)->create();
+
+    // Create authenticated user
+    $user = User::factory()->create(['email_verified_at' => now()]);
+    $user->assignRole('staff');
+    $this->actingAs($user);
+
+    // Create jokes
+    $jokes = [
+        [
+            'title' => fake()->word,
+            'content' => fake()->text,
+            'user_id' => 1,
+        ],
+        [
+            'title' => fake()->word,
+            'content' => fake()->text,
+            'user_id' => 2,
+        ],
+    ];
+
+    foreach($jokes as $joke) {
+        Joke::create($joke);
+    }
+
+    // Joke ID to be deleted
+    $jokeId = $jokes[1]['user_id'];
+
+    // Response
+    $response = $this->deleteJson("/api/v2/jokes/$jokeId");
+
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Joke deleted successfully",
+            'data' => [],
+        ]);
+});
+
+// Staff level and higher can recover deleted jokes
+test("staff level and higher can recover all deleted jokes", function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    // Prepare jokes and delete them
+    Joke::factory(2)->create();
+    Joke::query()->delete();
+
+    // Authenticate user
+    $user = User::factory()->create();
+    $user->assignRole('staff');
+    $this->actingAs($user);
+
+    // Recover jokes
+    $response = $this->postJson("/api/v2/jokes/trash/recover-all");
+
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "2 jokes recovered successfully"
+        ]);
+});
+
+test("staff level can recover one deleted joke", function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    $joke = Joke::factory()->create();
+    $joke->delete();
+
+    // Authenticate user
+    $user = User::factory()->create();
+    $user->assignRole('staff');
+    $this->actingAs($user);
+
+    // Recover jokes
+    $response = $this->postJson("/api/v2/jokes/trash/recover/{$joke->id}");
+
+    $joke->refresh();
+
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Joke recovered successfully",
+            'data' => $joke->toArray(),
+        ]);
+});
+
+// Staff level cannot remove deleted jokes
+test("staff level cannot remove deleted jokes", function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    // Prepare jokes and delete them
+    Joke::factory(2)->create();
+    Joke::query()->forceDelete();
+
+    // Authenticate user
+    $user = User::factory()->create();
+    $user->assignRole('staff');
+    $this->actingAs($user);
+
+    // Remove jokes
+    $response = $this->postJson("/api/v2/jokes/trash/remove-all");
+
+    $response->assertStatus(403)
+        ->assertJson([
+            'success' => false,
+            'message' => "You are not authorized to perform this action.",
+            'data' => [],
+        ]);
+});
+
+// Admin level and higher can remove deleted jokes
+test("admin level and higher can remove deleted jokes", function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    // Prepare jokes and delete them
+    Joke::factory(2)->create();
+    Joke::query()->delete();
+
+    // Authenticate user
+    $user = User::factory()->create();
+    $user->assignRole('admin');
+    $this->actingAs($user);
+
+    // Remove jokes
+    $response = $this->postJson("/api/v2/jokes/trash/remove-all");
+
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "2 jokes removed successfully",
+        ]);
+});
+
+test("admin level and higher can remove one deleted joke", function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+
+    $joke = Joke::factory()->create();
+    $joke->delete();
+
+    // Authenticate user
+    $user = User::factory()->create();
+    $user->assignRole('admin');
+    $this->actingAs($user);
+
+    // Recover jokes
+    $response = $this->postJson("/api/v2/jokes/trash/remove/{$joke->id}");
+
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Joke permanently deleted successfully",
+            'data' => '',
+        ]);
 });
