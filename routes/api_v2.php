@@ -47,18 +47,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::put('/profile', [ProfileControllerV2::class, 'update'])->name('update.profile');
     Route::delete('/profile/delete', [ProfileControllerV2::class, 'destroy'])->name('delete.profile');
 
-    // Users routes
-    Route::prefix('admin/users')->group(function() {
-        Route::prefix('trash')->group(function() {
-            Route::post('/recover/{id}', [UserController::class, 'recoverOne'])->name('users.recoverOne');
-            Route::post('/remove/{id}', [UserController::class, 'removeOne'])->name('users.removeOne');
-            Route::post('/recover-all', [UserController::class, 'recoverAll'])->name('users.recoverAll');
-            Route::post('/remove-all', [UserController::class, 'removeAll'])->name('users.removeAll');
-            Route::get('/', [UserController::class, 'trash'])->name('users.trash');
-        });
-
-        Route::apiResource('/', UserController::class);
+    // User Admin routes
+    Route::prefix('admin/users/trash')->group(function() {
+        Route::post('/recover/{id}', [UserController::class, 'recoverOne'])->name('users.recoverOne');
+        Route::post('/remove/{id}', [UserController::class, 'removeOne'])->name('users.removeOne');
+        Route::post('/recover-all', [UserController::class, 'recoverAll'])->name('users.recoverAll');
+        Route::post('/remove-all', [UserController::class, 'removeAll'])->name('users.removeAll');
+        Route::get('/', [UserController::class, 'trash'])->name('users.trash');
     });
+    Route::apiResource('/admin/users', UserController::class);
 
     // Jokes Routes
     Route::post('/jokes/{id}/like', [VoteControllerV2::class, 'like'])->name('jokes.like');
