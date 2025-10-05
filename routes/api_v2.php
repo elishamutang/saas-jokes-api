@@ -54,6 +54,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::post('/jokes/{id}/like', [VoteControllerV2::class, 'like'])->name('like.joke');
     Route::post('/jokes/{id}/dislike', [VoteControllerV2::class, 'dislike'])->name('dislike.joke');
     Route::post('/jokes/{id}/remove-vote', [VoteControllerV2::class, 'removeVote'])->name('remote.vote');
+
+    Route::prefix('jokes/trash')->group(function() {
+        Route::post('/recover/{id}', [JokeControllerV2::class, 'recoverOne'])->name('jokes.recoverOne');
+        Route::post('/remove/{id}', [JokeControllerV2::class, 'removeOne'])->name('jokes.removeOne');
+        Route::post('/recover-all', [JokeControllerV2::class, 'recoverAll'])->name('jokes.recoverAll');
+        Route::post('/remove-all', [JokeControllerV2::class, 'removeAll'])->name('jokes.removeAll');
+        Route::get('/', [JokeControllerV2::class, 'trash'])->name('jokes.trash');
+    });
     Route::apiResource('/jokes', JokeControllerV2::class);
 
     // Category routes
