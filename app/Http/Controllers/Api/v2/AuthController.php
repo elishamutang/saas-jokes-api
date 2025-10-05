@@ -61,6 +61,9 @@ class AuthController extends Controller
             ),
         ]);
 
+        // Assign newly-registered user to "client" role
+        $user->assignRole('client');
+
         // Dispatch successful user registration event to allow Laravel to send verification email.
         event(new Registered($user));
 
