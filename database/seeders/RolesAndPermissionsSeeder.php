@@ -55,16 +55,15 @@ class RolesAndPermissionsSeeder extends Seeder
                     'edit client or staff roles only', 'mark a client or staff user as banned or suspended',
                     'revert a client or staff user from banned to suspended', 'revert a client or staff user from suspended to active',
                     'logout all staff and client users', 'reset client or staff user passwords', 'browse all roles',
-                    'read any role', 'edit any role', 'create a role', 'search any role', 'browse all permissions',
-                    'read any permission', 'edit any permission', 'create a permission', 'search any permission',
-                    'assign user role', 'update user role', 'delete user role',
+                    'read any role', 'edit any role', 'create a role', 'search any role', 'delete any role', 'browse all permissions',
+                    'read any permission', 'search any permission', 'assign user role', 'update user role', 'delete user role',
                 ],
             ],
             [
                 'name' => 'super-admin',
                 'level' => 999,
                 'permissions' => [
-                        // Super-Admin implemented using Gate::before to assign all permissions
+                        // Super-Admin implemented globally using Gate::before to assign all permissions
                     ],
             ],
         ];
