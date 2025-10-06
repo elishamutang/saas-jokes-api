@@ -42,7 +42,7 @@ class VerifyEmailController extends Controller
 
         // Set user status as ACTIVE
         $request->user()->update([
-            'status' => 'Active',
+            'status' => 'active',
         ]);
 
         return ApiResponse::success($request->user(), "Email verified successfully.");
