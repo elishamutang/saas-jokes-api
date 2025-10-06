@@ -25,6 +25,10 @@ class UserController extends Controller
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
+        if (auth()->user()->status === 'suspended') {
+            return ApiResponse::error([], "Please reset your password.", 400);
+        }
+
         // Check for per_page query.
         $perPage = (int) $request->query('per_page', 5);
 
@@ -111,7 +115,33 @@ class UserController extends Controller
         try {
             // Find user and update
             $user = User::findOrFail((int) $id);
+
+            // Get role
+            $role = $validated['role'] ?? null;
+
+            // Prevent client users from changing their own role or status.
+            if (auth()->user()->hasRole('client')) {
+                if (!empty($validated['role'])) {
+                    return ApiResponse::error([], "You are not authorized to change your role.", 403);
+                }
+
+                if (!empty($validated['status'])) {
+                    return ApiResponse::error([], "You are not authorized to change your status.", 403);
+                }
+            }
+
+            // If admin or higher suspends or bans a user, email_verified_at will become NULL and logout the user.
+            if ($validated['status'] !== 'active') {
+                // Logout user
+                $user->tokens()->delete();
+                $user->email_verified_at = null;
+            }
+
+            // Update user
             $user->update($validated);
+
+            // Update role
+            $user->assignRole($role);
 
             return ApiResponse::success($user, "User updated successfully");
         } catch (ModelNotFoundException $e) {
