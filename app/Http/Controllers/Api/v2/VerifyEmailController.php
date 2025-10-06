@@ -40,6 +40,11 @@ class VerifyEmailController extends Controller
             event(new Verified($request->user()));
         }
 
+        // Check for user status
+        if ($request->user()->status === 'suspended') {
+            return ApiResponse::success([], "Please reset your password.");
+        }
+
         // Set user status as ACTIVE
         $request->user()->update([
             'status' => 'active',
