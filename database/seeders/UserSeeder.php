@@ -73,6 +73,12 @@ class UserSeeder extends Seeder
             $roles = $newUser['roles'];
             unset($newUser['roles']);
 
+            // Randomly assign user status.
+            $status = ['active', 'suspended', 'banned'];
+            $randomStatusKey = array_rand($status);
+
+            $newUser['status'] = $status[$randomStatusKey];
+
             // Update or create user in DB.
             $user = User::updateOrCreate(
                 ['email' => $newUser['email']],
