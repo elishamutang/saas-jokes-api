@@ -52,6 +52,8 @@ class UpdateUserRequest extends FormRequest
             'name' => ['sometimes', 'required', 'string'],
             'email' => ['sometimes', 'required', 'email', Rule::unique('users')->ignore($this->user)],
             'password' => ['sometimes', 'required', 'string', Password::min(8)],
+            'role' => ['sometimes', 'required', 'string', Rule::in(['admin', 'staff', 'client'])],
+            'status' => ['sometimes', 'required', 'string', Rule::in(['active', 'suspended', 'banned'])],
         ];
     }
 
@@ -62,6 +64,10 @@ class UpdateUserRequest extends FormRequest
             'email.required' => 'Email must not be empty.',
             'password.required' => 'Password must not be empty.',
             'password' => 'Password must be at least 8 characters long.',
+            'role.required' => 'Role must not be empty.',
+            'role' => 'Role can either be admin, staff or client.',
+            'status.required' => 'Status must not be empty.',
+            'status' => 'Status can either be active, suspended or banned.',
         ];
     }
 }
