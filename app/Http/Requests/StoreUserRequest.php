@@ -28,6 +28,7 @@ class StoreUserRequest extends FormRequest
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', Password::min(6)],
             'role' => ['required', 'string', Rule::in(['admin', 'staff', 'client'])],
+            'status' => ['sometimes', 'string', Rule::in(['active', 'suspended', 'banned'])],
             'email_verified_at' => ['nullable', 'date'],
         ];
     }
@@ -43,6 +44,7 @@ class StoreUserRequest extends FormRequest
             'password' => 'Password must be at least 8 characters long.',
             'role.required' => 'User role required.',
             'role' => "Invalid role. Please choose either admin, staff, or client role.",
+            'status' => 'Invalid status. Please choose either active, suspended or banned.',
         ];
     }
 }
