@@ -41,7 +41,7 @@ Route::prefix('auth')
             ->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
 
         // Reset password
-        Route::put('/reset-password', [PasswordResetControllerV2::class, 'resetPassword'])
+        Route::post('/reset-password', [PasswordResetControllerV2::class, 'resetPassword'])
             ->middleware(['auth:sanctum', 'verified'])->name('reset.password');
     });
 
