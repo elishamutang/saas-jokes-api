@@ -38,6 +38,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
+    protected $attributes = [
+        'status' => 'active',
+    ];
+
     /**
      * Get the attributes that should be cast.
      *
