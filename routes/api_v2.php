@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\v2\JokeController as JokeControllerV2;
 use App\Http\Controllers\Api\v2\ProfileController as ProfileControllerV2;
 use App\Http\Controllers\Api\v2\VerifyEmailController as VerifyEmailControllerV2;
 use App\Http\Controllers\Api\v2\VoteController as VoteControllerV2;
+use App\Http\Controllers\Api\v2\PasswordResetController as PasswordResetControllerV2;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -38,6 +39,10 @@ Route::prefix('auth')
         // Resending the verification email
         Route::post('/email/verification-notification', [VerifyEmailControllerV2::class, 'resendEmailVerification'])
             ->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
+
+        // Reset password
+        Route::put('/reset-password', [PasswordResetControllerV2::class, 'resetPassword'])
+            ->middleware(['auth:sanctum', 'verified'])->name('reset.password');
     });
 
 // Routes for authenticated and verified users
@@ -81,29 +86,3 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     });
     Route::apiResource("/categories", CategoryControllerV2::class);
 });
-
-// TODO: Complete other routes below
-//Route::get('categories/trash', [CategoryControllerV2::class, 'trash'])
-//    ->name('categories.trash');
-//
-//Route::delete('categories/trash/empty', [CategoryControllerV2::class, 'removeAll'])
-//    ->name('categories.trash.remove.all');
-//
-//Route::post('categories/trash/recover', [CategoryControllerV2::class, 'recoverAll'])
-//    ->name('categories.trash.recover.all');
-//
-//Route::delete('categories/trash/{id}/remove', [CategoryControllerV2::class, 'removeOne'])
-//    ->name('categories.trash.remove.one');
-//
-//Route::post('categories/trash/{id}/recover', [CategoryControllerV2::class, 'recoverOne'])
-//    ->name('categories.trash.recover.one');
-//
-///** Stop people trying to "GET" admin/categories/trash/1234/delete or similar */
-//Route::get('categories/trash/{id}/{method}', [CategoryControllerV2::class, 'trash']);
-//
-//Route::post('categories/{category}/delete', [CategoryControllerV2::class, 'delete'])
-//    ->name('categories.delete');
-//
-//Route::get('categories/{category}/delete', function () {
-//    return redirect()->route('admin.categories.index');
-//});
