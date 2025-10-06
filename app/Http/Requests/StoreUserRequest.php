@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class StoreUserRequest extends FormRequest
@@ -12,7 +13,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->hasAnyPermission(['create a user', 'create client users only', 'create client and staff users only']);
     }
 
     /**
@@ -25,7 +26,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', Password::min(8)],
+            'password' => ['required', 'string', Password::min(6)],
+            'role' => ['required', 'string', Rule::in(['admin', 'staff', 'client'])],
             'email_verified_at' => ['nullable', 'date'],
         ];
     }
@@ -39,6 +41,8 @@ class StoreUserRequest extends FormRequest
             'email.unique' => 'Email already exists.',
             'password.required' => 'Password is required.',
             'password' => 'Password must be at least 8 characters long.',
+            'role.required' => 'User role required.',
+            'role' => "Invalid role. Please choose either admin, staff, or client role.",
         ];
     }
 }
