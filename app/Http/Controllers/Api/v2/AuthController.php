@@ -118,6 +118,21 @@ class AuthController extends Controller
         $user = Auth::user();
         $token = $user->createToken($user->name)->plainTextToken;
 
+        // Suspended users need to verify their email address and change password.
+        if ($user->status === 'suspended') {
+            // Re-send email verification link.
+            $request->user()->sendEmailVerificationNotification();
+
+            return ApiResponse::success([
+                'token' => $token,
+            ], "Your account is suspended. Please verify your email address and change your password.");
+        }
+
+        // Banned users need admins to change their status from banned to suspended.
+        if ($user->status === 'banned') {
+            return ApiResponse::success([], "Your account is banned. Please contact an Administrator for further action.");
+        }
+
         return ApiResponse::success(
             [
                 'token' => $token,
