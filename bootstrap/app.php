@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Middleware\CheckUserNotSuspended;
+use App\Http\Middleware\CheckUserStatus;
 use App\Models\Joke;
 use App\Responses\ApiResponse;
 use Illuminate\Auth\AuthenticationException;
@@ -33,7 +33,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Check if user is suspended
         $middleware->alias([
-            'not.suspended' => CheckUserNotSuspended::class,
+            'user.status' => CheckUserStatus::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
