@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\v2\ProfileController as ProfileControllerV2;
 use App\Http\Controllers\Api\v2\VerifyEmailController as VerifyEmailControllerV2;
 use App\Http\Controllers\Api\v2\VoteController as VoteControllerV2;
 use App\Http\Controllers\Api\v2\PasswordResetController as PasswordResetControllerV2;
+use App\Http\Controllers\Api\v2\RoleController as RoleControllerV2;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -61,6 +62,9 @@ Route::middleware(['auth:sanctum', 'verified', 'user.status'])->group(function()
         Route::get('/', [UserController::class, 'trash'])->name('users.trash');
     });
     Route::apiResource('/admin/users', UserController::class);
+
+    // Role routes
+    Route::apiResource("/admin/roles", RoleControllerV2::class);
 
     // Jokes Routes
     Route::post('/jokes/{id}/like', [VoteControllerV2::class, 'like'])->name('jokes.like');
