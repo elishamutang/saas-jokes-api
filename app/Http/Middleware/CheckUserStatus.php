@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckUserNotSuspended
+class CheckUserStatus
 {
     /**
      * Handle an incoming request.
@@ -19,6 +19,10 @@ class CheckUserNotSuspended
 
         if ($request->user()->status === 'suspended') {
             return ApiResponse::error([], "Please reset your password.", 400);
+        }
+
+        if ($request->user()->status === 'banned') {
+            return ApiResponse::error([], "Your account is banned. Please contact an administrator.", 400);
         }
 
         return $next($request);
