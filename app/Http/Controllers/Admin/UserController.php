@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index(Request $request): JsonResponse
     {
         // Check if user has the appropriate permissions.
-        if (!auth()->user()->hasPermissionTo('browse all users')) {
+        if (auth()->user()->cannot('viewAny', User::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
@@ -65,17 +65,17 @@ class UserController extends Controller
         // Get role from request
         $role = Role::where('name', $validated['role'])->first();
 
-        // Create user
-        $user = User::create($validated);
-
         // Check appropriate permissions
         if (auth()->user()->hasPermissionTo('create client and staff users only') && $role->name === 'admin') {
-            return ApiResponse::error([], "Admins can only assign client or staff roles to users.", 400);
+            return ApiResponse::error([], "Admins can only assign client or staff roles to users.", 403);
         }
 
         if (auth()->user()->hasPermissionTo('create client users only') && $role->name !== "client") {
-            return ApiResponse::error([], "Staff users can only assign client roles to users.", 400);
+            return ApiResponse::error([], "Staff users can only assign client roles to users.", 403);
         }
+
+        // Create user
+        $user = User::create($validated);
 
         // Assign role
         $user->assignRole($role->name);
@@ -88,12 +88,13 @@ class UserController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        if (!auth()->user()->hasPermissionTo('read any user')) {
-            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
-        }
-
         try {
             $user = User::with(['jokes', 'votes'])->findOrFail((int) $id);
+
+            if (auth()->user()->cannot('view', $user)) {
+                return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+            }
+
             return ApiResponse::success($user, "User retrieved successfully");
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], "User not found", 404);
@@ -112,8 +113,9 @@ class UserController extends Controller
             // Find user and update
             $user = User::findOrFail((int) $id);
 
-            // Get role
+            // Get role and status
             $role = $validated['role'] ?? null;
+            $status = $validated['status'] ?? null;
 
             // Prevent client users from changing their own role or status.
             if (auth()->user()->hasRole('client')) {
@@ -128,7 +130,7 @@ class UserController extends Controller
 
             // TODO: Staff cannot ban admin, admin cannot ban super-admin.
             // If admin or higher suspends or bans a user, email_verified_at will become NULL and logout the user.
-            if ($validated['status'] !== 'active') {
+            if ($status && $status !== 'active') {
                 // Logout user
                 $user->tokens()->delete();
                 $user->email_verified_at = null;
@@ -151,44 +153,19 @@ class UserController extends Controller
      */
     public function destroy(string $id): JsonResponse
     {
-        // Get current authenticated user
-        $authenticatedUser = auth()->user();
-
-        // Check for appropriate permissions
-        if (!$authenticatedUser->hasAnyPermission([
-            'delete client users only',
-            'delete client and staff users only',
-        ])) {
-            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
-        }
-
         try {
+            // Get current authenticated user
+            $authenticatedUser = auth()->user();
+
             // Find user to be deleted
             $user = User::findOrFail((int) $id);
 
-            // Super-admin cannot be deleted
-            if ($user->hasRole('super-admin')) {
-                return ApiResponse::error([], "You are not authorized to perform this action.", 403);
-            }
-
-            // Staff and admins cannot delete themselves
-            if ($authenticatedUser->hasAnyRole(['staff', 'admin']) && $authenticatedUser->id === $user->id) {
-                return ApiResponse::error([], "You are not allowed to delete yourself.", 400);
-            }
-
-            // Staff users cannot delete admins and higher
-            if ($authenticatedUser->hasRole('staff') && !$user->hasRole('client')) {
-                return ApiResponse::error([], "You are not authorized to perform this action.", 403);
-            }
-
-            // Client users cannot delete other users.
-            if ($authenticatedUser->hasRole('client') && $authenticatedUser->id !== $user->id) {
+            if ($authenticatedUser->cannot('delete', $user) || $user->hasRole('super-admin')) {
                 return ApiResponse::error([], "You are not authorized to perform this action.", 403);
             }
 
             $user->delete();
-
-            return ApiResponse::success('', "User deleted successfully");
+            return ApiResponse::success($user, "User deleted successfully");
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], "User not found", 404);
         }
@@ -203,10 +180,7 @@ class UserController extends Controller
     public function trash(Request $request): JsonResponse
     {
         // Check if current user has permission to access soft-deleted users.
-        if (!auth()->user()->hasAnyPermission([
-            'browse soft-deleted client users',
-            'browse soft-deleted users'
-        ])) {
+        if (auth()->user()->cannot('browseTrash', User::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
@@ -244,10 +218,7 @@ class UserController extends Controller
     public function recoverAll(): JsonResponse
     {
         // Check if current user has permission to recover all soft-deleted users.
-        if (!auth()->user()->hasAnyPermission([
-            'restore soft-deleted client users',
-            'restore soft-deleted users'
-        ])) {
+        if (auth()->user()->cannot('recoverAll', User::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
@@ -277,10 +248,7 @@ class UserController extends Controller
     public function removeAll(): JsonResponse
     {
         // Check if current user has permission to remove all soft-deleted users.
-        if (!auth()->user()->hasAnyPermission([
-            'remove soft-deleted client users',
-            'remove soft-deleted users'
-        ])) {
+        if (auth()->user()->cannot('removeAll', User::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
@@ -307,19 +275,11 @@ class UserController extends Controller
      */
     public function recoverOne(string $id): JsonResponse
     {
-        // Check if current user has permission to recover soft-deleted users.
-        if (!auth()->user()->hasAnyPermission([
-            'restore soft-deleted client users',
-            'restore soft-deleted users'
-        ])) {
-            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
-        }
-
         try {
             // Find soft deleted user
             $user = User::onlyTrashed()->findOrFail((int) $id);
 
-            if (auth()->user()->hasPermissionTo('restore soft-deleted client users') && !$user->hasRole('client')) {
+            if (auth()->user()->cannot('recoverOne', $user)) {
                 return ApiResponse::error([], "User not found.", 404);
             }
 
@@ -340,19 +300,11 @@ class UserController extends Controller
      */
     public function removeOne(string $id): JsonResponse
     {
-        // Check if current user has permission to remove all soft-deleted users.
-        if (!auth()->user()->hasAnyPermission([
-            'remove soft-deleted client users',
-            'remove soft-deleted users'
-        ])) {
-            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
-        }
-
         try {
             // Find soft deleted user
             $user = User::onlyTrashed()->findOrFail((int) $id);
 
-            if (auth()->user()->hasPermissionTo('remove soft-deleted client users') && !$user->hasRole('client')) {
+            if (auth()->user()->cannot('removeOne', $user)) {
                 return ApiResponse::error([], "User not found.", 404);
             }
 
