@@ -23,7 +23,7 @@ class UpdateUserRequest extends FormRequest
 
         // Check the role of the user being updated
         // Admin permissions
-        if ($user->hasPermissionTo('edit client or staff users only') && $selectedUser->hasAnyRole(['client', 'staff'])) {
+        if ($user->hasPermissionTo('edit admin, client or staff users only') && $selectedUser->hasAnyRole(['client', 'staff', 'admin'])) {
             return true;
         }
 
@@ -51,7 +51,6 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => ['sometimes', 'required', 'string'],
             'email' => ['sometimes', 'required', 'email', Rule::unique('users')->ignore($this->user)],
-            'password' => ['sometimes', 'required', 'string', Password::min(8)],
             'role' => ['sometimes', 'required', 'string', Rule::in(['admin', 'staff', 'client'])],
             'status' => ['sometimes', 'required', 'string', Rule::in(['active', 'suspended', 'banned'])],
         ];
@@ -62,8 +61,6 @@ class UpdateUserRequest extends FormRequest
         return [
             'name.required' => 'Name must not be empty.',
             'email.required' => 'Email must not be empty.',
-            'password.required' => 'Password must not be empty.',
-            'password' => 'Password must be at least 8 characters long.',
             'role.required' => 'Role must not be empty.',
             'role' => 'Role can either be admin, staff or client.',
             'status.required' => 'Status must not be empty.',
