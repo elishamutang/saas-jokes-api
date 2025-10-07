@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
@@ -14,31 +15,11 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Get currently authenticated user
-        $user = auth()->user();
-
         // Get user being updated
         $selectedUserId = (int) $this->route('user');
         $selectedUser = User::find($selectedUserId);
 
-        // Check the role of the user being updated
-        // Admin permissions
-        if ($user->hasPermissionTo('edit admin, client or staff users only') && $selectedUser->hasAnyRole(['client', 'staff', 'admin'])) {
-            return true;
-        }
-
-        // Staff permissions
-        if ($user->hasPermissionTo('edit client users only') && $selectedUser->hasRole('client')) {
-            return true;
-        }
-
-        // If updating own user data
-        if ($user->hasPermissionTo('edit own user profile') && $selectedUser->id === $user->id) {
-            return true;
-        }
-
-        // Clients cannot update other users
-        return false;
+        return auth()->user()->can('update', $selectedUser);
     }
 
     /**
