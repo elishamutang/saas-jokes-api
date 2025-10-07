@@ -53,7 +53,7 @@ class RolesAndPermissionsSeeder extends Seeder
                     'delete any category', 'search any category', 'remove categories', 'restore categories',
                     'browse all users', 'read any user', 'delete client and staff users only', 'create a user', 'create client and staff users only',
                     'search any user', 'vote', 'remove own vote', 'remove all votes from client or staff user', 'read own user profile',
-                    'edit own user profile', 'delete own user profile', 'edit client or staff users only',
+                    'edit own user profile', 'delete own user profile', 'edit admin, client or staff users only',
                     'edit client or staff roles only', 'mark a client or staff user as banned or suspended',
                     'revert a client or staff user from banned to suspended', 'revert a client or staff user from suspended to active',
                     'logout all staff and client users', 'reset client or staff user passwords', 'browse all roles',
