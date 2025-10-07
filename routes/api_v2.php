@@ -46,7 +46,7 @@ Route::prefix('auth')
     });
 
 // Routes for authenticated and verified users
-Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+Route::middleware(['auth:sanctum', 'verified', 'not.suspended'])->group(function() {
     // Get own user profile
     Route::get('/profile', [AuthControllerV2::class, 'profile'])->name('get.profile');
     Route::put('/profile', [ProfileControllerV2::class, 'update'])->name('update.profile');
