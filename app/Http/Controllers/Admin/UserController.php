@@ -25,10 +25,6 @@ class UserController extends Controller
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
-        if (auth()->user()->status === 'suspended') {
-            return ApiResponse::error([], "Please reset your password.", 400);
-        }
-
         // Check for per_page query.
         $perPage = (int) $request->query('per_page', 5);
 
@@ -130,6 +126,7 @@ class UserController extends Controller
                 }
             }
 
+            // TODO: Staff cannot ban admin, admin cannot ban super-admin.
             // If admin or higher suspends or bans a user, email_verified_at will become NULL and logout the user.
             if ($validated['status'] !== 'active') {
                 // Logout user
