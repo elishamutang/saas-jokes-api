@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use App\Responses\ApiResponse;
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class CheckUserNotSuspended
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+
+        if ($request->user()->status === 'suspended') {
+            return ApiResponse::error([], "Please reset your password.", 400);
+        }
+
+        return $next($request);
+    }
+}
