@@ -5,6 +5,7 @@ use App\Models\Joke;
 use App\Models\User;
 use Database\Seeders\RolesAndPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Testing\Fluent\AssertableJson;
 use function Spatie\PestPluginTestTime\testTime;
@@ -12,10 +13,13 @@ use function Spatie\PestPluginTestTime\testTime;
 uses(RefreshDatabase::class);
 testTime()->freeze('2025-09-28 16:37:00');
 
+beforeEach(function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+});
+
 // Browse all jokes
 test('get all jokes', function () {
     // Create jokes
-    $this->seed(RolesAndPermissionsSeeder::class);
     Joke::factory(5)->create();
 
     // Create authenticated user
@@ -43,7 +47,6 @@ test('get all jokes', function () {
 
 test('get specific number of jokes per page', function () {
     // Create jokes
-    $this->seed(RolesAndPermissionsSeeder::class);
     Joke::factory(10)->create();
 
     // Create authenticated user
@@ -72,7 +75,6 @@ test('get specific number of jokes per page', function () {
 
 test('search for a joke based on title', function () {
     // Create users
-    $this->seed(RolesAndPermissionsSeeder::class);
     User::factory(10)->create();
 
     // Create authenticated user and assign role.
@@ -126,7 +128,6 @@ test('search for a joke based on title', function () {
 // Unauthenticated users cannot read a single joke
 test('unauthenticated users cannot read a single joke', function() {
     // Prepare data
-    $this->seed(RolesAndPermissionsSeeder::class);
     $joke = Joke::factory()->create();
     $category = Category::factory()->create();
 
@@ -145,7 +146,6 @@ test('unauthenticated users cannot read a single joke', function() {
 // Client users cannot read joke with unknown category
 test('client users cannot read a joke with an unknown category', function() {
     // Prepare data
-    $this->seed(RolesAndPermissionsSeeder::class);
     $joke = Joke::factory()->create();
     $category = Category::factory()->create(['title' => 'Unknown']);
 
@@ -172,7 +172,6 @@ test('client users cannot read a joke with an unknown category', function() {
 // Client users cannot read joke with empty category
 test('client users cannot read a joke with empty category', function() {
     // Prepare data
-    $this->seed(RolesAndPermissionsSeeder::class);
     $joke = Joke::factory()->create();
 
     // Create authenticated user
@@ -197,8 +196,6 @@ test('client users cannot read a joke with empty category', function() {
 // Read a single joke
 test('client users can read a single joke', function () {
     // Prepare data
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     $joke = Joke::factory()->create();
     $category = Category::factory()->create();
 
@@ -230,7 +227,6 @@ test('client users can read a single joke', function () {
 // Client users cannot update other user jokes
 test('client users cannot update other user jokes', function () {
     // Prepare
-    $this->seed(RolesAndPermissionsSeeder::class);
     User::factory(3)->create();
 
     // Create user and authenticate them.
@@ -263,9 +259,6 @@ test('client users cannot update other user jokes', function () {
 
 // Client user can update their own jokes
 test('client users can update their own jokes', function() {
-    // Prepare
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Create user and authenticate them.
     $user = User::factory()->create(['email_verified_at' => now()]);
     $user->assignRole('client');
@@ -299,7 +292,6 @@ test('client users can update their own jokes', function() {
 // Staff level and higher can update other users jokes
 test('staff level and higher can update other user jokes', function() {
     // Prepare
-    $this->seed(RolesAndPermissionsSeeder::class);
     User::factory(3)->create();
 
     // Create user and authenticate them.
@@ -354,9 +346,6 @@ test('unauthenticated users cannot add a joke', function() {
 
 // Add a single joke
 test('client users can add a joke', function () {
-    // Prepare
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Create authenticated user
     $user = User::factory()->create(['email_verified_at' => now()]);
     $user->assignRole('client');
@@ -386,8 +375,6 @@ test('client users can add a joke', function () {
 
 // Delete a single joke
 test("client users cannot delete other user's joke", function () {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Populate users in DB
     User::factory(5)->create();
 
@@ -429,8 +416,6 @@ test("client users cannot delete other user's joke", function () {
 
 // Client can delete their own jokes
 test('client users can delete their own jokes', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     $user = User::factory()->create();
     $user->assignRole('client');
     $this->actingAs($user);
@@ -461,8 +446,6 @@ test('client users can delete their own jokes', function() {
 
 // Client users cannot access jokes trash
 test("client users cannot access jokes trash", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     $user = User::factory()->create();
     $user->assignRole('client');
     $this->actingAs($user);
@@ -481,8 +464,6 @@ test("client users cannot access jokes trash", function() {
 
 // Staff level and higher can access jokes trash
 test("staff level and higher can access jokes trash", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     $user = User::factory()->create();
     $user->assignRole('staff');
     $this->actingAs($user);
@@ -500,8 +481,6 @@ test("staff level and higher can access jokes trash", function() {
 
 // Staff level and higher can delete other user's jokes
 test("staff level and higher can delete other user's jokes", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Populate users in DB
     User::factory(5)->create();
 
@@ -544,8 +523,6 @@ test("staff level and higher can delete other user's jokes", function() {
 
 // Staff level and higher can recover deleted jokes
 test("staff level and higher can recover all deleted jokes", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare jokes and delete them
     Joke::factory(2)->create();
     Joke::query()->delete();
@@ -566,8 +543,6 @@ test("staff level and higher can recover all deleted jokes", function() {
 });
 
 test("staff level can recover one deleted joke", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     $joke = Joke::factory()->create();
     $joke->delete();
 
@@ -591,8 +566,6 @@ test("staff level can recover one deleted joke", function() {
 
 // Staff level cannot remove deleted jokes
 test("staff level cannot remove deleted jokes", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare jokes and delete them
     Joke::factory(2)->create();
     Joke::query()->forceDelete();
@@ -615,8 +588,6 @@ test("staff level cannot remove deleted jokes", function() {
 
 // Admin level and higher can remove deleted jokes
 test("admin level and higher can remove deleted jokes", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare jokes and delete them
     Joke::factory(2)->create();
     Joke::query()->delete();
@@ -637,8 +608,6 @@ test("admin level and higher can remove deleted jokes", function() {
 });
 
 test("admin level and higher can remove one deleted joke", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     $joke = Joke::factory()->create();
     $joke->delete();
 
@@ -657,3 +626,65 @@ test("admin level and higher can remove one deleted joke", function() {
             'data' => '',
         ]);
 });
+
+// Banned user cannot access jokes
+test('banned user cannot access jokes', function() {
+    // Prepare data
+    $user = User::factory()->create([
+        'email' => 'user@example.com',
+        'email_verified_at' => now(),
+        'password' => Hash::make('Password1'),
+        'status' => 'banned',
+    ]);
+
+    $user->assignRole('client');
+    $this->actingAs($user);
+
+    $data = [
+        'email' => $user['email'],
+        'password' => 'Password1',
+    ];
+
+    // Send POST request
+    $response = $this->postJson("/api/v2/auth/login", $data);
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Your account is banned. Please contact an Administrator for further action.",
+            'data' => [],
+        ]);
+});
+
+
+// Suspended user cannot access jokes
+test('suspended users cannot access jokes', function() {
+    // Prepare data
+    $user = User::factory()->create([
+        'email' => 'user@example.com',
+        'email_verified_at' => now(),
+        'password' => Hash::make('Password1'),
+        'status' => 'suspended',
+    ]);
+
+    $user->assignRole('client');
+    $this->actingAs($user);
+
+    $data = [
+        'email' => $user['email'],
+        'password' => 'Password1',
+    ];
+
+    // Send POST request
+    $response = $this->postJson("/api/v2/auth/login", $data);
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Your account is suspended. Please verify your email address and change your password.",
+            'data' => [],
+        ]);
+});
+
