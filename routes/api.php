@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
  * Fallback route for any routes that are not defined
  * Result 404
  */
-Route::fallback(static function(){
-   return Response::json([
-       ['error'=>"OOPS!"]
-   ],404);
-});
+//Route::fallback(static function(){
+//   return Response::json([
+//       ['error'=>"OOPS!"]
+//   ],404);
+//});
 
 //Route::get('/user', function (Request $request) {
 //    return $request->user();
