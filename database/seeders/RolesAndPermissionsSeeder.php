@@ -15,6 +15,8 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run(): void
     {
+        // Clear roles and permissions cache
+        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
 
         $seedRolesAndPermissions = [
             [
@@ -56,8 +58,8 @@ class RolesAndPermissionsSeeder extends Seeder
                     'edit own user profile', 'delete own user profile', 'edit admin, client or staff users only',
                     'edit client or staff roles only', 'mark a client or staff user as banned or suspended',
                     'revert a client or staff user from banned to suspended', 'revert a client or staff user from suspended to active',
-                    'logout all staff and client users', 'reset client or staff user passwords', 'browse all roles',
-                    'read any role', 'create a role', 'search any role', 'delete any role', 'browse all permissions',
+                    'logout all staff and client users', 'reset client or staff user passwords', 'browse all roles', 'edit any role',
+                    'read any role', 'create a role', 'search any role', 'browse all permissions',
                     'read any permission', 'search any permission', 'assign user role', 'update user role', 'delete user role',
                     'browse soft-deleted categories', 'restore soft-deleted categories', 'remove soft-deleted categories',
                     'browse soft-deleted users', 'restore soft-deleted users', 'remove soft-deleted users'
