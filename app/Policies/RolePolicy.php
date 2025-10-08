@@ -5,7 +5,6 @@ namespace App\Policies;
 use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class RolePolicy
 {
@@ -14,7 +13,7 @@ class RolePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermissionTo('browse all roles');
+        return $user->hasAnyPermission(['browse all roles', 'search any role']);
     }
 
     /**
@@ -38,29 +37,13 @@ class RolePolicy
      */
     public function update(User $user, Role $role): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Role $role): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Role $role): bool
-    {
-        return false;
+        return $user->hasPermissionTo('edit any role');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Role $role): bool
+    public function destroy(User $user, Role $role): bool
     {
         return false;
     }
