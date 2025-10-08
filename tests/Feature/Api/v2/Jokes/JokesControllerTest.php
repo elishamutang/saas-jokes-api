@@ -171,7 +171,7 @@ test('client users cannot read a joke with an unknown category', function() {
 
 // Client users cannot read joke with empty category
 test('client users cannot read a joke with empty category', function() {
-    // Preapre data
+    // Prepare data
     $this->seed(RolesAndPermissionsSeeder::class);
     $joke = Joke::factory()->create();
 
