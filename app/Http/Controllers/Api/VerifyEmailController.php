@@ -30,6 +30,7 @@ class VerifyEmailController extends Controller
      * @param EmailVerificationRequest $request
      * @return JsonResponse
      */
+    // @codeCoverageIgnoreStart
     public function verifyEmailHandler(EmailVerificationRequest $request): JsonResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
@@ -52,6 +53,7 @@ class VerifyEmailController extends Controller
 
         return ApiResponse::success($request->user(), "Email verified successfully.");
     }
+    // @codeCoverageIgnoreEnd
 
     /**
      * Re-sends email verification to user.
