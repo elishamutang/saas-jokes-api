@@ -17,6 +17,21 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable, HasApiTokens, HasRoles, SoftDeletes;
 
     /**
+     * From Spatie's documentation (Forcing Use of A Single Guard)
+     * https://spatie.be/docs/laravel-permission/v6/basic-usage/multiple-guards
+     *
+     * For the purposes of this project, I am assuming that the app structure does not differentiate between guards
+     * when it comes to roles/permissions (i.e all my roles and permissions are the same for all guards)
+     *
+     * @var string
+     */
+    protected string $guard_name = 'web';
+    protected function getDefaultGuardName(): string
+    {
+        return $this->guard_name;
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
