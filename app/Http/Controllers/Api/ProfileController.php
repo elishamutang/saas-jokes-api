@@ -48,7 +48,7 @@ class ProfileController extends Controller
     {
         // Delete user
         $user = $request->user();
-        $user->delete();
+        $user->forceDelete();
 
         // Automatically logs out the user by removing their tokens.
         $user->tokens()->delete();
