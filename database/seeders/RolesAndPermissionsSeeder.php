@@ -25,6 +25,7 @@ class RolesAndPermissionsSeeder extends Seeder
                 'permissions' => [
                     'create a joke', 'read any joke', 'browse all jokes', 'search a joke',
                     'edit own joke', 'delete own joke', 'read any category', 'browse all categories',
+                    'create a category', 'edit own category', 'delete own category',
                     'search any category', 'vote', 'remove own vote', 'edit own vote',
                     'read own user profile', 'edit own user profile', 'delete own user profile',
                 ],
