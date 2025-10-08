@@ -24,7 +24,7 @@ test('unauthenticated user can register', function() {
     ];
 
     // Send POST request
-    $response = $this->postJson("/api/v2/auth/register", $data);
+    $response = $this->postJson("/api/auth/register", $data);
 
     // Assert
     $response->assertStatus(201)
@@ -52,7 +52,7 @@ test('registered user can login', function() {
     ];
 
     // Send POST request
-    $response = $this->postJson("/api/v2/auth/login", $data);
+    $response = $this->postJson("/api/auth/login", $data);
 
     // Assert
     $response->assertStatus(200);
@@ -75,7 +75,7 @@ test('registered user can access own profile', function() {
     ];
 
     // Send GET request
-    $response = $this->getJson("/api/v2/profile");
+    $response = $this->getJson("/api/profile");
 
     // Assert
     $response->assertStatus(200)
@@ -98,7 +98,7 @@ test('authenticated user can logout', function() {
     $this->actingAs($user);
 
     // Send POST request
-    $response = $this->postJson("/api/v2/auth/logout");
+    $response = $this->postJson("/api/auth/logout");
 
     // Assert
     $response->assertStatus(200)
