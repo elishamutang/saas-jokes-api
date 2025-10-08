@@ -68,7 +68,7 @@ test("users can delete their own profile", function() {
             'message' => "Profile deleted successfully"
         ]);
 
-    $this->assertSoftDeleted('users', [
+    $this->assertDatabaseMissing('users', [
         'id' => $user->id
     ]);
 });
