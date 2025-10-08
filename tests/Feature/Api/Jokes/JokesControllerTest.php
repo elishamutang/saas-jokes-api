@@ -18,7 +18,7 @@ beforeEach(function() {
 });
 
 // Browse all jokes
-test('get all jokes', function () {
+test('client users can get all jokes', function () {
     // Create jokes
     Joke::factory(5)->create();
 
@@ -45,7 +45,7 @@ test('get all jokes', function () {
         );
 });
 
-test('get specific number of jokes per page', function () {
+test('client users can get specific number of jokes per page', function () {
     // Create jokes
     Joke::factory(10)->create();
 
@@ -73,7 +73,7 @@ test('get specific number of jokes per page', function () {
         );
 });
 
-test('search for a joke based on title', function () {
+test('client users can search for a joke based on title', function () {
     // Create users
     User::factory(10)->create();
 
@@ -192,6 +192,34 @@ test('client users cannot read a joke with empty category', function() {
         ]);
 });
 
+// Create a single joke
+test('client users can create a joke', function() {
+    // Prepare
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+        'status' => 'active',
+    ]);
+
+    $user->assignRole('client');
+    $this->actingAs($user);
+
+    $data = [
+        'title' => 'joke',
+        'content' => 'joke content',
+    ];
+
+    // Send POST request
+    $response = $this->postJson('/api/jokes', $data);
+
+    // Assert
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Joke created successfully",
+            'data' => $data,
+        ]);
+});
+
 
 // Read a single joke
 test('client users can read a single joke', function () {
@@ -287,6 +315,41 @@ test('client users can update their own jokes', function() {
             'message' => "Joke updated successfully",
             'data' => $updatedJoke,
         ]);
+});
+
+// Jokes removed when user chooses to delete their own profile
+test('jokes are removed if user deletes their own profile', function() {
+    // Prepare
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+        'status' => 'active'
+    ]);
+
+    $user->jokes()->create([
+        'title' => 'joke',
+        'content' => 'joke content',
+    ]);
+
+    $user->assignRole('client');
+    $this->actingAs($user);
+
+    // Send DELETE request
+    $response = $this->deleteJson('/api/profile/delete');
+
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Profile deleted successfully",
+            'data' => [],
+        ]);
+
+    $this->assertDatabaseMissing('users', [
+        'id' => $user->id,
+    ]);
+
+    $this->assertDatabaseMissing('jokes', [
+        'title' => 'joke',
+    ]);
 });
 
 // Staff level and higher can update other users jokes
