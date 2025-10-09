@@ -90,3 +90,50 @@ test('password must be confirmed', function() {
             'message' => "The password field confirmation does not match."
         ]);
 });
+
+test('user cannot re-use previous password', function() {
+    // Prepare
+    $this->user->password = Hash::make('password1');
+    $this->user->assignRole('client');
+
+    $data = [
+        'password' => 'password1',
+        'password_confirmation' => 'password1',
+    ];
+
+    // Send POST request
+    $response = $this->postJson("/api/auth/reset-password", $data);
+
+    $response->assertStatus(400)
+        ->assertJson([
+            'success' => false,
+            'message' => "New password cannot be the same as previous one.",
+            'data' => [],
+        ]);
+});
+
+test('user status change from suspended to active after password reset', function() {
+    // Prepare
+    $this->user->status = 'suspended';
+    $this->user->assignRole('client');
+
+    $data = [
+        'password' => 'password1',
+        'password_confirmation' => 'password1',
+    ];
+
+    // Send POST request
+    $response = $this->postJson("/api/auth/reset-password", $data);
+
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'message' => "Password reset successfully.",
+            'data' => $this->user->toArray(),
+        ]);
+
+    $this->assertDatabaseHas('users', [
+        'id' => $this->user->id,
+        'status' => 'active',
+    ]);
+});
