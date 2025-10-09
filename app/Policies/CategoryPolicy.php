@@ -12,7 +12,7 @@ class CategoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasAllPermissions(['browse all categories', 'search any category']);
     }
 
     /**
@@ -20,7 +20,7 @@ class CategoryPolicy
      */
     public function view(User $user, Category $category): bool
     {
-        return false;
+        return $user->hasPermissionTo('read any category');
     }
 
     /**
@@ -28,7 +28,7 @@ class CategoryPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermissionTo('create a category');
     }
 
     /**
@@ -36,7 +36,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category): bool
     {
-        return false;
+        return $user->hasPermissionTo('edit any category');
     }
 
     /**
@@ -44,22 +44,36 @@ class CategoryPolicy
      */
     public function delete(User $user, Category $category): bool
     {
-        return false;
+        return $user->hasPermissionTo('delete any category');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can access soft-deleted categories.
+     *
+     * @param User $user
+     * @return bool
      */
-    public function restore(User $user, Category $category): bool
+    public function checkTrash(User $user): bool
     {
-        return false;
+        return $user->hasPermissionTo('browse soft-deleted categories');
+    }
+
+    /**
+     * Determine whether the user can restore all soft-deleted categories.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function restore(User $user): bool
+    {
+        return $user->hasPermissionTo('restore soft-deleted categories');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Category $category): bool
+    public function remove(User $user): bool
     {
-        return false;
+        return $user->hasPermissionTo('remove soft-deleted categories');
     }
 }

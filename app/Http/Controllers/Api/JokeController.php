@@ -212,7 +212,7 @@ class JokeController extends Controller
         $numOfJokesRecovered = Joke::onlyTrashed()->restore();
 
         // Check if current user has permission to recover all soft-deleted jokes.
-        if (auth()->user()->cannot('restoreAll', Joke::class)) {
+        if (auth()->user()->cannot('restore', Joke::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
@@ -227,7 +227,7 @@ class JokeController extends Controller
     public function removeAll(): JsonResponse
     {
         // Check if current user has permission to remove all soft-deleted jokes.
-        if (auth()->user()->cannot('removeAll', Joke::class)) {
+        if (auth()->user()->cannot('remove', Joke::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
@@ -248,7 +248,7 @@ class JokeController extends Controller
             $joke = Joke::onlyTrashed()->findOrFail((int) $id);
 
             // Check if current user has permission to recover soft-deleted jokes.
-            if (auth()->user()->cannot('restore', $joke)) {
+            if (auth()->user()->cannot('restore', Joke::class)) {
                 return ApiResponse::error([], "You are not authorized to perform this action.", 403);
             }
 
@@ -274,7 +274,7 @@ class JokeController extends Controller
             $joke = Joke::onlyTrashed()->findOrFail((int) $id);
 
             // Check if current user has permission to remove soft-deleted jokes.
-            if (auth()->user()->cannot('remove', $joke)) {
+            if (auth()->user()->cannot('remove', Joke::class)) {
                 return ApiResponse::error([], "You are not authorized to perform this action.", 403);
             }
 

@@ -69,15 +69,7 @@ class JokePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Joke $joke): bool
-    {
-        return $user->hasPermissionTo('restore soft-deleted jokes');
-    }
-
-    /**
-     * Determine whether the user can restore all the models.
-     */
-    public function restoreAll(User $user): bool
+    public function restore(User $user): bool
     {
         return $user->hasPermissionTo('restore soft-deleted jokes');
     }
@@ -85,15 +77,7 @@ class JokePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function remove(User $user, Joke $joke): bool
-    {
-        return $user->hasPermissionTo('remove soft-deleted jokes');
-    }
-
-    /**
-     * Determine whether the user can permanently delete all the models.
-     */
-    public function removeAll(User $user): bool
+    public function remove(User $user): bool
     {
         return $user->hasPermissionTo('remove soft-deleted jokes');
     }

@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function index(Request $request): JsonResponse
     {
         // Check if user has the appropriate permissions.
-        if (!auth()->user()->hasAllPermissions(['browse all categories', 'search any category'])) {
+        if (auth()->user()->cannot('viewAny', Category::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
@@ -61,7 +61,7 @@ class CategoryController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request): JsonResponse
     {
         // Validate request and whether user is authorized to perform this action.
         $validated = $request->validated();
@@ -78,16 +78,17 @@ class CategoryController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        // Check if user has permission
-        if (!auth()->user()->hasPermissionTo('read any category')) {
-            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
-        }
-
         try {
             // Find category
             $category = Category::with(['jokes' => function ($query) {
                 $query->inRandomOrder()->limit(5)->get();
             }])->findOrFail((int) $id);
+
+            // Check if user has permission
+            if (auth()->user()->cannot('read any category', $category)) {
+                return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+            }
+
             return ApiResponse::success($category, "Category retrieved successfully");
         } catch (ModelNotFoundException $e) {
             return ApiResponse::error([], "Category not found", 404);
@@ -126,14 +127,15 @@ class CategoryController extends Controller
      */
     public function destroy(string $id): JsonResponse
     {
-        // Check if current user has permission to delete a category.
-        if (!auth()->user()->hasPermissionTo('delete any category')) {
-            return ApiResponse::error([], "You are not authorized to perform this action.", 403);
-        }
-
         try {
             // Find category
             $category = Category::findOrFail((int) $id);
+
+            // Check if current user has permission to delete a category.
+            if (auth()->user()->cannot('delete', $category)) {
+                return ApiResponse::error([], "You are not authorized to perform this action.", 403);
+            }
+
             $category->delete();
             $category->jokes()->detach();
 
@@ -152,7 +154,7 @@ class CategoryController extends Controller
     public function trash(Request $request): JsonResponse
     {
         // Check if current user has permission to access soft-deleted categories.
-        if (!auth()->user()->hasPermissionTo('browse soft-deleted categories')) {
+        if (auth()->user()->cannot('checkTrash', Category::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
@@ -178,11 +180,12 @@ class CategoryController extends Controller
      */
     public function recoverAll(): JsonResponse
     {
-        if (!auth()->user()->hasPermissionTo('restore soft-deleted categories')) {
+        $deletedCategories = Category::onlyTrashed()->get();
+
+        if (auth()->user()->cannot('restore', Category::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
-        $deletedCategories = Category::onlyTrashed()->get();
         $numOfCategoriesRestored = Category::onlyTrashed()->restore();
 
         return ApiResponse::success($deletedCategories, "$numOfCategoriesRestored categories restored successfully");
@@ -195,7 +198,7 @@ class CategoryController extends Controller
      */
     public function removeAll(): JsonResponse
     {
-        if (!auth()->user()->hasPermissionTo('remove soft-deleted categories')) {
+        if (auth()->user()->cannot('remove', Category::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
@@ -211,7 +214,7 @@ class CategoryController extends Controller
      */
     public function recoverOne(string $id): JsonResponse
     {
-        if (!auth()->user()->hasPermissionTo('restore soft-deleted categories')) {
+        if (auth()->user()->cannot('restore', Category::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
@@ -235,7 +238,7 @@ class CategoryController extends Controller
      */
     public function removeOne(string $id): JsonResponse
     {
-        if (!auth()->user()->hasPermissionTo('remove soft-deleted categories')) {
+        if (auth()->user()->cannot('remove', Category::class)) {
             return ApiResponse::error([], "You are not authorized to perform this action.", 403);
         }
 
