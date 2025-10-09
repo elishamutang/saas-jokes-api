@@ -15,16 +15,9 @@ class UpdateJokeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Staff level and higher can edit any joke.
-        if (auth()->user()->hasPermissionTo('edit any joke')) {
-            return true;
-        }
-
         // Client users can only update jokes belonging to themselves.
         $jokeId = (int) $this->route('joke');
-        $userId = Joke::find($jokeId)->user_id;
-
-        return auth()->user()->hasPermissionTo('edit own joke') && auth()->user()->id === $userId;
+        return auth()->user()->can('update', Joke::find($jokeId));
     }
 
     /**

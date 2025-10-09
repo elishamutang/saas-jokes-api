@@ -12,7 +12,7 @@ class JokePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasAllPermissions(['browse all jokes', 'search a joke']);
     }
 
     /**
@@ -20,7 +20,7 @@ class JokePolicy
      */
     public function view(User $user, Joke $joke): bool
     {
-        return false;
+        return $user->hasPermissionTo('read any joke');
     }
 
     /**
@@ -28,7 +28,7 @@ class JokePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermissionTo('create a joke');
     }
 
     /**
@@ -36,7 +36,11 @@ class JokePolicy
      */
     public function update(User $user, Joke $joke): bool
     {
-        return false;
+        if ($user->hasPermissionTo('edit own joke') && $joke->user_id === $user->id) {
+            return true;
+        }
+
+        return $user->hasPermissionTo('edit any joke');
     }
 
     /**
@@ -44,7 +48,22 @@ class JokePolicy
      */
     public function delete(User $user, Joke $joke): bool
     {
-        return false;
+        if ($user->hasPermissionTo('delete own joke') && $joke->user_id === $user->id) {
+            return true;
+        }
+
+        return $user->hasPermissionTo('delete any joke');
+    }
+
+    /**
+     * Determine whether user can access soft-deleted jokes.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function checkTrash(User $user): bool
+    {
+        return $user->hasPermissionTo('browse soft-deleted jokes');
     }
 
     /**
@@ -52,14 +71,30 @@ class JokePolicy
      */
     public function restore(User $user, Joke $joke): bool
     {
-        return false;
+        return $user->hasPermissionTo('restore soft-deleted jokes');
+    }
+
+    /**
+     * Determine whether the user can restore all the models.
+     */
+    public function restoreAll(User $user): bool
+    {
+        return $user->hasPermissionTo('restore soft-deleted jokes');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Joke $joke): bool
+    public function remove(User $user, Joke $joke): bool
     {
-        return false;
+        return $user->hasPermissionTo('remove soft-deleted jokes');
+    }
+
+    /**
+     * Determine whether the user can permanently delete all the models.
+     */
+    public function removeAll(User $user): bool
+    {
+        return $user->hasPermissionTo('remove soft-deleted jokes');
     }
 }

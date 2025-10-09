@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Joke;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -13,7 +14,7 @@ class StoreJokeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->hasPermissionTo('create a joke');
+        return auth()->user()->can('create', Joke::class);
     }
 
     /**
