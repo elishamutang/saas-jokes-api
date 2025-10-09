@@ -430,7 +430,7 @@ test("staff can update client user name and email", function() {
 });
 
 // Admin can update admin, staff or client users
-test("admin can admin, staff or client users", function() {
+test("admin can update admin, staff or client users", function() {
     $this->seed(RolesAndPermissionsSeeder::class);
 
     // Prepare users

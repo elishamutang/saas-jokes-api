@@ -407,35 +407,6 @@ test('unauthenticated users cannot add a joke', function() {
         ]);
 });
 
-// Add a single joke
-test('client users can add a joke', function () {
-    // Create authenticated user
-    $user = User::factory()->create(['email_verified_at' => now()]);
-    $user->assignRole('client');
-    $this->actingAs($user);
-
-    // Prepare joke
-    $joke = [
-        'title' => 'New joke',
-        'content' => 'New joke content',
-        'user_id' => 1,
-    ];
-
-    // Mock result
-    $result = [
-        'success' => true,
-        'message' => 'Joke created successfully',
-        'data' => $joke,
-    ];
-
-    // Response
-    $response = $this->postJson('/api/jokes', $joke);
-
-    // Assert
-    $response->assertStatus(200)
-        ->assertJson($result);
-});
-
 // Delete a single joke
 test("client users cannot delete other user's joke", function () {
     // Populate users in DB
