@@ -10,6 +10,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Log;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -27,12 +28,12 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->statefulApi();
+        
         // Check if user is suspended
         $middleware->alias([
             'user.status' => CheckUserStatus::class,
         ]);
-
-        $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function(ModelNotFoundException $error, Request $request){
@@ -48,6 +49,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // Handle unauthenticated user when visiting /api/v2/jokes endpoint
         $exceptions->render(function(AuthenticationException $error, Illuminate\Http\Request $request) {
             if ($request->wantsJson() || $request->is('api/v2/jokes')) {
+                Log::info($request->header('Authorization'));
+                Log::info(getallheaders());
+                Log::info($_SERVER);
                 // Render random joke for unauthenticated users or 'guests'.
                 $randomJoke = Joke::inRandomOrder()->first();
                 return ApiResponse::error($randomJoke, "Please log into your account.", 401);
