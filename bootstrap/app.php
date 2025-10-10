@@ -29,13 +29,16 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->statefulApi();
-        
         // Check if user is suspended
         $middleware->alias([
             'custom.auth.header' => CustomAuthHeaderForSanctumToken::class,
             'user.status' => CheckUserStatus::class,
         ]);
+
+        $middleware->prependToPriorityList(
+            before: \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            prepend: CustomAuthHeaderForSanctumToken::class,
+        );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function(ModelNotFoundException $error, Request $request){
@@ -51,9 +54,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Handle unauthenticated user when visiting /api/v2/jokes endpoint
         $exceptions->render(function(AuthenticationException $error, Illuminate\Http\Request $request) {
             if ($request->wantsJson() || $request->is('api/v2/jokes')) {
-                Log::info($request->header('Authorization'));
                 Log::info(getallheaders());
-                Log::info($_SERVER);
                 // Render random joke for unauthenticated users or 'guests'.
                 $randomJoke = Joke::inRandomOrder()->first();
                 return ApiResponse::error($randomJoke, "Please log into your account.", 401);
