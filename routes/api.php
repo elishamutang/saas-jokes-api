@@ -21,27 +21,27 @@ Route::prefix('auth')
         Route::post('register', [AuthController::class, 'register']);
         Route::post('login', [AuthController::class, 'login']);
         Route::post('logout', [AuthController::class, 'logout'])
-            ->middleware(['auth:sanctum', 'verified']);
+            ->middleware(['custom.auth.header', 'auth:sanctum', 'verified']);
 
         // The Email Verification Notice route
         Route::get('/email/verify', [VerifyEmailController::class, 'checkEmailVerified'])
-            ->middleware(['auth:sanctum'])->name('verification.notice');
+            ->middleware(['custom.auth.header', 'auth:sanctum'])->name('verification.notice');
 
         // The Email Verification Handler
         Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, 'verifyEmailHandler'])
-            ->middleware(['auth:sanctum', 'signed'])->name('verification.verify');
+            ->middleware(['custom.auth.header', 'auth:sanctum', 'signed'])->name('verification.verify');
 
         // Resending the verification email
         Route::post('/email/verification-notification', [VerifyEmailController::class, 'resendEmailVerification'])
-            ->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
+            ->middleware(['custom.auth.header', 'auth:sanctum', 'throttle:6,1'])->name('verification.send');
 
         // Reset password
         Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])
-            ->middleware(['auth:sanctum', 'verified'])->name('reset.password');
+            ->middleware(['custom.auth.header', 'auth:sanctum', 'verified'])->name('reset.password');
     });
 
 // Routes for authenticated and verified users
-Route::middleware(['auth:sanctum', 'verified', 'user.status'])->group(function() {
+Route::middleware(['custom.auth.header', 'auth:sanctum', 'verified', 'user.status'])->group(function() {
     // Get own user profile
     Route::get('/profile', [AuthController::class, 'profile'])->name('get.profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('update.profile');

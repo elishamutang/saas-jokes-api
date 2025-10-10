@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckUserStatus;
+use App\Http\Middleware\CustomAuthHeaderForSanctumToken;
 use App\Models\Joke;
 use App\Responses\ApiResponse;
 use Illuminate\Auth\AuthenticationException;
@@ -29,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Check if user is suspended
         $middleware->alias([
+            'custom.auth.header' => CustomAuthHeaderForSanctumToken::class,
             'user.status' => CheckUserStatus::class,
         ]);
 
