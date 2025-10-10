@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class CustomAuthHeaderForSanctumToken
@@ -20,6 +21,8 @@ class CustomAuthHeaderForSanctumToken
             $token = $request->header('X-Api-Token');
             $request->headers->set('Authorization', 'Bearer ' . $token);
         }
+
+        Log::info($request->header('Authorization'));
 
         return $next($request);
     }
