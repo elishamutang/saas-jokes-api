@@ -7,14 +7,16 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
-    
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+      
+    - name: Deploy to cPanel
+      id: deploy
+      uses: pinkasey/cpanel-deploy-action@v1.0.0
       with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        protocol: ftps
-        port: 21
-        passive: true
-        timeout: 190000
+        hostname: 'https://hostname.example.com'
+        repository_root: '/home/my_account/repositories/my_repository'
+        branch: main
+        cpanel_token: '${{ secrets.CPANEL_TOKEN }}'
+        
+    - name: echo deploy-duration
+      run: echo "Deployment took ${{ steps.deploy.outputs.duration }} milliseconds"
+
