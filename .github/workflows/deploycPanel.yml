@@ -1,14 +1,18 @@
 on: push
 name: 🚀 Deploy app on push
 jobs:
-  deploy:
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: FTP Deployer
-      uses: sand4rt/ftp-deployer@v1.8
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.6
       with:
-        host: ${{ secrets.FTP_SERVER }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
-        port: 21 # optional, default is: 21
-        username: ${{ secrets.FTP_USERNAME }} # FTP username
-        password: ${{ secrets.FTP_PASSWORD }} # FTP password
-        passive: true # optional
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        protocol: ftps
+        port: 21 # todo replace with your web hosts ftps port
