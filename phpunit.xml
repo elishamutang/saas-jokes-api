@@ -17,6 +17,7 @@
             <directory>app</directory>
         </include>
         <exclude>
+            <file>app/Http/Controllers/StaticPageController.php</file>
             <directory>app/Providers</directory>
             <directory>app/Http/Controllers/Auth</directory>
             <directory>app/Http/Requests/Auth</directory>
