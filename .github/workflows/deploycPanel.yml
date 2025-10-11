@@ -1,5 +1,5 @@
 on: push
-name: 🚀 Deploy website on push
+name: 🚀 Deploy app on push
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -17,3 +17,4 @@ jobs:
         protocol: ftps
         port: 21
         timeout: 190000
+        security: loose
