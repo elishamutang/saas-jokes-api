@@ -12,10 +12,11 @@ jobs:
       id: deploy
       uses: pinkasey/cpanel-deploy-action@v1.0.0
       with:
-        hostname: 'https://hostname.example.com'
-        repository_root: '/home/my_account/repositories/my_repository'
+        hostname: 'https://daneilel.screencraft.net.au/'
+        repository_root: '/home/daneilelscreencr/public_html/emd-saas-jokes'
         branch: main
         cpanel_token: '${{ secrets.CPANEL_TOKEN }}'
+        cpanel_username: 'daneilelscreencr'
         
     - name: echo deploy-duration
       run: echo "Deployment took ${{ steps.deploy.outputs.duration }} milliseconds"
