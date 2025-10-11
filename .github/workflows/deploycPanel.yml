@@ -1,23 +1,19 @@
 on: push
 name: 🚀 Deploy app on push
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
-      
-    - name: Deploy to cPanel
-      id: deploy
-      uses: pinkasey/cpanel-deploy-action@v1.0.0
-      with:
-        hostname: 'https://daneilel.screencraft.net.au/'
-        repository_root: '/home/daneilelscreencr/public_html/emd-saas-jokes'
-        branch: main
-        cpanel_token: '${{ secrets.CPANEL_TOKEN }}'
-        cpanel_username: 'daneilelscreencr'
+      - name: Deploy to cPanel
+        id: deploy
+        uses: pinkasey/cpanel-deploy-action@v1.0.0
+        with:
+          hostname: 'https://daneilel.screencraft.net.au/'
+          repository_root: '/home/daneilelscreencr/public_html/emd-saas-jokes'
+          branch: main
+          cpanel_token: '${{ secrets.CPANEL_TOKEN }}'
+          cpanel_username: 'daneilelscreencr'
         
-    - name: echo deploy-duration
-      run: echo "Deployment took ${{ steps.deploy.outputs.duration }} milliseconds"
+      - name: echo deploy-duration
+        run: echo "Deployment took ${{ steps.deploy.outputs.duration }} milliseconds"
 
