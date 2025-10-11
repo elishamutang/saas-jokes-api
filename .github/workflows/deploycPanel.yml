@@ -16,4 +16,4 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         protocol: ftps
         security: loose
-        timeout: 190000
+        timeout: 300000
