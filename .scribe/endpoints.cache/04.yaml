@@ -22,7 +22,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -47,8 +47,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -70,7 +70,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -95,8 +95,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -118,7 +118,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -132,8 +132,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -155,7 +155,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -169,8 +169,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -192,7 +192,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -204,8 +204,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"success":true,"message":"Deleted users retrieved successfully","data":{"current_page":1,"data":[],"first_page_url":"http:\/\/localhost:8000\/api\/admin\/users\/trash?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/localhost:8000\/api\/admin\/users\/trash?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost:8000\/api\/admin\/users\/trash?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/localhost:8000\/api\/admin\/users\/trash","per_page":5,"prev_page_url":null,"to":null,"total":0}}'
+        status: 401
+        content: '{"success":false,"message":"Please log into your account.","data":{"id":7,"title":"Cache Bankruptcy","content":"Why did the edge server go bankrupt? Because it ran out of cache.","user_id":5,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:29:09.000000Z","deleted_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -215,8 +215,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -238,7 +238,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -261,8 +261,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"success":true,"message":"Users retrieved successfully","data":{"current_page":1,"data":[],"first_page_url":"http:\/\/localhost:8000\/api\/admin\/users?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/localhost:8000\/api\/admin\/users?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost:8000\/api\/admin\/users?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/localhost:8000\/api\/admin\/users","per_page":5,"prev_page_url":null,"to":null,"total":0}}'
+        status: 401
+        content: '{"success":false,"message":"Please log into your account.","data":{"id":7,"title":"Cache Bankruptcy","content":"Why did the edge server go bankrupt? Because it ran out of cache.","user_id":5,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:29:09.000000Z","deleted_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -272,8 +272,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -295,7 +295,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -337,7 +337,7 @@ endpoints:
         name: role
         description: ''
         required: true
-        example: staff
+        example: client
         type: string
         enumValues:
           - admin
@@ -350,7 +350,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: banned
+        example: suspended
         type: string
         enumValues:
           - active
@@ -363,7 +363,7 @@ endpoints:
         name: email_verified_at
         description: 'Must be a valid date.'
         required: false
-        example: '2025-10-11T09:19:29'
+        example: '2025-10-11T10:01:59'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -373,16 +373,16 @@ endpoints:
       name: architecto
       email: zbailey@example.net
       password: '|]|{+-'
-      role: staff
-      status: banned
-      email_verified_at: '2025-10-11T09:19:29'
+      role: client
+      status: suspended
+      email_verified_at: '2025-10-11T10:01:59'
     fileParameters: []
     responses: []
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -404,7 +404,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -412,14 +412,14 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 1
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -427,8 +427,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"success":true,"message":"User retrieved successfully","data":{"id":1,"name":"Super Admin","email":"superadmin@example.com","email_verified_at":"2025-10-09T06:29:08.000000Z","created_at":"2025-10-09T06:29:08.000000Z","updated_at":"2025-10-09T06:29:08.000000Z","status":"active","deleted_at":null,"jokes":[{"id":1,"title":"Skeleton Fight","content":"Why don''t skeletons fight each other? Because they don''t have the guts.","user_id":1,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:29:09.000000Z","deleted_at":null}],"votes":[]}}'
+        status: 401
+        content: '{"success":false,"message":"Please log into your account.","data":{"id":5,"title":"Java Divorce","content":"Why did the two Java methods get a divorce? Because they had constant arguments.","user_id":5,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:29:09.000000Z","deleted_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -438,8 +438,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -462,7 +462,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -470,14 +470,14 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 1
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -537,8 +537,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -560,7 +560,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -568,14 +568,14 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 1
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -585,8 +585,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null

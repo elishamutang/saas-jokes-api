@@ -22,7 +22,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -45,8 +45,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"success":true,"message":"Roles retrieved successfully","data":{"current_page":1,"data":[],"first_page_url":"http:\/\/localhost:8000\/api\/admin\/roles?page=1","from":null,"last_page":1,"last_page_url":"http:\/\/localhost:8000\/api\/admin\/roles?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost:8000\/api\/admin\/roles?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"http:\/\/localhost:8000\/api\/admin\/roles","per_page":5,"prev_page_url":null,"to":null,"total":0}}'
+        status: 401
+        content: '{"success":false,"message":"Please log into your account.","data":{"id":5,"title":"Java Divorce","content":"Why did the two Java methods get a divorce? Because they had constant arguments.","user_id":5,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:29:09.000000Z","deleted_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -56,8 +56,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -79,7 +79,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -115,8 +115,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -138,7 +138,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -161,8 +161,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 404
-        content: '{"success":false,"message":"Role not found","data":[]}'
+        status: 401
+        content: '{"success":false,"message":"Please log into your account.","data":{"id":4,"title":"LIGHTS","content":"How many programmers does it take to change a light bulb? None. That\u2019s a hardware problem.","user_id":6,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:47:13.000000Z","deleted_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -172,8 +172,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -196,7 +196,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -221,8 +221,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
@@ -244,7 +244,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -269,8 +269,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null

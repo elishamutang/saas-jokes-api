@@ -301,7 +301,7 @@
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).&lt;/aside&gt;</code></pre>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>To authenticate requests, include an <strong><code>X-Api-Key</code></strong> header with the value <strong><code>"{YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by logging into your account.</p>
 
@@ -738,7 +738,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-profile">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -750,19 +750,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;User profile request successful&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;user&quot;: {
-            &quot;id&quot;: 1,
-            &quot;name&quot;: &quot;Super Admin&quot;,
-            &quot;email&quot;: &quot;superadmin@example.com&quot;,
-            &quot;email_verified_at&quot;: &quot;2025-10-09T06:29:08.000000Z&quot;,
-            &quot;created_at&quot;: &quot;2025-10-09T06:29:08.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2025-10-09T06:29:08.000000Z&quot;,
-            &quot;status&quot;: &quot;active&quot;,
-            &quot;deleted_at&quot;: null
-        }
+        &quot;id&quot;: 2,
+        &quot;title&quot;: &quot;Pirate Maths&quot;,
+        &quot;content&quot;: &quot;What type of Maths are pirates best at?Algebra. Because they are good at finding X.&quot;,
+        &quot;user_id&quot;: 3,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -857,7 +854,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/categories/trash/recover/architecto" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -868,7 +865,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -886,7 +883,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -902,7 +899,7 @@ import json
 
 url = 'http://localhost:8000/api/categories/trash/recover/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -962,15 +959,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-categories-trash-recover--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-categories-trash-recover--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1023,7 +1020,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/categories/trash/remove/architecto" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -1034,7 +1031,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1052,7 +1049,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -1068,7 +1065,7 @@ import json
 
 url = 'http://localhost:8000/api/categories/trash/remove/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -1128,15 +1125,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-categories-trash-remove--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-categories-trash-remove--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1189,7 +1186,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/categories/trash/recover-all" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -1200,7 +1197,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1218,7 +1215,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -1234,7 +1231,7 @@ import json
 
 url = 'http://localhost:8000/api/categories/trash/recover-all'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -1294,15 +1291,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-categories-trash-recover-all"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-categories-trash-recover-all"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1343,7 +1340,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/categories/trash/remove-all" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -1354,7 +1351,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1372,7 +1369,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -1388,7 +1385,7 @@ import json
 
 url = 'http://localhost:8000/api/categories/trash/remove-all'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -1448,15 +1445,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-categories-trash-remove-all"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-categories-trash-remove-all"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1497,7 +1494,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/categories/trash" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -1508,7 +1505,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1526,7 +1523,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -1542,7 +1539,7 @@ import json
 
 url = 'http://localhost:8000/api/categories/trash'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -1554,7 +1551,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-categories-trash">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1566,38 +1563,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Deleted categories retrieved successfully&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/categories/trash?page=1&quot;,
-        &quot;from&quot;: null,
-        &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/categories/trash?page=1&quot;,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/categories/trash?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://localhost:8000/api/categories/trash&quot;,
-        &quot;per_page&quot;: 5,
-        &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: null,
-        &quot;total&quot;: 0
+        &quot;id&quot;: 3,
+        &quot;title&quot;: &quot;SQL Bar&quot;,
+        &quot;content&quot;: &quot;An SQL query walks into a bar, sees two tables, and asks: \&quot;Can I join you?\&quot;&quot;,
+        &quot;user_id&quot;: 4,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:45:40.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -1650,15 +1625,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-categories-trash"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-categories-trash"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1699,7 +1674,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/categories" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1714,7 +1689,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1737,7 +1712,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -1759,7 +1734,7 @@ payload = {
     "search": "architecto"
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -1771,7 +1746,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-categories">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1783,38 +1758,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Categories retrieved successfully&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/categories?page=1&quot;,
-        &quot;from&quot;: null,
-        &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/categories?page=1&quot;,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/categories?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://localhost:8000/api/categories&quot;,
-        &quot;per_page&quot;: 5,
-        &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: null,
-        &quot;total&quot;: 0
+        &quot;id&quot;: 5,
+        &quot;title&quot;: &quot;Java Divorce&quot;,
+        &quot;content&quot;: &quot;Why did the two Java methods get a divorce? Because they had constant arguments.&quot;,
+        &quot;user_id&quot;: 5,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -1867,15 +1820,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-categories"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-categories"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1928,7 +1881,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/categories" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1944,7 +1897,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1968,7 +1921,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -1992,7 +1945,7 @@ payload = {
     "description": "Eius et animi quos velit et."
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2052,15 +2005,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-categories"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-categories"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -2123,19 +2076,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/categories/1" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --get "http://localhost:8000/api/categories/architecto" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/1"
+    "http://localhost:8000/api/categories/architecto"
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2148,12 +2101,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/1';
+$url = 'http://localhost:8000/api/categories/architecto';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -2167,9 +2120,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/1'
+url = 'http://localhost:8000/api/categories/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2181,7 +2134,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-categories--id-">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -2193,30 +2146,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Category retrieved successfully&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;id&quot;: 1,
-        &quot;title&quot;: &quot;Unknown&quot;,
-        &quot;description&quot;: &quot;Sorry, but we have no idea where to place this joke.&quot;,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;deleted_at&quot;: null,
-        &quot;jokes&quot;: [
-            {
-                &quot;id&quot;: 8,
-                &quot;title&quot;: &quot;Joke about pirates, maths, server&quot;,
-                &quot;content&quot;: &quot;New joke&#039;s content&quot;,
-                &quot;user_id&quot;: 4,
-                &quot;created_at&quot;: &quot;2025-10-09T06:33:50.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-10-09T06:33:50.000000Z&quot;,
-                &quot;deleted_at&quot;: null,
-                &quot;pivot&quot;: {
-                    &quot;category_id&quot;: 1,
-                    &quot;joke_id&quot;: 8
-                }
-            }
-        ]
+        &quot;id&quot;: 8,
+        &quot;title&quot;: &quot;Joke about pirates, maths, server&quot;,
+        &quot;content&quot;: &quot;New joke&#039;s content&quot;,
+        &quot;user_id&quot;: 4,
+        &quot;created_at&quot;: &quot;2025-10-09T06:33:50.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:33:50.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -2269,15 +2208,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-categories--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-categories--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -2304,14 +2243,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="id"                data-endpoint="GETapi-categories--id-"
-               value="1"
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-categories--id-"
+               value="architecto"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>1</code></p>
+<p>The ID of the category. Example: <code>architecto</code></p>
             </div>
                     </form>
 
@@ -2329,8 +2268,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/categories/1" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    "http://localhost:8000/api/categories/architecto" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2342,11 +2281,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/1"
+    "http://localhost:8000/api/categories/architecto"
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2365,12 +2304,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/1';
+$url = 'http://localhost:8000/api/categories/architecto';
 $response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -2388,13 +2327,13 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/1'
+url = 'http://localhost:8000/api/categories/architecto'
 payload = {
     "title": "architecto",
     "description": "Eius et animi quos velit et."
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2458,15 +2397,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-categories--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="PUTapi-categories--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -2493,14 +2432,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="id"                data-endpoint="PUTapi-categories--id-"
-               value="1"
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-categories--id-"
+               value="architecto"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>1</code></p>
+<p>The ID of the category. Example: <code>architecto</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -2541,19 +2480,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/categories/1" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    "http://localhost:8000/api/categories/architecto" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/1"
+    "http://localhost:8000/api/categories/architecto"
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2566,12 +2505,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/1';
+$url = 'http://localhost:8000/api/categories/architecto';
 $response = $client-&gt;delete(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -2585,9 +2524,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/1'
+url = 'http://localhost:8000/api/categories/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2647,15 +2586,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-categories--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="DELETEapi-categories--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -2682,14 +2621,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="id"                data-endpoint="DELETEapi-categories--id-"
-               value="1"
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-categories--id-"
+               value="architecto"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>1</code></p>
+<p>The ID of the category. Example: <code>architecto</code></p>
             </div>
                     </form>
 
@@ -2712,7 +2651,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/auth/email/verify" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -2723,7 +2662,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2741,7 +2680,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -2757,7 +2696,7 @@ import json
 
 url = 'http://localhost:8000/api/auth/email/verify'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2769,7 +2708,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-auth-email-verify">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -2781,16 +2720,15 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;User email already verified.&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
         &quot;id&quot;: 1,
-        &quot;name&quot;: &quot;Super Admin&quot;,
-        &quot;email&quot;: &quot;superadmin@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2025-10-09T06:29:08.000000Z&quot;,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:08.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:08.000000Z&quot;,
-        &quot;status&quot;: &quot;active&quot;,
+        &quot;title&quot;: &quot;Skeleton Fight&quot;,
+        &quot;content&quot;: &quot;Why don&#039;t skeletons fight each other? Because they don&#039;t have the guts.&quot;,
+        &quot;user_id&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
         &quot;deleted_at&quot;: null
     }
 }</code>
@@ -2844,15 +2782,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-auth-email-verify"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-auth-email-verify"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -2893,7 +2831,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/auth/email/verify/architecto/architecto" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -2904,7 +2842,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2922,7 +2860,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -2938,7 +2876,7 @@ import json
 
 url = 'http://localhost:8000/api/auth/email/verify/architecto/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2950,7 +2888,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-auth-email-verify--id---hash-">
             <blockquote>
-            <p>Example response (403):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -2962,7 +2900,17 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Invalid signature.&quot;
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 4,
+        &quot;title&quot;: &quot;LIGHTS&quot;,
+        &quot;content&quot;: &quot;How many programmers does it take to change a light bulb? None. That&rsquo;s a hardware problem.&quot;,
+        &quot;user_id&quot;: 6,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:47:13.000000Z&quot;,
+        &quot;deleted_at&quot;: null
+    }
 }</code>
  </pre>
     </span>
@@ -3014,15 +2962,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-auth-email-verify--id---hash-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-auth-email-verify--id---hash-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3086,7 +3034,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/auth/email/verification-notification" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -3097,7 +3045,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3115,7 +3063,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3131,7 +3079,7 @@ import json
 
 url = 'http://localhost:8000/api/auth/email/verification-notification'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3191,15 +3139,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-auth-email-verification-notification"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-auth-email-verification-notification"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3244,7 +3192,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/jokes/trash/recover/architecto" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -3255,7 +3203,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3273,7 +3221,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3289,7 +3237,7 @@ import json
 
 url = 'http://localhost:8000/api/jokes/trash/recover/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3349,15 +3297,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes-trash-recover--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes-trash-recover--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3410,7 +3358,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/jokes/trash/remove/architecto" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -3421,7 +3369,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3439,7 +3387,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3455,7 +3403,7 @@ import json
 
 url = 'http://localhost:8000/api/jokes/trash/remove/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3515,15 +3463,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes-trash-remove--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes-trash-remove--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3576,7 +3524,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/jokes/trash/recover-all" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -3587,7 +3535,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3605,7 +3553,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3621,7 +3569,7 @@ import json
 
 url = 'http://localhost:8000/api/jokes/trash/recover-all'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3681,15 +3629,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes-trash-recover-all"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes-trash-recover-all"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3730,7 +3678,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/jokes/trash/remove-all" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -3741,7 +3689,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3759,7 +3707,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3775,7 +3723,7 @@ import json
 
 url = 'http://localhost:8000/api/jokes/trash/remove-all'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3835,15 +3783,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes-trash-remove-all"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes-trash-remove-all"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3884,7 +3832,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/jokes/trash" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -3895,7 +3843,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3913,7 +3861,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3929,7 +3877,7 @@ import json
 
 url = 'http://localhost:8000/api/jokes/trash'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3941,7 +3889,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-jokes-trash">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -3953,38 +3901,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Deleted jokes retrieved successfully&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/jokes/trash?page=1&quot;,
-        &quot;from&quot;: null,
-        &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/jokes/trash?page=1&quot;,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/jokes/trash?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://localhost:8000/api/jokes/trash&quot;,
-        &quot;per_page&quot;: 5,
-        &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: null,
-        &quot;total&quot;: 0
+        &quot;id&quot;: 5,
+        &quot;title&quot;: &quot;Java Divorce&quot;,
+        &quot;content&quot;: &quot;Why did the two Java methods get a divorce? Because they had constant arguments.&quot;,
+        &quot;user_id&quot;: 5,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -4037,15 +3963,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-jokes-trash"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-jokes-trash"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4086,7 +4012,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/jokes" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4101,7 +4027,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4124,7 +4050,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -4146,7 +4072,7 @@ payload = {
     "search": "architecto"
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -4158,7 +4084,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-jokes">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -4170,38 +4096,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Jokes retrieved successfully&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/jokes?page=1&quot;,
-        &quot;from&quot;: null,
-        &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/jokes?page=1&quot;,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/jokes?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://localhost:8000/api/jokes&quot;,
-        &quot;per_page&quot;: 5,
-        &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: null,
-        &quot;total&quot;: 0
+        &quot;id&quot;: 8,
+        &quot;title&quot;: &quot;Joke about pirates, maths, server&quot;,
+        &quot;content&quot;: &quot;New joke&#039;s content&quot;,
+        &quot;user_id&quot;: 4,
+        &quot;created_at&quot;: &quot;2025-10-09T06:33:50.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:33:50.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -4254,15 +4158,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-jokes"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-jokes"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4315,7 +4219,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/jokes" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4333,7 +4237,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4359,7 +4263,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -4387,7 +4291,7 @@ payload = {
     "reference": "architecto"
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -4447,15 +4351,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4541,7 +4445,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/jokes/1" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -4552,7 +4456,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4570,7 +4474,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -4586,7 +4490,7 @@ import json
 
 url = 'http://localhost:8000/api/jokes/1'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -4598,7 +4502,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-jokes--id-">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -4610,43 +4514,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Joke retrieved successfully&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;id&quot;: 1,
-        &quot;title&quot;: &quot;Skeleton Fight&quot;,
-        &quot;content&quot;: &quot;Why don&#039;t skeletons fight each other? Because they don&#039;t have the guts.&quot;,
-        &quot;user_id&quot;: 1,
+        &quot;id&quot;: 4,
+        &quot;title&quot;: &quot;LIGHTS&quot;,
+        &quot;content&quot;: &quot;How many programmers does it take to change a light bulb? None. That&rsquo;s a hardware problem.&quot;,
+        &quot;user_id&quot;: 6,
         &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;deleted_at&quot;: null,
-        &quot;categories&quot;: [
-            {
-                &quot;id&quot;: 5,
-                &quot;title&quot;: &quot;Skeleton&quot;,
-                &quot;description&quot;: &quot;Jokes about skeletons and bones.&quot;,
-                &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-                &quot;deleted_at&quot;: null,
-                &quot;pivot&quot;: {
-                    &quot;joke_id&quot;: 1,
-                    &quot;category_id&quot;: 5
-                }
-            },
-            {
-                &quot;id&quot;: 13,
-                &quot;title&quot;: &quot;Maths&quot;,
-                &quot;description&quot;: &quot;Jokes related to mathematics.&quot;,
-                &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-                &quot;deleted_at&quot;: null,
-                &quot;pivot&quot;: {
-                    &quot;joke_id&quot;: 1,
-                    &quot;category_id&quot;: 13
-                }
-            }
-        ],
-        &quot;votes&quot;: []
+        &quot;updated_at&quot;: &quot;2025-10-09T06:47:13.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -4699,15 +4576,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-jokes--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-jokes--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4760,7 +4637,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
     "http://localhost:8000/api/jokes/1" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4776,7 +4653,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4800,7 +4677,7 @@ $response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -4824,7 +4701,7 @@ payload = {
     "content": "architecto"
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -4888,15 +4765,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-jokes--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="PUTapi-jokes--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4972,7 +4849,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
     "http://localhost:8000/api/jokes/1" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -4983,7 +4860,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5001,7 +4878,7 @@ $response = $client-&gt;delete(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -5017,7 +4894,7 @@ import json
 
 url = 'http://localhost:8000/api/jokes/1'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -5077,15 +4954,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-jokes--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="DELETEapi-jokes--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5142,7 +5019,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/auth/reset-password" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -5157,7 +5034,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5180,7 +5057,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -5202,7 +5079,7 @@ payload = {
     "password": "|]|{+-"
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -5262,15 +5139,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-auth-reset-password"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-auth-reset-password"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5327,7 +5204,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/admin/roles" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -5342,7 +5219,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5365,7 +5242,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -5387,7 +5264,7 @@ payload = {
     "search": "architecto"
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -5399,7 +5276,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-admin-roles">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -5411,38 +5288,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Roles retrieved successfully&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/admin/roles?page=1&quot;,
-        &quot;from&quot;: null,
-        &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/admin/roles?page=1&quot;,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/admin/roles?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://localhost:8000/api/admin/roles&quot;,
-        &quot;per_page&quot;: 5,
-        &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: null,
-        &quot;total&quot;: 0
+        &quot;id&quot;: 5,
+        &quot;title&quot;: &quot;Java Divorce&quot;,
+        &quot;content&quot;: &quot;Why did the two Java methods get a divorce? Because they had constant arguments.&quot;,
+        &quot;user_id&quot;: 5,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -5495,15 +5350,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-roles"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-admin-roles"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5556,7 +5411,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/admin/roles" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -5572,7 +5427,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5596,7 +5451,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -5620,7 +5475,7 @@ payload = {
     "level": 22
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -5680,15 +5535,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-roles"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-roles"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5752,7 +5607,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/admin/roles/architecto" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -5763,7 +5618,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5781,7 +5636,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -5797,7 +5652,7 @@ import json
 
 url = 'http://localhost:8000/api/admin/roles/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -5809,7 +5664,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-admin-roles--id-">
             <blockquote>
-            <p>Example response (404):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -5822,8 +5677,16 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Role not found&quot;,
-    &quot;data&quot;: []
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 4,
+        &quot;title&quot;: &quot;LIGHTS&quot;,
+        &quot;content&quot;: &quot;How many programmers does it take to change a light bulb? None. That&rsquo;s a hardware problem.&quot;,
+        &quot;user_id&quot;: 6,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:47:13.000000Z&quot;,
+        &quot;deleted_at&quot;: null
+    }
 }</code>
  </pre>
     </span>
@@ -5875,15 +5738,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-roles--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-admin-roles--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5936,7 +5799,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
     "http://localhost:8000/api/admin/roles/architecto" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -5947,7 +5810,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5965,7 +5828,7 @@ $response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -5981,7 +5844,7 @@ import json
 
 url = 'http://localhost:8000/api/admin/roles/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6045,15 +5908,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-admin-roles--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="PUTapi-admin-roles--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6106,7 +5969,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
     "http://localhost:8000/api/admin/roles/architecto" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -6117,7 +5980,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6135,7 +5998,7 @@ $response = $client-&gt;delete(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6151,7 +6014,7 @@ import json
 
 url = 'http://localhost:8000/api/admin/roles/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6211,15 +6074,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-admin-roles--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="DELETEapi-admin-roles--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6276,7 +6139,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/admin/users/trash/recover/architecto" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -6287,7 +6150,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6305,7 +6168,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6321,7 +6184,7 @@ import json
 
 url = 'http://localhost:8000/api/admin/users/trash/recover/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6381,15 +6244,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-recover--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-recover--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6442,7 +6305,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/admin/users/trash/remove/architecto" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -6453,7 +6316,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6471,7 +6334,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6487,7 +6350,7 @@ import json
 
 url = 'http://localhost:8000/api/admin/users/trash/remove/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6547,15 +6410,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-remove--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-remove--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6608,7 +6471,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/admin/users/trash/recover-all" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -6619,7 +6482,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6637,7 +6500,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6653,7 +6516,7 @@ import json
 
 url = 'http://localhost:8000/api/admin/users/trash/recover-all'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6713,15 +6576,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-recover-all"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-recover-all"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6762,7 +6625,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/admin/users/trash/remove-all" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -6773,7 +6636,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6791,7 +6654,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6807,7 +6670,7 @@ import json
 
 url = 'http://localhost:8000/api/admin/users/trash/remove-all'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6867,15 +6730,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-remove-all"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-remove-all"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6916,7 +6779,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/admin/users/trash" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -6927,7 +6790,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6945,7 +6808,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6961,7 +6824,7 @@ import json
 
 url = 'http://localhost:8000/api/admin/users/trash'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6973,7 +6836,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-admin-users-trash">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -6985,38 +6848,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Deleted users retrieved successfully&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/admin/users/trash?page=1&quot;,
-        &quot;from&quot;: null,
-        &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/admin/users/trash?page=1&quot;,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/admin/users/trash?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://localhost:8000/api/admin/users/trash&quot;,
-        &quot;per_page&quot;: 5,
-        &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: null,
-        &quot;total&quot;: 0
+        &quot;id&quot;: 7,
+        &quot;title&quot;: &quot;Cache Bankruptcy&quot;,
+        &quot;content&quot;: &quot;Why did the edge server go bankrupt? Because it ran out of cache.&quot;,
+        &quot;user_id&quot;: 5,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -7069,15 +6910,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-users-trash"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-admin-users-trash"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -7118,7 +6959,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
     --get "http://localhost:8000/api/admin/users" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -7133,7 +6974,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7156,7 +6997,7 @@ $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -7178,7 +7019,7 @@ payload = {
     "search": "architecto"
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -7190,7 +7031,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-admin-users">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -7202,38 +7043,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Users retrieved successfully&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;data&quot;: [],
-        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/admin/users?page=1&quot;,
-        &quot;from&quot;: null,
-        &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/admin/users?page=1&quot;,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/admin/users?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://localhost:8000/api/admin/users&quot;,
-        &quot;per_page&quot;: 5,
-        &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: null,
-        &quot;total&quot;: 0
+        &quot;id&quot;: 7,
+        &quot;title&quot;: &quot;Cache Bankruptcy&quot;,
+        &quot;content&quot;: &quot;Why did the edge server go bankrupt? Because it ran out of cache.&quot;,
+        &quot;user_id&quot;: 5,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -7286,15 +7105,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-users"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-admin-users"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -7347,16 +7166,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/admin/users" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
     \"name\": \"architecto\",
     \"email\": \"zbailey@example.net\",
     \"password\": \"|]|{+-\",
-    \"role\": \"staff\",
-    \"status\": \"banned\",
-    \"email_verified_at\": \"2025-10-11T09:19:29\"
+    \"role\": \"client\",
+    \"status\": \"suspended\",
+    \"email_verified_at\": \"2025-10-11T10:01:59\"
 }"
 </code></pre></div>
 
@@ -7367,7 +7186,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7376,9 +7195,9 @@ let body = {
     "name": "architecto",
     "email": "zbailey@example.net",
     "password": "|]|{+-",
-    "role": "staff",
-    "status": "banned",
-    "email_verified_at": "2025-10-11T09:19:29"
+    "role": "client",
+    "status": "suspended",
+    "email_verified_at": "2025-10-11T10:01:59"
 };
 
 fetch(url, {
@@ -7395,7 +7214,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -7403,9 +7222,9 @@ $response = $client-&gt;post(
             'name' =&gt; 'architecto',
             'email' =&gt; 'zbailey@example.net',
             'password' =&gt; '|]|{+-',
-            'role' =&gt; 'staff',
-            'status' =&gt; 'banned',
-            'email_verified_at' =&gt; '2025-10-11T09:19:29',
+            'role' =&gt; 'client',
+            'status' =&gt; 'suspended',
+            'email_verified_at' =&gt; '2025-10-11T10:01:59',
         ],
     ]
 );
@@ -7422,12 +7241,12 @@ payload = {
     "name": "architecto",
     "email": "zbailey@example.net",
     "password": "|]|{+-",
-    "role": "staff",
-    "status": "banned",
-    "email_verified_at": "2025-10-11T09:19:29"
+    "role": "client",
+    "status": "suspended",
+    "email_verified_at": "2025-10-11T10:01:59"
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -7487,15 +7306,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-users"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-users"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -7559,10 +7378,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="POSTapi-admin-users"
-               value="staff"
+               value="client"
                data-component="body">
     <br>
-<p>Example: <code>staff</code></p>
+<p>Example: <code>client</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>admin</code></li> <li><code>staff</code></li> <li><code>client</code></li></ul>
         </div>
@@ -7572,10 +7391,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-admin-users"
-               value="banned"
+               value="suspended"
                data-component="body">
     <br>
-<p>Example: <code>banned</code></p>
+<p>Example: <code>suspended</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>suspended</code></li> <li><code>banned</code></li></ul>
         </div>
@@ -7585,10 +7404,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="email_verified_at"                data-endpoint="POSTapi-admin-users"
-               value="2025-10-11T09:19:29"
+               value="2025-10-11T10:01:59"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-10-11T09:19:29</code></p>
+<p>Must be a valid date. Example: <code>2025-10-11T10:01:59</code></p>
         </div>
         </form>
 
@@ -7606,19 +7425,19 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/admin/users/1" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --get "http://localhost:8000/api/admin/users/architecto" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/1"
+    "http://localhost:8000/api/admin/users/architecto"
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7631,12 +7450,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/1';
+$url = 'http://localhost:8000/api/admin/users/architecto';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -7650,9 +7469,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/1'
+url = 'http://localhost:8000/api/admin/users/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -7664,7 +7483,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-admin-users--id-">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -7676,29 +7495,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;User retrieved successfully&quot;,
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Please log into your account.&quot;,
     &quot;data&quot;: {
-        &quot;id&quot;: 1,
-        &quot;name&quot;: &quot;Super Admin&quot;,
-        &quot;email&quot;: &quot;superadmin@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2025-10-09T06:29:08.000000Z&quot;,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:08.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:08.000000Z&quot;,
-        &quot;status&quot;: &quot;active&quot;,
-        &quot;deleted_at&quot;: null,
-        &quot;jokes&quot;: [
-            {
-                &quot;id&quot;: 1,
-                &quot;title&quot;: &quot;Skeleton Fight&quot;,
-                &quot;content&quot;: &quot;Why don&#039;t skeletons fight each other? Because they don&#039;t have the guts.&quot;,
-                &quot;user_id&quot;: 1,
-                &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-                &quot;deleted_at&quot;: null
-            }
-        ],
-        &quot;votes&quot;: []
+        &quot;id&quot;: 5,
+        &quot;title&quot;: &quot;Java Divorce&quot;,
+        &quot;content&quot;: &quot;Why did the two Java methods get a divorce? Because they had constant arguments.&quot;,
+        &quot;user_id&quot;: 5,
+        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;deleted_at&quot;: null
     }
 }</code>
  </pre>
@@ -7751,15 +7557,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-users--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-admin-users--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -7786,14 +7592,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="id"                data-endpoint="GETapi-admin-users--id-"
-               value="1"
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-admin-users--id-"
+               value="architecto"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>1</code></p>
+<p>The ID of the user. Example: <code>architecto</code></p>
             </div>
                     </form>
 
@@ -7811,8 +7617,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/admin/users/1" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    "http://localhost:8000/api/admin/users/architecto" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -7826,11 +7632,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/1"
+    "http://localhost:8000/api/admin/users/architecto"
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7851,12 +7657,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/1';
+$url = 'http://localhost:8000/api/admin/users/architecto';
 $response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -7876,7 +7682,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/1'
+url = 'http://localhost:8000/api/admin/users/architecto'
 payload = {
     "name": "architecto",
     "email": "zbailey@example.net",
@@ -7884,7 +7690,7 @@ payload = {
     "status": "active"
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -7948,15 +7754,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-admin-users--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="PUTapi-admin-users--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -7983,14 +7789,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="id"                data-endpoint="PUTapi-admin-users--id-"
-               value="1"
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-admin-users--id-"
+               value="architecto"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>1</code></p>
+<p>The ID of the user. Example: <code>architecto</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -8057,19 +7863,19 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/admin/users/1" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    "http://localhost:8000/api/admin/users/architecto" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/1"
+    "http://localhost:8000/api/admin/users/architecto"
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8082,12 +7888,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/1';
+$url = 'http://localhost:8000/api/admin/users/architecto';
 $response = $client-&gt;delete(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -8101,9 +7907,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/1'
+url = 'http://localhost:8000/api/admin/users/architecto'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -8163,15 +7969,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-admin-users--id-"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="DELETEapi-admin-users--id-"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -8198,14 +8004,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="id"                data-endpoint="DELETEapi-admin-users--id-"
-               value="1"
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-admin-users--id-"
+               value="architecto"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>1</code></p>
+<p>The ID of the user. Example: <code>architecto</code></p>
             </div>
                     </form>
 
@@ -8228,7 +8034,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
     "http://localhost:8000/api/profile" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -8245,7 +8051,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8270,7 +8076,7 @@ $response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -8296,7 +8102,7 @@ payload = {
     "password": "architecto"
 }
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -8356,15 +8162,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-profile"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="PUTapi-profile"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -8439,7 +8245,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
     "http://localhost:8000/api/profile/delete" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -8450,7 +8256,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8468,7 +8274,7 @@ $response = $client-&gt;delete(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -8484,7 +8290,7 @@ import json
 
 url = 'http://localhost:8000/api/profile/delete'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -8544,15 +8350,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-profile-delete"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="DELETEapi-profile-delete"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -8597,7 +8403,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/jokes/1/like" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -8608,7 +8414,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8626,7 +8432,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -8642,7 +8448,7 @@ import json
 
 url = 'http://localhost:8000/api/jokes/1/like'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -8702,15 +8508,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes--id--like"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes--id--like"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -8763,7 +8569,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/jokes/1/dislike" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -8774,7 +8580,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8792,7 +8598,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -8808,7 +8614,7 @@ import json
 
 url = 'http://localhost:8000/api/jokes/1/dislike'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -8868,15 +8674,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes--id--dislike"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes--id--dislike"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -8929,7 +8735,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://localhost:8000/api/jokes/1/remove-vote" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -8940,7 +8746,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "X-Api-Key": "{YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8958,7 +8764,7 @@ $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -8974,7 +8780,7 @@ import json
 
 url = 'http://localhost:8000/api/jokes/1/remove-vote'
 headers = {
-  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'X-Api-Key': '{YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -9034,15 +8840,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes--id--remove-vote"
-               value="Bearer {YOUR_AUTH_KEY}"
+                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes--id--remove-vote"
+               value="{YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;

@@ -22,7 +22,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      X-Api-Key: '{YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -47,8 +47,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - Authorization
-      - 'Bearer 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58'
+      - X-Api-Key
+      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
     controller: null
     method: null
     route: null
