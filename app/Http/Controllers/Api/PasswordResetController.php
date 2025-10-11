@@ -8,6 +8,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @group Reset Password
+ *
+ * APIs for resetting user password.
+ */
 class PasswordResetController extends Controller
 {
     public function resetPassword(Request $request): JsonResponse

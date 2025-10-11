@@ -10,10 +10,15 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
+/**
+ * @group User Profile Management
+ *
+ * APIs for managing own user profile.
+ */
 class ProfileController extends Controller
 {
     /**
-     * Update the specified resource in storage.
+     * Update the specified user profile in storage.
      */
     public function update(Request $request): JsonResponse
     {
@@ -42,7 +47,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified user profile from storage.
      */
     public function destroy(Request $request): JsonResponse
     {

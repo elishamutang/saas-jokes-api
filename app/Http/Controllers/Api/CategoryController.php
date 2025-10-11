@@ -12,6 +12,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @group Categories Management
+ *
+ * APIs for managing categories
+ */
 class CategoryController extends Controller
 {
     /**

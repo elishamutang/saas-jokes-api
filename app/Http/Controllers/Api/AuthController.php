@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Validator;
 
 
 /**
- * API Version 2 - AuthController
+ * @group Authentication
+ * @unauthenticated
+ *
+ * APIs for authenticating a user.
  */
 class AuthController extends Controller
 {

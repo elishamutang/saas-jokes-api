@@ -8,6 +8,11 @@ use App\Responses\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @group Votes
+ *
+ * APIs for voting on a joke.
+ */
 class VoteController extends Controller
 {
     /**

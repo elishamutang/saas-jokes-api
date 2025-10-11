@@ -12,10 +12,15 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 
+/**
+ * @group Role Management
+ *
+ * APIs for managing user roles.
+ */
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the role.
      */
     public function index(Request $request): JsonResponse
     {
@@ -53,7 +58,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created role in storage.
      */
     public function store(Request $request): JsonResponse
     {
@@ -85,7 +90,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified role.
      */
     public function show(string $id): JsonResponse
     {
@@ -104,7 +109,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified role in storage.
      */
     public function update(Request $request, string $id): JsonResponse
     {
@@ -143,7 +148,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified role from storage.
      */
     public function destroy(string $id): JsonResponse
     {

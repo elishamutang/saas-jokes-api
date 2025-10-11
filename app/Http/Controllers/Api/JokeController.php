@@ -13,10 +13,15 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @group Jokes Management
+ *
+ * APIs for managing jokes.
+ */
 class JokeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the jokes.
      */
     public function index(Request $request): JsonResponse
     {
@@ -56,7 +61,7 @@ class JokeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created jokes in storage.
      */
     public function store(StoreJokeRequest $request): JsonResponse
     {
@@ -99,7 +104,7 @@ class JokeController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified joke.
      */
     public function show(string $id): JsonResponse
     {
@@ -129,7 +134,7 @@ class JokeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified joke in storage.
      */
     public function update(UpdateJokeRequest $request, string $id): JsonResponse
     {
@@ -148,7 +153,7 @@ class JokeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified joke from storage.
      */
     public function destroy(string $id): JsonResponse
     {

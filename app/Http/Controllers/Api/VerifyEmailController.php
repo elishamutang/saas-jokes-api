@@ -9,6 +9,11 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @group Email Verification
+ *
+ * APIs for verifying user email address.
+ */
 class VerifyEmailController extends Controller
 {
     /**
