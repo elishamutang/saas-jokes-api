@@ -291,7 +291,7 @@
     <div class="dark-box"></div>
     <div class="content">
         <h1 id="introduction">Introduction</h1>
-<p>Jokes Management API</p>
+<p>Jokes Management REST API, allowing authenticated users to perform CRUD operations on (but not limited to) jokes, categories.</p>
 <aside>
     <strong>Base URL</strong>: <code>https://daneilel.screencraft.net.au</code>
 </aside>
@@ -7192,8 +7192,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"email\": \"carolyne.luettgen@example.org\",
     \"password\": \"O[2UZ5ij-e\\/dl4m{o,\",
     \"role\": \"admin\",
-    \"status\": \"suspended\",
-    \"email_verified_at\": \"2025-10-12T12:46:24\"
+    \"status\": \"active\",
+    \"email_verified_at\": \"2025-10-12T13:02:59\"
 }"
 </code></pre></div>
 
@@ -7214,8 +7214,8 @@ let body = {
     "email": "carolyne.luettgen@example.org",
     "password": "O[2UZ5ij-e\/dl4m{o,",
     "role": "admin",
-    "status": "suspended",
-    "email_verified_at": "2025-10-12T12:46:24"
+    "status": "active",
+    "email_verified_at": "2025-10-12T13:02:59"
 };
 
 fetch(url, {
@@ -7241,8 +7241,8 @@ $response = $client-&gt;post(
             'email' =&gt; 'carolyne.luettgen@example.org',
             'password' =&gt; 'O[2UZ5ij-e/dl4m{o,',
             'role' =&gt; 'admin',
-            'status' =&gt; 'suspended',
-            'email_verified_at' =&gt; '2025-10-12T12:46:24',
+            'status' =&gt; 'active',
+            'email_verified_at' =&gt; '2025-10-12T13:02:59',
         ],
     ]
 );
@@ -7260,8 +7260,8 @@ payload = {
     "email": "carolyne.luettgen@example.org",
     "password": "O[2UZ5ij-e\/dl4m{o,",
     "role": "admin",
-    "status": "suspended",
-    "email_verified_at": "2025-10-12T12:46:24"
+    "status": "active",
+    "email_verified_at": "2025-10-12T13:02:59"
 }
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
@@ -7409,10 +7409,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-admin-users"
-               value="suspended"
+               value="active"
                data-component="body">
     <br>
-<p>Example: <code>suspended</code></p>
+<p>Example: <code>active</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>suspended</code></li> <li><code>banned</code></li></ul>
         </div>
@@ -7422,10 +7422,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="email_verified_at"                data-endpoint="POSTapi-admin-users"
-               value="2025-10-12T12:46:24"
+               value="2025-10-12T13:02:59"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-10-12T12:46:24</code></p>
+<p>Must be a valid date. Example: <code>2025-10-12T13:02:59</code></p>
         </div>
         </form>
 
@@ -7634,8 +7634,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"name\": \"consequatur\",
     \"email\": \"carolyne.luettgen@example.org\",
-    \"role\": \"admin\",
-    \"status\": \"suspended\"
+    \"role\": \"staff\",
+    \"status\": \"active\"
 }"
 </code></pre></div>
 
@@ -7654,8 +7654,8 @@ const headers = {
 let body = {
     "name": "consequatur",
     "email": "carolyne.luettgen@example.org",
-    "role": "admin",
-    "status": "suspended"
+    "role": "staff",
+    "status": "active"
 };
 
 fetch(url, {
@@ -7679,8 +7679,8 @@ $response = $client-&gt;put(
         'json' =&gt; [
             'name' =&gt; 'consequatur',
             'email' =&gt; 'carolyne.luettgen@example.org',
-            'role' =&gt; 'admin',
-            'status' =&gt; 'suspended',
+            'role' =&gt; 'staff',
+            'status' =&gt; 'active',
         ],
     ]
 );
@@ -7696,8 +7696,8 @@ url = 'https://daneilel.screencraft.net.au/api/admin/users/1'
 payload = {
     "name": "consequatur",
     "email": "carolyne.luettgen@example.org",
-    "role": "admin",
-    "status": "suspended"
+    "role": "staff",
+    "status": "active"
 }
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
@@ -7837,10 +7837,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="PUTapi-admin-users--id-"
-               value="admin"
+               value="staff"
                data-component="body">
     <br>
-<p>Example: <code>admin</code></p>
+<p>Example: <code>staff</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>admin</code></li> <li><code>staff</code></li> <li><code>client</code></li></ul>
         </div>
@@ -7850,10 +7850,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-admin-users--id-"
-               value="suspended"
+               value="active"
                data-component="body">
     <br>
-<p>Example: <code>suspended</code></p>
+<p>Example: <code>active</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>suspended</code></li> <li><code>banned</code></li></ul>
         </div>

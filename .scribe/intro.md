@@ -1,6 +1,6 @@
 # Introduction
 
-Jokes Management API
+Jokes Management REST API, allowing authenticated users to perform CRUD operations on (but not limited to) jokes, categories.
 
 <aside>
     <strong>Base URL</strong>: <code>https://daneilel.screencraft.net.au</code>
