@@ -40,7 +40,7 @@ class UserPolicy
     {
         // Check the role of the user being updated
         // Admin permissions
-        if ($user->hasPermissionTo('edit admin, client or staff users only') && $model->hasAnyRole(['client', 'staff', 'admin'])) {
+        if ($user->hasPermissionTo('edit admin, client or staff users only') && !$model->hasRole('super-admin')) {
             return true;
         }
 
@@ -63,7 +63,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        if ($user->hasPermissionTo('delete client and staff users only') && $model->hasAnyRole(['client', 'staff'])) {
+        if ($user->hasPermissionTo('delete client and staff users only') && !$model->hasAnyRole(['admin', 'super-admin'])) {
             return true;
         }
 
