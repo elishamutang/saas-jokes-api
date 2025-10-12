@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Laravel API Documentation</title>
+    <title>EMD-SaaS-Jokes-API Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -28,7 +28,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://localhost:8000";
+        var tryItOutBaseUrl = "https://daneilel.screencraft.net.au";
         var useCsrf = Boolean(1);
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -293,7 +293,7 @@
         <h1 id="introduction">Introduction</h1>
 <p>Jokes Management API</p>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost:8000</code>
+    <strong>Base URL</strong>: <code>https://daneilel.screencraft.net.au</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -301,7 +301,8 @@
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).&lt;/aside&gt;</code></pre>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>To authenticate requests, include an <strong><code>X-Api-Key</code></strong> header with the value <strong><code>"{YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_BEARER_TOKEN}"</code></strong>.</p>
+<p>If the above didn't work, add an additional header in your request called <strong><code>X-Api-Key</code></strong> with the value <strong><code>"{YOUR_BEARER_TOKEN}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by logging into your account.</p>
 
@@ -328,21 +329,21 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/auth/register" \
+    "https://daneilel.screencraft.net.au/api/auth/register" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"b\",
-    \"email\": \"zbailey@example.net\",
-    \"password\": \"-0pBNvYgxw\",
-    \"password_confirmation\": \"aykcmyuwpwlvqwrsitcpscqldzsnrwtujwvlxjklqppwqb\"
+    \"name\": \"vmqeopfuudtdsufvyvddq\",
+    \"email\": \"kunde.eloisa@example.com\",
+    \"password\": \"4[*UyPJ\\\"}6\",
+    \"password_confirmation\": \"hdtqtqxbajwbpilpmufinllwloauydlsmsjuryvojcybzvrbyickznkygloigmkwxphlvazjrc\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/auth/register"
+    "https://daneilel.screencraft.net.au/api/auth/register"
 );
 
 const headers = {
@@ -351,10 +352,10 @@ const headers = {
 };
 
 let body = {
-    "name": "b",
-    "email": "zbailey@example.net",
-    "password": "-0pBNvYgxw",
-    "password_confirmation": "aykcmyuwpwlvqwrsitcpscqldzsnrwtujwvlxjklqppwqb"
+    "name": "vmqeopfuudtdsufvyvddq",
+    "email": "kunde.eloisa@example.com",
+    "password": "4[*UyPJ\"}6",
+    "password_confirmation": "hdtqtqxbajwbpilpmufinllwloauydlsmsjuryvojcybzvrbyickznkygloigmkwxphlvazjrc"
 };
 
 fetch(url, {
@@ -366,7 +367,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/auth/register';
+$url = 'https://daneilel.screencraft.net.au/api/auth/register';
 $response = $client-&gt;post(
     $url,
     [
@@ -375,10 +376,10 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'b',
-            'email' =&gt; 'zbailey@example.net',
-            'password' =&gt; '-0pBNvYgxw',
-            'password_confirmation' =&gt; 'aykcmyuwpwlvqwrsitcpscqldzsnrwtujwvlxjklqppwqb',
+            'name' =&gt; 'vmqeopfuudtdsufvyvddq',
+            'email' =&gt; 'kunde.eloisa@example.com',
+            'password' =&gt; '4[*UyPJ"}6',
+            'password_confirmation' =&gt; 'hdtqtqxbajwbpilpmufinllwloauydlsmsjuryvojcybzvrbyickznkygloigmkwxphlvazjrc',
         ],
     ]
 );
@@ -390,12 +391,12 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/auth/register'
+url = 'https://daneilel.screencraft.net.au/api/auth/register'
 payload = {
-    "name": "b",
-    "email": "zbailey@example.net",
-    "password": "-0pBNvYgxw",
-    "password_confirmation": "aykcmyuwpwlvqwrsitcpscqldzsnrwtujwvlxjklqppwqb"
+    "name": "vmqeopfuudtdsufvyvddq",
+    "email": "kunde.eloisa@example.com",
+    "password": "4[*UyPJ\"}6",
+    "password_confirmation": "hdtqtqxbajwbpilpmufinllwloauydlsmsjuryvojcybzvrbyickznkygloigmkwxphlvazjrc"
 }
 headers = {
   'Content-Type': 'application/json',
@@ -485,10 +486,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-auth-register"
-               value="b"
+               value="vmqeopfuudtdsufvyvddq"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>b</code></p>
+<p>Must not be greater than 255 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -496,10 +497,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-auth-register"
-               value="zbailey@example.net"
+               value="kunde.eloisa@example.com"
                data-component="body">
     <br>
-<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>zbailey@example.net</code></p>
+<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>kunde.eloisa@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -507,10 +508,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-auth-register"
-               value="-0pBNvYgxw"
+               value="4[*UyPJ"}6"
                data-component="body">
     <br>
-<p>Must be at least 6 characters. Example: <code>-0pBNvYgxw</code></p>
+<p>Must be at least 6 characters. Example: <code>4[*UyPJ"}6</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
@@ -518,10 +519,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password_confirmation"                data-endpoint="POSTapi-auth-register"
-               value="aykcmyuwpwlvqwrsitcpscqldzsnrwtujwvlxjklqppwqb"
+               value="hdtqtqxbajwbpilpmufinllwloauydlsmsjuryvojcybzvrbyickznkygloigmkwxphlvazjrc"
                data-component="body">
     <br>
-<p>Must be at least 6 characters. Example: <code>aykcmyuwpwlvqwrsitcpscqldzsnrwtujwvlxjklqppwqb</code></p>
+<p>Must be at least 6 characters. Example: <code>hdtqtqxbajwbpilpmufinllwloauydlsmsjuryvojcybzvrbyickznkygloigmkwxphlvazjrc</code></p>
         </div>
         </form>
 
@@ -538,14 +539,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/auth/logout" \
+    "https://daneilel.screencraft.net.au/api/auth/logout" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/auth/logout"
+    "https://daneilel.screencraft.net.au/api/auth/logout"
 );
 
 const headers = {
@@ -561,7 +562,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/auth/logout';
+$url = 'https://daneilel.screencraft.net.au/api/auth/logout';
 $response = $client-&gt;post(
     $url,
     [
@@ -579,7 +580,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/auth/logout'
+url = 'https://daneilel.screencraft.net.au/api/auth/logout'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
@@ -684,14 +685,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/profile" \
+    --get "https://daneilel.screencraft.net.au/api/profile" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/profile"
+    "https://daneilel.screencraft.net.au/api/profile"
 );
 
 const headers = {
@@ -707,7 +708,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/profile';
+$url = 'https://daneilel.screencraft.net.au/api/profile';
 $response = $client-&gt;get(
     $url,
     [
@@ -725,7 +726,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/profile'
+url = 'https://daneilel.screencraft.net.au/api/profile'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
@@ -738,7 +739,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-profile">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -750,16 +751,19 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;User profile request successful&quot;,
     &quot;data&quot;: {
-        &quot;id&quot;: 2,
-        &quot;title&quot;: &quot;Pirate Maths&quot;,
-        &quot;content&quot;: &quot;What type of Maths are pirates best at?Algebra. Because they are good at finding X.&quot;,
-        &quot;user_id&quot;: 3,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;deleted_at&quot;: null
+        &quot;user&quot;: {
+            &quot;id&quot;: 7,
+            &quot;name&quot;: &quot;elisha&quot;,
+            &quot;email&quot;: &quot;elishamutang@outlook.com&quot;,
+            &quot;email_verified_at&quot;: &quot;2025-10-10T14:01:55.000000Z&quot;,
+            &quot;created_at&quot;: &quot;2025-10-10T14:01:36.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2025-10-10T14:01:55.000000Z&quot;,
+            &quot;status&quot;: &quot;active&quot;,
+            &quot;deleted_at&quot;: null
+        }
     }
 }</code>
  </pre>
@@ -853,19 +857,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/categories/trash/recover/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/categories/trash/recover/consequatur" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/trash/recover/architecto"
+    "https://daneilel.screencraft.net.au/api/categories/trash/recover/consequatur"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -878,12 +882,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/trash/recover/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/categories/trash/recover/consequatur';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -897,9 +901,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/trash/recover/architecto'
+url = 'https://daneilel.screencraft.net.au/api/categories/trash/recover/consequatur'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -959,15 +963,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-categories-trash-recover--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-categories-trash-recover--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -998,10 +1002,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-categories-trash-recover--id-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the recover. Example: <code>architecto</code></p>
+<p>The ID of the recover. Example: <code>consequatur</code></p>
             </div>
                     </form>
 
@@ -1019,19 +1023,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/categories/trash/remove/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/categories/trash/remove/consequatur" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/trash/remove/architecto"
+    "https://daneilel.screencraft.net.au/api/categories/trash/remove/consequatur"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1044,12 +1048,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/trash/remove/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/categories/trash/remove/consequatur';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -1063,9 +1067,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/trash/remove/architecto'
+url = 'https://daneilel.screencraft.net.au/api/categories/trash/remove/consequatur'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -1125,15 +1129,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-categories-trash-remove--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-categories-trash-remove--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1164,10 +1168,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-categories-trash-remove--id-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the remove. Example: <code>architecto</code></p>
+<p>The ID of the remove. Example: <code>consequatur</code></p>
             </div>
                     </form>
 
@@ -1185,19 +1189,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/categories/trash/recover-all" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/categories/trash/recover-all" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/trash/recover-all"
+    "https://daneilel.screencraft.net.au/api/categories/trash/recover-all"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1210,12 +1214,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/trash/recover-all';
+$url = 'https://daneilel.screencraft.net.au/api/categories/trash/recover-all';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -1229,9 +1233,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/trash/recover-all'
+url = 'https://daneilel.screencraft.net.au/api/categories/trash/recover-all'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -1291,15 +1295,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-categories-trash-recover-all"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-categories-trash-recover-all"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1339,19 +1343,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/categories/trash/remove-all" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/categories/trash/remove-all" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/trash/remove-all"
+    "https://daneilel.screencraft.net.au/api/categories/trash/remove-all"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1364,12 +1368,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/trash/remove-all';
+$url = 'https://daneilel.screencraft.net.au/api/categories/trash/remove-all';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -1383,9 +1387,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/trash/remove-all'
+url = 'https://daneilel.screencraft.net.au/api/categories/trash/remove-all'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -1445,15 +1449,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-categories-trash-remove-all"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-categories-trash-remove-all"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1493,19 +1497,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/categories/trash" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/categories/trash" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/trash"
+    "https://daneilel.screencraft.net.au/api/categories/trash"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1518,12 +1522,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/trash';
+$url = 'https://daneilel.screencraft.net.au/api/categories/trash';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -1537,9 +1541,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/trash'
+url = 'https://daneilel.screencraft.net.au/api/categories/trash'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -1551,7 +1555,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-categories-trash">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (403):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1564,16 +1568,8 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
-    &quot;data&quot;: {
-        &quot;id&quot;: 3,
-        &quot;title&quot;: &quot;SQL Bar&quot;,
-        &quot;content&quot;: &quot;An SQL query walks into a bar, sees two tables, and asks: \&quot;Can I join you?\&quot;&quot;,
-        &quot;user_id&quot;: 4,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:45:40.000000Z&quot;,
-        &quot;deleted_at&quot;: null
-    }
+    &quot;message&quot;: &quot;You are not authorized to perform this action.&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -1625,15 +1621,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-categories-trash"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-categories-trash"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1673,29 +1669,29 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/categories" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/categories" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"search\": \"architecto\"
+    \"search\": \"consequatur\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories"
+    "https://daneilel.screencraft.net.au/api/categories"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "search": "architecto"
+    "search": "consequatur"
 };
 
 fetch(url, {
@@ -1707,17 +1703,17 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories';
+$url = 'https://daneilel.screencraft.net.au/api/categories';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'search' =&gt; 'architecto',
+            'search' =&gt; 'consequatur',
         ],
     ]
 );
@@ -1729,12 +1725,12 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories'
+url = 'https://daneilel.screencraft.net.au/api/categories'
 payload = {
-    "search": "architecto"
+    "search": "consequatur"
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -1746,7 +1742,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-categories">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1758,16 +1754,38 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Categories retrieved successfully&quot;,
     &quot;data&quot;: {
-        &quot;id&quot;: 5,
-        &quot;title&quot;: &quot;Java Divorce&quot;,
-        &quot;content&quot;: &quot;Why did the two Java methods get a divorce? Because they had constant arguments.&quot;,
-        &quot;user_id&quot;: 5,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;deleted_at&quot;: null
+        &quot;current_page&quot;: 1,
+        &quot;data&quot;: [],
+        &quot;first_page_url&quot;: &quot;https://daneilel.screencraft.net.au/api/categories?page=1&quot;,
+        &quot;from&quot;: null,
+        &quot;last_page&quot;: 1,
+        &quot;last_page_url&quot;: &quot;https://daneilel.screencraft.net.au/api/categories?page=1&quot;,
+        &quot;links&quot;: [
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;https://daneilel.screencraft.net.au/api/categories?page=1&quot;,
+                &quot;label&quot;: &quot;1&quot;,
+                &quot;active&quot;: true
+            },
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
+                &quot;active&quot;: false
+            }
+        ],
+        &quot;next_page_url&quot;: null,
+        &quot;path&quot;: &quot;https://daneilel.screencraft.net.au/api/categories&quot;,
+        &quot;per_page&quot;: 5,
+        &quot;prev_page_url&quot;: null,
+        &quot;to&quot;: null,
+        &quot;total&quot;: 0
     }
 }</code>
  </pre>
@@ -1820,15 +1838,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-categories"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-categories"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -1859,10 +1877,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="search"                data-endpoint="GETapi-categories"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
         </form>
 
@@ -1880,31 +1898,31 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/categories" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/categories" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"title\": \"architecto\",
-    \"description\": \"Eius et animi quos velit et.\"
+    \"title\": \"consequatur\",
+    \"description\": \"Dolores dolorum amet iste laborum eius est dolor.\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories"
+    "https://daneilel.screencraft.net.au/api/categories"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "title": "architecto",
-    "description": "Eius et animi quos velit et."
+    "title": "consequatur",
+    "description": "Dolores dolorum amet iste laborum eius est dolor."
 };
 
 fetch(url, {
@@ -1916,18 +1934,18 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories';
+$url = 'https://daneilel.screencraft.net.au/api/categories';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'title' =&gt; 'architecto',
-            'description' =&gt; 'Eius et animi quos velit et.',
+            'title' =&gt; 'consequatur',
+            'description' =&gt; 'Dolores dolorum amet iste laborum eius est dolor.',
         ],
     ]
 );
@@ -1939,13 +1957,13 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories'
+url = 'https://daneilel.screencraft.net.au/api/categories'
 payload = {
-    "title": "architecto",
-    "description": "Eius et animi quos velit et."
+    "title": "consequatur",
+    "description": "Dolores dolorum amet iste laborum eius est dolor."
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2005,15 +2023,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-categories"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-categories"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -2044,10 +2062,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="title"                data-endpoint="POSTapi-categories"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
@@ -2055,10 +2073,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="description"                data-endpoint="POSTapi-categories"
-               value="Eius et animi quos velit et."
+               value="Dolores dolorum amet iste laborum eius est dolor."
                data-component="body">
     <br>
-<p>Example: <code>Eius et animi quos velit et.</code></p>
+<p>Example: <code>Dolores dolorum amet iste laborum eius est dolor.</code></p>
         </div>
         </form>
 
@@ -2076,19 +2094,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/categories/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/categories/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/architecto"
+    "https://daneilel.screencraft.net.au/api/categories/1"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2101,12 +2119,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/categories/1';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -2120,9 +2138,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/architecto'
+url = 'https://daneilel.screencraft.net.au/api/categories/1'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2134,7 +2152,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-categories--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -2146,16 +2164,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Category retrieved successfully&quot;,
     &quot;data&quot;: {
-        &quot;id&quot;: 8,
-        &quot;title&quot;: &quot;Joke about pirates, maths, server&quot;,
-        &quot;content&quot;: &quot;New joke&#039;s content&quot;,
-        &quot;user_id&quot;: 4,
-        &quot;created_at&quot;: &quot;2025-10-09T06:33:50.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:33:50.000000Z&quot;,
-        &quot;deleted_at&quot;: null
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;Unknown&quot;,
+        &quot;description&quot;: &quot;Sorry, but we have no idea where to place this joke.&quot;,
+        &quot;created_at&quot;: &quot;2025-10-10T14:01:27.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-10T14:01:27.000000Z&quot;,
+        &quot;deleted_at&quot;: null,
+        &quot;jokes&quot;: []
     }
 }</code>
  </pre>
@@ -2208,15 +2226,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-categories--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-categories--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -2243,14 +2261,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-categories--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-categories--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>architecto</code></p>
+<p>The ID of the category. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -2268,31 +2286,31 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/categories/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/categories/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"title\": \"architecto\",
-    \"description\": \"Eius et animi quos velit et.\"
+    \"title\": \"consequatur\",
+    \"description\": \"Dolores dolorum amet iste laborum eius est dolor.\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/architecto"
+    "https://daneilel.screencraft.net.au/api/categories/1"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "title": "architecto",
-    "description": "Eius et animi quos velit et."
+    "title": "consequatur",
+    "description": "Dolores dolorum amet iste laborum eius est dolor."
 };
 
 fetch(url, {
@@ -2304,18 +2322,18 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/categories/1';
 $response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'title' =&gt; 'architecto',
-            'description' =&gt; 'Eius et animi quos velit et.',
+            'title' =&gt; 'consequatur',
+            'description' =&gt; 'Dolores dolorum amet iste laborum eius est dolor.',
         ],
     ]
 );
@@ -2327,13 +2345,13 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/architecto'
+url = 'https://daneilel.screencraft.net.au/api/categories/1'
 payload = {
-    "title": "architecto",
-    "description": "Eius et animi quos velit et."
+    "title": "consequatur",
+    "description": "Dolores dolorum amet iste laborum eius est dolor."
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2397,15 +2415,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="PUTapi-categories--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-categories--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -2432,14 +2450,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="PUTapi-categories--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-categories--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>architecto</code></p>
+<p>The ID of the category. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -2448,10 +2466,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="title"                data-endpoint="PUTapi-categories--id-"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
@@ -2459,10 +2477,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="description"                data-endpoint="PUTapi-categories--id-"
-               value="Eius et animi quos velit et."
+               value="Dolores dolorum amet iste laborum eius est dolor."
                data-component="body">
     <br>
-<p>Example: <code>Eius et animi quos velit et.</code></p>
+<p>Example: <code>Dolores dolorum amet iste laborum eius est dolor.</code></p>
         </div>
         </form>
 
@@ -2480,19 +2498,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/categories/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/categories/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/categories/architecto"
+    "https://daneilel.screencraft.net.au/api/categories/1"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2505,12 +2523,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/categories/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/categories/1';
 $response = $client-&gt;delete(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -2524,9 +2542,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/categories/architecto'
+url = 'https://daneilel.screencraft.net.au/api/categories/1'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2586,15 +2604,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="DELETEapi-categories--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-categories--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -2621,14 +2639,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-categories--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-categories--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>architecto</code></p>
+<p>The ID of the category. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -2650,19 +2668,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/auth/email/verify" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/auth/email/verify" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/auth/email/verify"
+    "https://daneilel.screencraft.net.au/api/auth/email/verify"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2675,12 +2693,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/auth/email/verify';
+$url = 'https://daneilel.screencraft.net.au/api/auth/email/verify';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -2694,9 +2712,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/auth/email/verify'
+url = 'https://daneilel.screencraft.net.au/api/auth/email/verify'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2708,7 +2726,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-auth-email-verify">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -2720,15 +2738,16 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;User email already verified.&quot;,
     &quot;data&quot;: {
-        &quot;id&quot;: 1,
-        &quot;title&quot;: &quot;Skeleton Fight&quot;,
-        &quot;content&quot;: &quot;Why don&#039;t skeletons fight each other? Because they don&#039;t have the guts.&quot;,
-        &quot;user_id&quot;: 1,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
+        &quot;id&quot;: 7,
+        &quot;name&quot;: &quot;elisha&quot;,
+        &quot;email&quot;: &quot;elishamutang@outlook.com&quot;,
+        &quot;email_verified_at&quot;: &quot;2025-10-10T14:01:55.000000Z&quot;,
+        &quot;created_at&quot;: &quot;2025-10-10T14:01:36.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-10T14:01:55.000000Z&quot;,
+        &quot;status&quot;: &quot;active&quot;,
         &quot;deleted_at&quot;: null
     }
 }</code>
@@ -2782,15 +2801,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-auth-email-verify"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-auth-email-verify"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -2830,19 +2849,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/auth/email/verify/architecto/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/auth/email/verify/consequatur/consequatur" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/auth/email/verify/architecto/architecto"
+    "https://daneilel.screencraft.net.au/api/auth/email/verify/consequatur/consequatur"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -2855,12 +2874,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/auth/email/verify/architecto/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/auth/email/verify/consequatur/consequatur';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -2874,9 +2893,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/auth/email/verify/architecto/architecto'
+url = 'https://daneilel.screencraft.net.au/api/auth/email/verify/consequatur/consequatur'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -2888,7 +2907,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-auth-email-verify--id---hash-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (403):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -2900,17 +2919,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
-    &quot;data&quot;: {
-        &quot;id&quot;: 4,
-        &quot;title&quot;: &quot;LIGHTS&quot;,
-        &quot;content&quot;: &quot;How many programmers does it take to change a light bulb? None. That&rsquo;s a hardware problem.&quot;,
-        &quot;user_id&quot;: 6,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:47:13.000000Z&quot;,
-        &quot;deleted_at&quot;: null
-    }
+    &quot;message&quot;: &quot;Invalid signature.&quot;
 }</code>
  </pre>
     </span>
@@ -2962,15 +2971,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-auth-email-verify--id---hash-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-auth-email-verify--id---hash-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3001,10 +3010,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-auth-email-verify--id---hash-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the verify. Example: <code>architecto</code></p>
+<p>The ID of the verify. Example: <code>consequatur</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>hash</code></b>&nbsp;&nbsp;
@@ -3012,10 +3021,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="hash"                data-endpoint="GETapi-auth-email-verify--id---hash-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
             </div>
                     </form>
 
@@ -3033,19 +3042,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/auth/email/verification-notification" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/auth/email/verification-notification" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/auth/email/verification-notification"
+    "https://daneilel.screencraft.net.au/api/auth/email/verification-notification"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3058,12 +3067,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/auth/email/verification-notification';
+$url = 'https://daneilel.screencraft.net.au/api/auth/email/verification-notification';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3077,9 +3086,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/auth/email/verification-notification'
+url = 'https://daneilel.screencraft.net.au/api/auth/email/verification-notification'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3139,15 +3148,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-auth-email-verification-notification"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-auth-email-verification-notification"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3191,19 +3200,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/jokes/trash/recover/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/jokes/trash/recover/consequatur" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/trash/recover/architecto"
+    "https://daneilel.screencraft.net.au/api/jokes/trash/recover/consequatur"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3216,12 +3225,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/trash/recover/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/trash/recover/consequatur';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3235,9 +3244,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/trash/recover/architecto'
+url = 'https://daneilel.screencraft.net.au/api/jokes/trash/recover/consequatur'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3297,15 +3306,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes-trash-recover--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes-trash-recover--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3336,10 +3345,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-jokes-trash-recover--id-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the recover. Example: <code>architecto</code></p>
+<p>The ID of the recover. Example: <code>consequatur</code></p>
             </div>
                     </form>
 
@@ -3357,19 +3366,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/jokes/trash/remove/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/jokes/trash/remove/consequatur" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/trash/remove/architecto"
+    "https://daneilel.screencraft.net.au/api/jokes/trash/remove/consequatur"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3382,12 +3391,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/trash/remove/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/trash/remove/consequatur';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3401,9 +3410,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/trash/remove/architecto'
+url = 'https://daneilel.screencraft.net.au/api/jokes/trash/remove/consequatur'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3463,15 +3472,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes-trash-remove--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes-trash-remove--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3502,10 +3511,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-jokes-trash-remove--id-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the remove. Example: <code>architecto</code></p>
+<p>The ID of the remove. Example: <code>consequatur</code></p>
             </div>
                     </form>
 
@@ -3523,19 +3532,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/jokes/trash/recover-all" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/jokes/trash/recover-all" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/trash/recover-all"
+    "https://daneilel.screencraft.net.au/api/jokes/trash/recover-all"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3548,12 +3557,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/trash/recover-all';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/trash/recover-all';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3567,9 +3576,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/trash/recover-all'
+url = 'https://daneilel.screencraft.net.au/api/jokes/trash/recover-all'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3629,15 +3638,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes-trash-recover-all"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes-trash-recover-all"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3677,19 +3686,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/jokes/trash/remove-all" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/jokes/trash/remove-all" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/trash/remove-all"
+    "https://daneilel.screencraft.net.au/api/jokes/trash/remove-all"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3702,12 +3711,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/trash/remove-all';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/trash/remove-all';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3721,9 +3730,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/trash/remove-all'
+url = 'https://daneilel.screencraft.net.au/api/jokes/trash/remove-all'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3783,15 +3792,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes-trash-remove-all"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes-trash-remove-all"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -3831,19 +3840,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/jokes/trash" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/jokes/trash" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/trash"
+    "https://daneilel.screencraft.net.au/api/jokes/trash"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -3856,12 +3865,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/trash';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/trash';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -3875,9 +3884,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/trash'
+url = 'https://daneilel.screencraft.net.au/api/jokes/trash'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -3889,7 +3898,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-jokes-trash">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (403):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -3902,16 +3911,8 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
-    &quot;data&quot;: {
-        &quot;id&quot;: 5,
-        &quot;title&quot;: &quot;Java Divorce&quot;,
-        &quot;content&quot;: &quot;Why did the two Java methods get a divorce? Because they had constant arguments.&quot;,
-        &quot;user_id&quot;: 5,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;deleted_at&quot;: null
-    }
+    &quot;message&quot;: &quot;You are not authorized to perform this action.&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -3963,15 +3964,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-jokes-trash"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-jokes-trash"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4011,29 +4012,29 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/jokes" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/jokes" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"search\": \"architecto\"
+    \"search\": \"consequatur\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes"
+    "https://daneilel.screencraft.net.au/api/jokes"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "search": "architecto"
+    "search": "consequatur"
 };
 
 fetch(url, {
@@ -4045,17 +4046,17 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes';
+$url = 'https://daneilel.screencraft.net.au/api/jokes';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'search' =&gt; 'architecto',
+            'search' =&gt; 'consequatur',
         ],
     ]
 );
@@ -4067,12 +4068,12 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes'
+url = 'https://daneilel.screencraft.net.au/api/jokes'
 payload = {
-    "search": "architecto"
+    "search": "consequatur"
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -4084,7 +4085,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-jokes">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -4096,16 +4097,38 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Jokes retrieved successfully&quot;,
     &quot;data&quot;: {
-        &quot;id&quot;: 8,
-        &quot;title&quot;: &quot;Joke about pirates, maths, server&quot;,
-        &quot;content&quot;: &quot;New joke&#039;s content&quot;,
-        &quot;user_id&quot;: 4,
-        &quot;created_at&quot;: &quot;2025-10-09T06:33:50.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:33:50.000000Z&quot;,
-        &quot;deleted_at&quot;: null
+        &quot;current_page&quot;: 1,
+        &quot;data&quot;: [],
+        &quot;first_page_url&quot;: &quot;https://daneilel.screencraft.net.au/api/jokes?page=1&quot;,
+        &quot;from&quot;: null,
+        &quot;last_page&quot;: 1,
+        &quot;last_page_url&quot;: &quot;https://daneilel.screencraft.net.au/api/jokes?page=1&quot;,
+        &quot;links&quot;: [
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;https://daneilel.screencraft.net.au/api/jokes?page=1&quot;,
+                &quot;label&quot;: &quot;1&quot;,
+                &quot;active&quot;: true
+            },
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
+                &quot;active&quot;: false
+            }
+        ],
+        &quot;next_page_url&quot;: null,
+        &quot;path&quot;: &quot;https://daneilel.screencraft.net.au/api/jokes&quot;,
+        &quot;per_page&quot;: 5,
+        &quot;prev_page_url&quot;: null,
+        &quot;to&quot;: null,
+        &quot;total&quot;: 0
     }
 }</code>
  </pre>
@@ -4158,15 +4181,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-jokes"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-jokes"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4197,10 +4220,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="search"                data-endpoint="GETapi-jokes"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
         </form>
 
@@ -4218,35 +4241,35 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/jokes" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/jokes" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"title\": \"b\",
-    \"content\": \"architecto\",
-    \"categories\": \"architecto\",
-    \"reference\": \"architecto\"
+    \"title\": \"vmqeopfuudtdsufvyvddq\",
+    \"content\": \"consequatur\",
+    \"categories\": \"consequatur\",
+    \"reference\": \"consequatur\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes"
+    "https://daneilel.screencraft.net.au/api/jokes"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "title": "b",
-    "content": "architecto",
-    "categories": "architecto",
-    "reference": "architecto"
+    "title": "vmqeopfuudtdsufvyvddq",
+    "content": "consequatur",
+    "categories": "consequatur",
+    "reference": "consequatur"
 };
 
 fetch(url, {
@@ -4258,20 +4281,20 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes';
+$url = 'https://daneilel.screencraft.net.au/api/jokes';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'title' =&gt; 'b',
-            'content' =&gt; 'architecto',
-            'categories' =&gt; 'architecto',
-            'reference' =&gt; 'architecto',
+            'title' =&gt; 'vmqeopfuudtdsufvyvddq',
+            'content' =&gt; 'consequatur',
+            'categories' =&gt; 'consequatur',
+            'reference' =&gt; 'consequatur',
         ],
     ]
 );
@@ -4283,15 +4306,15 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes'
+url = 'https://daneilel.screencraft.net.au/api/jokes'
 payload = {
-    "title": "b",
-    "content": "architecto",
-    "categories": "architecto",
-    "reference": "architecto"
+    "title": "vmqeopfuudtdsufvyvddq",
+    "content": "consequatur",
+    "categories": "consequatur",
+    "reference": "consequatur"
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -4351,15 +4374,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4390,10 +4413,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="title"                data-endpoint="POSTapi-jokes"
-               value="b"
+               value="vmqeopfuudtdsufvyvddq"
                data-component="body">
     <br>
-<p>Must not be greater than 96 characters. Example: <code>b</code></p>
+<p>Must not be greater than 96 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>content</code></b>&nbsp;&nbsp;
@@ -4401,10 +4424,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="content"                data-endpoint="POSTapi-jokes"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>categories</code></b>&nbsp;&nbsp;
@@ -4412,10 +4435,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="categories"                data-endpoint="POSTapi-jokes"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>reference</code></b>&nbsp;&nbsp;
@@ -4423,10 +4446,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="reference"                data-endpoint="POSTapi-jokes"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
         </form>
 
@@ -4444,19 +4467,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/jokes/1" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/jokes/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/1"
+    "https://daneilel.screencraft.net.au/api/jokes/1"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4469,12 +4492,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/1';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/1';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -4488,9 +4511,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/1'
+url = 'https://daneilel.screencraft.net.au/api/jokes/1'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -4502,7 +4525,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-jokes--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -4514,16 +4537,43 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Joke retrieved successfully&quot;,
     &quot;data&quot;: {
-        &quot;id&quot;: 4,
-        &quot;title&quot;: &quot;LIGHTS&quot;,
-        &quot;content&quot;: &quot;How many programmers does it take to change a light bulb? None. That&rsquo;s a hardware problem.&quot;,
-        &quot;user_id&quot;: 6,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:47:13.000000Z&quot;,
-        &quot;deleted_at&quot;: null
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;Skeleton Fight&quot;,
+        &quot;content&quot;: &quot;Why don&#039;t skeletons fight each other? Because they don&#039;t have the guts.&quot;,
+        &quot;user_id&quot;: 2,
+        &quot;created_at&quot;: &quot;2025-10-10T14:01:27.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-10-10T14:01:27.000000Z&quot;,
+        &quot;deleted_at&quot;: null,
+        &quot;categories&quot;: [
+            {
+                &quot;id&quot;: 5,
+                &quot;title&quot;: &quot;Maths&quot;,
+                &quot;description&quot;: &quot;Jokes related to mathematics.&quot;,
+                &quot;created_at&quot;: &quot;2025-10-10T14:01:27.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-10-10T14:01:27.000000Z&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;pivot&quot;: {
+                    &quot;joke_id&quot;: 1,
+                    &quot;category_id&quot;: 5
+                }
+            },
+            {
+                &quot;id&quot;: 10,
+                &quot;title&quot;: &quot;Skeleton&quot;,
+                &quot;description&quot;: &quot;Jokes about skeletons and bones.&quot;,
+                &quot;created_at&quot;: &quot;2025-10-10T14:01:27.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-10-10T14:01:27.000000Z&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;pivot&quot;: {
+                    &quot;joke_id&quot;: 1,
+                    &quot;category_id&quot;: 10
+                }
+            }
+        ],
+        &quot;votes&quot;: []
     }
 }</code>
  </pre>
@@ -4576,15 +4626,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-jokes--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-jokes--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4636,31 +4686,31 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/jokes/1" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/jokes/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"title\": \"b\",
-    \"content\": \"architecto\"
+    \"title\": \"vmqeopfuudtdsufvyvddq\",
+    \"content\": \"consequatur\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/1"
+    "https://daneilel.screencraft.net.au/api/jokes/1"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "title": "b",
-    "content": "architecto"
+    "title": "vmqeopfuudtdsufvyvddq",
+    "content": "consequatur"
 };
 
 fetch(url, {
@@ -4672,18 +4722,18 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/1';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/1';
 $response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'title' =&gt; 'b',
-            'content' =&gt; 'architecto',
+            'title' =&gt; 'vmqeopfuudtdsufvyvddq',
+            'content' =&gt; 'consequatur',
         ],
     ]
 );
@@ -4695,13 +4745,13 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/1'
+url = 'https://daneilel.screencraft.net.au/api/jokes/1'
 payload = {
-    "title": "b",
-    "content": "architecto"
+    "title": "vmqeopfuudtdsufvyvddq",
+    "content": "consequatur"
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -4765,15 +4815,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="PUTapi-jokes--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-jokes--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4816,10 +4866,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="title"                data-endpoint="PUTapi-jokes--id-"
-               value="b"
+               value="vmqeopfuudtdsufvyvddq"
                data-component="body">
     <br>
-<p>Must not be greater than 96 characters. Example: <code>b</code></p>
+<p>Must not be greater than 96 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>content</code></b>&nbsp;&nbsp;
@@ -4827,10 +4877,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="content"                data-endpoint="PUTapi-jokes--id-"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
         </form>
 
@@ -4848,19 +4898,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/jokes/1" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/jokes/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/1"
+    "https://daneilel.screencraft.net.au/api/jokes/1"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4873,12 +4923,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/1';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/1';
 $response = $client-&gt;delete(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -4892,9 +4942,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/1'
+url = 'https://daneilel.screencraft.net.au/api/jokes/1'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -4954,15 +5004,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="DELETEapi-jokes--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-jokes--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5018,29 +5068,29 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/auth/reset-password" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/auth/reset-password" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"password\": \"|]|{+-\"
+    \"password\": \"O[2UZ5ij-e\\/dl4m{o,\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/auth/reset-password"
+    "https://daneilel.screencraft.net.au/api/auth/reset-password"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "password": "|]|{+-"
+    "password": "O[2UZ5ij-e\/dl4m{o,"
 };
 
 fetch(url, {
@@ -5052,17 +5102,17 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/auth/reset-password';
+$url = 'https://daneilel.screencraft.net.au/api/auth/reset-password';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'password' =&gt; '|]|{+-',
+            'password' =&gt; 'O[2UZ5ij-e/dl4m{o,',
         ],
     ]
 );
@@ -5074,12 +5124,12 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/auth/reset-password'
+url = 'https://daneilel.screencraft.net.au/api/auth/reset-password'
 payload = {
-    "password": "|]|{+-"
+    "password": "O[2UZ5ij-e\/dl4m{o,"
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -5139,15 +5189,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-auth-reset-password"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-auth-reset-password"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5178,10 +5228,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-auth-reset-password"
-               value="|]|{+-"
+               value="O[2UZ5ij-e/dl4m{o,"
                data-component="body">
     <br>
-<p>Must be at least 6 characters. Example: <code>|]|{+-</code></p>
+<p>Must be at least 6 characters. Example: <code>O[2UZ5ij-e/dl4m{o,</code></p>
         </div>
         </form>
 
@@ -5203,29 +5253,29 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/admin/roles" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/admin/roles" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"search\": \"architecto\"
+    \"search\": \"consequatur\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/roles"
+    "https://daneilel.screencraft.net.au/api/admin/roles"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "search": "architecto"
+    "search": "consequatur"
 };
 
 fetch(url, {
@@ -5237,17 +5287,17 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/roles';
+$url = 'https://daneilel.screencraft.net.au/api/admin/roles';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'search' =&gt; 'architecto',
+            'search' =&gt; 'consequatur',
         ],
     ]
 );
@@ -5259,12 +5309,12 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/roles'
+url = 'https://daneilel.screencraft.net.au/api/admin/roles'
 payload = {
-    "search": "architecto"
+    "search": "consequatur"
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -5276,7 +5326,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-admin-roles">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (403):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -5289,16 +5339,8 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
-    &quot;data&quot;: {
-        &quot;id&quot;: 5,
-        &quot;title&quot;: &quot;Java Divorce&quot;,
-        &quot;content&quot;: &quot;Why did the two Java methods get a divorce? Because they had constant arguments.&quot;,
-        &quot;user_id&quot;: 5,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;deleted_at&quot;: null
-    }
+    &quot;message&quot;: &quot;You are not authorized to perform this action.&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -5350,15 +5392,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-admin-roles"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-roles"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5389,10 +5431,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="search"                data-endpoint="GETapi-admin-roles"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
         </form>
 
@@ -5410,31 +5452,31 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/admin/roles" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/admin/roles" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"b\",
-    \"level\": 22
+    \"name\": \"vmqeopfuudtdsufvyvddq\",
+    \"level\": 1
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/roles"
+    "https://daneilel.screencraft.net.au/api/admin/roles"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "name": "b",
-    "level": 22
+    "name": "vmqeopfuudtdsufvyvddq",
+    "level": 1
 };
 
 fetch(url, {
@@ -5446,18 +5488,18 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/roles';
+$url = 'https://daneilel.screencraft.net.au/api/admin/roles';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'b',
-            'level' =&gt; 22,
+            'name' =&gt; 'vmqeopfuudtdsufvyvddq',
+            'level' =&gt; 1,
         ],
     ]
 );
@@ -5469,13 +5511,13 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/roles'
+url = 'https://daneilel.screencraft.net.au/api/admin/roles'
 payload = {
-    "name": "b",
-    "level": 22
+    "name": "vmqeopfuudtdsufvyvddq",
+    "level": 1
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -5535,15 +5577,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-roles"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-roles"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5574,10 +5616,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-admin-roles"
-               value="b"
+               value="vmqeopfuudtdsufvyvddq"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>b</code></p>
+<p>Must not be greater than 255 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>level</code></b>&nbsp;&nbsp;
@@ -5585,10 +5627,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="level"                data-endpoint="POSTapi-admin-roles"
-               value="22"
+               value="1"
                data-component="body">
     <br>
-<p>Must be at least 1. Must not be greater than 999. Example: <code>22</code></p>
+<p>Must be at least 1. Must not be greater than 999. Example: <code>1</code></p>
         </div>
         </form>
 
@@ -5606,19 +5648,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/admin/roles/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/admin/roles/consequatur" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/roles/architecto"
+    "https://daneilel.screencraft.net.au/api/admin/roles/consequatur"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5631,12 +5673,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/roles/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/admin/roles/consequatur';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -5650,9 +5692,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/roles/architecto'
+url = 'https://daneilel.screencraft.net.au/api/admin/roles/consequatur'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -5664,7 +5706,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-admin-roles--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (404):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -5677,16 +5719,8 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
-    &quot;data&quot;: {
-        &quot;id&quot;: 4,
-        &quot;title&quot;: &quot;LIGHTS&quot;,
-        &quot;content&quot;: &quot;How many programmers does it take to change a light bulb? None. That&rsquo;s a hardware problem.&quot;,
-        &quot;user_id&quot;: 6,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:47:13.000000Z&quot;,
-        &quot;deleted_at&quot;: null
-    }
+    &quot;message&quot;: &quot;Role not found&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -5738,15 +5772,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-admin-roles--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-roles--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5777,10 +5811,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-admin-roles--id-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the role. Example: <code>architecto</code></p>
+<p>The ID of the role. Example: <code>consequatur</code></p>
             </div>
                     </form>
 
@@ -5798,19 +5832,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/admin/roles/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/admin/roles/consequatur" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/roles/architecto"
+    "https://daneilel.screencraft.net.au/api/admin/roles/consequatur"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5823,12 +5857,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/roles/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/admin/roles/consequatur';
 $response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -5842,9 +5876,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/roles/architecto'
+url = 'https://daneilel.screencraft.net.au/api/admin/roles/consequatur'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -5908,15 +5942,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="PUTapi-admin-roles--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-admin-roles--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -5947,10 +5981,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PUTapi-admin-roles--id-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the role. Example: <code>architecto</code></p>
+<p>The ID of the role. Example: <code>consequatur</code></p>
             </div>
                     </form>
 
@@ -5968,19 +6002,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/admin/roles/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/admin/roles/consequatur" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/roles/architecto"
+    "https://daneilel.screencraft.net.au/api/admin/roles/consequatur"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5993,12 +6027,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/roles/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/admin/roles/consequatur';
 $response = $client-&gt;delete(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6012,9 +6046,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/roles/architecto'
+url = 'https://daneilel.screencraft.net.au/api/admin/roles/consequatur'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6074,15 +6108,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="DELETEapi-admin-roles--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-admin-roles--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6113,10 +6147,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-admin-roles--id-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the role. Example: <code>architecto</code></p>
+<p>The ID of the role. Example: <code>consequatur</code></p>
             </div>
                     </form>
 
@@ -6138,19 +6172,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/admin/users/trash/recover/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/admin/users/trash/recover/consequatur" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/trash/recover/architecto"
+    "https://daneilel.screencraft.net.au/api/admin/users/trash/recover/consequatur"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6163,12 +6197,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/trash/recover/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/admin/users/trash/recover/consequatur';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6182,9 +6216,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/trash/recover/architecto'
+url = 'https://daneilel.screencraft.net.au/api/admin/users/trash/recover/consequatur'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6244,15 +6278,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-recover--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-recover--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6283,10 +6317,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-admin-users-trash-recover--id-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the recover. Example: <code>architecto</code></p>
+<p>The ID of the recover. Example: <code>consequatur</code></p>
             </div>
                     </form>
 
@@ -6304,19 +6338,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/admin/users/trash/remove/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/admin/users/trash/remove/consequatur" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/trash/remove/architecto"
+    "https://daneilel.screencraft.net.au/api/admin/users/trash/remove/consequatur"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6329,12 +6363,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/trash/remove/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/admin/users/trash/remove/consequatur';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6348,9 +6382,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/trash/remove/architecto'
+url = 'https://daneilel.screencraft.net.au/api/admin/users/trash/remove/consequatur'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6410,15 +6444,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-remove--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-remove--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6449,10 +6483,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-admin-users-trash-remove--id-"
-               value="architecto"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the remove. Example: <code>architecto</code></p>
+<p>The ID of the remove. Example: <code>consequatur</code></p>
             </div>
                     </form>
 
@@ -6470,19 +6504,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/admin/users/trash/recover-all" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/admin/users/trash/recover-all" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/trash/recover-all"
+    "https://daneilel.screencraft.net.au/api/admin/users/trash/recover-all"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6495,12 +6529,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/trash/recover-all';
+$url = 'https://daneilel.screencraft.net.au/api/admin/users/trash/recover-all';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6514,9 +6548,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/trash/recover-all'
+url = 'https://daneilel.screencraft.net.au/api/admin/users/trash/recover-all'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6576,15 +6610,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-recover-all"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-recover-all"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6624,19 +6658,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/admin/users/trash/remove-all" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/admin/users/trash/remove-all" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/trash/remove-all"
+    "https://daneilel.screencraft.net.au/api/admin/users/trash/remove-all"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6649,12 +6683,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/trash/remove-all';
+$url = 'https://daneilel.screencraft.net.au/api/admin/users/trash/remove-all';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6668,9 +6702,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/trash/remove-all'
+url = 'https://daneilel.screencraft.net.au/api/admin/users/trash/remove-all'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6730,15 +6764,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-remove-all"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-users-trash-remove-all"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6778,19 +6812,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/admin/users/trash" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/admin/users/trash" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/trash"
+    "https://daneilel.screencraft.net.au/api/admin/users/trash"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -6803,12 +6837,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/trash';
+$url = 'https://daneilel.screencraft.net.au/api/admin/users/trash';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -6822,9 +6856,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/trash'
+url = 'https://daneilel.screencraft.net.au/api/admin/users/trash'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -6836,7 +6870,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-admin-users-trash">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (403):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -6849,16 +6883,8 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
-    &quot;data&quot;: {
-        &quot;id&quot;: 7,
-        &quot;title&quot;: &quot;Cache Bankruptcy&quot;,
-        &quot;content&quot;: &quot;Why did the edge server go bankrupt? Because it ran out of cache.&quot;,
-        &quot;user_id&quot;: 5,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;deleted_at&quot;: null
-    }
+    &quot;message&quot;: &quot;You are not authorized to perform this action.&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -6910,15 +6936,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-admin-users-trash"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-users-trash"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -6958,29 +6984,29 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/admin/users" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/admin/users" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"search\": \"architecto\"
+    \"search\": \"consequatur\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users"
+    "https://daneilel.screencraft.net.au/api/admin/users"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "search": "architecto"
+    "search": "consequatur"
 };
 
 fetch(url, {
@@ -6992,17 +7018,17 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users';
+$url = 'https://daneilel.screencraft.net.au/api/admin/users';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'search' =&gt; 'architecto',
+            'search' =&gt; 'consequatur',
         ],
     ]
 );
@@ -7014,12 +7040,12 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users'
+url = 'https://daneilel.screencraft.net.au/api/admin/users'
 payload = {
-    "search": "architecto"
+    "search": "consequatur"
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -7031,7 +7057,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-admin-users">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (403):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -7044,16 +7070,8 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
-    &quot;data&quot;: {
-        &quot;id&quot;: 7,
-        &quot;title&quot;: &quot;Cache Bankruptcy&quot;,
-        &quot;content&quot;: &quot;Why did the edge server go bankrupt? Because it ran out of cache.&quot;,
-        &quot;user_id&quot;: 5,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;deleted_at&quot;: null
-    }
+    &quot;message&quot;: &quot;You are not authorized to perform this action.&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -7105,15 +7123,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-admin-users"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-users"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -7144,10 +7162,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="search"                data-endpoint="GETapi-admin-users"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
         </form>
 
@@ -7165,39 +7183,39 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/admin/users" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/admin/users" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"architecto\",
-    \"email\": \"zbailey@example.net\",
-    \"password\": \"|]|{+-\",
-    \"role\": \"client\",
-    \"status\": \"suspended\",
-    \"email_verified_at\": \"2025-10-11T10:01:59\"
+    \"name\": \"consequatur\",
+    \"email\": \"carolyne.luettgen@example.org\",
+    \"password\": \"O[2UZ5ij-e\\/dl4m{o,\",
+    \"role\": \"staff\",
+    \"status\": \"banned\",
+    \"email_verified_at\": \"2025-10-11T10:14:22\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users"
+    "https://daneilel.screencraft.net.au/api/admin/users"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "name": "architecto",
-    "email": "zbailey@example.net",
-    "password": "|]|{+-",
-    "role": "client",
-    "status": "suspended",
-    "email_verified_at": "2025-10-11T10:01:59"
+    "name": "consequatur",
+    "email": "carolyne.luettgen@example.org",
+    "password": "O[2UZ5ij-e\/dl4m{o,",
+    "role": "staff",
+    "status": "banned",
+    "email_verified_at": "2025-10-11T10:14:22"
 };
 
 fetch(url, {
@@ -7209,22 +7227,22 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users';
+$url = 'https://daneilel.screencraft.net.au/api/admin/users';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'architecto',
-            'email' =&gt; 'zbailey@example.net',
-            'password' =&gt; '|]|{+-',
-            'role' =&gt; 'client',
-            'status' =&gt; 'suspended',
-            'email_verified_at' =&gt; '2025-10-11T10:01:59',
+            'name' =&gt; 'consequatur',
+            'email' =&gt; 'carolyne.luettgen@example.org',
+            'password' =&gt; 'O[2UZ5ij-e/dl4m{o,',
+            'role' =&gt; 'staff',
+            'status' =&gt; 'banned',
+            'email_verified_at' =&gt; '2025-10-11T10:14:22',
         ],
     ]
 );
@@ -7236,17 +7254,17 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users'
+url = 'https://daneilel.screencraft.net.au/api/admin/users'
 payload = {
-    "name": "architecto",
-    "email": "zbailey@example.net",
-    "password": "|]|{+-",
-    "role": "client",
-    "status": "suspended",
-    "email_verified_at": "2025-10-11T10:01:59"
+    "name": "consequatur",
+    "email": "carolyne.luettgen@example.org",
+    "password": "O[2UZ5ij-e\/dl4m{o,",
+    "role": "staff",
+    "status": "banned",
+    "email_verified_at": "2025-10-11T10:14:22"
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -7306,15 +7324,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-admin-users"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-users"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -7345,10 +7363,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-admin-users"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -7356,10 +7374,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-admin-users"
-               value="zbailey@example.net"
+               value="carolyne.luettgen@example.org"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>zbailey@example.net</code></p>
+<p>Must be a valid email address. Example: <code>carolyne.luettgen@example.org</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -7367,10 +7385,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-admin-users"
-               value="|]|{+-"
+               value="O[2UZ5ij-e/dl4m{o,"
                data-component="body">
     <br>
-<p>Example: <code>|]|{+-</code></p>
+<p>Example: <code>O[2UZ5ij-e/dl4m{o,</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>role</code></b>&nbsp;&nbsp;
@@ -7378,10 +7396,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="POSTapi-admin-users"
-               value="client"
+               value="staff"
                data-component="body">
     <br>
-<p>Example: <code>client</code></p>
+<p>Example: <code>staff</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>admin</code></li> <li><code>staff</code></li> <li><code>client</code></li></ul>
         </div>
@@ -7391,10 +7409,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-admin-users"
-               value="suspended"
+               value="banned"
                data-component="body">
     <br>
-<p>Example: <code>suspended</code></p>
+<p>Example: <code>banned</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>suspended</code></li> <li><code>banned</code></li></ul>
         </div>
@@ -7404,10 +7422,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="email_verified_at"                data-endpoint="POSTapi-admin-users"
-               value="2025-10-11T10:01:59"
+               value="2025-10-11T10:14:22"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-10-11T10:01:59</code></p>
+<p>Must be a valid date. Example: <code>2025-10-11T10:14:22</code></p>
         </div>
         </form>
 
@@ -7425,19 +7443,19 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/admin/users/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    --get "https://daneilel.screencraft.net.au/api/admin/users/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/architecto"
+    "https://daneilel.screencraft.net.au/api/admin/users/1"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7450,12 +7468,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/admin/users/1';
 $response = $client-&gt;get(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -7469,9 +7487,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/architecto'
+url = 'https://daneilel.screencraft.net.au/api/admin/users/1'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -7483,7 +7501,7 @@ response.json()</code></pre></div>
 
 <span id="example-responses-GETapi-admin-users--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (403):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -7496,16 +7514,8 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Please log into your account.&quot;,
-    &quot;data&quot;: {
-        &quot;id&quot;: 5,
-        &quot;title&quot;: &quot;Java Divorce&quot;,
-        &quot;content&quot;: &quot;Why did the two Java methods get a divorce? Because they had constant arguments.&quot;,
-        &quot;user_id&quot;: 5,
-        &quot;created_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-10-09T06:29:09.000000Z&quot;,
-        &quot;deleted_at&quot;: null
-    }
+    &quot;message&quot;: &quot;You are not authorized to perform this action.&quot;,
+    &quot;data&quot;: []
 }</code>
  </pre>
     </span>
@@ -7557,15 +7567,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="GETapi-admin-users--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-users--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -7592,14 +7602,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-admin-users--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-admin-users--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>architecto</code></p>
+<p>The ID of the user. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -7617,35 +7627,35 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/admin/users/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/admin/users/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"architecto\",
-    \"email\": \"zbailey@example.net\",
-    \"role\": \"staff\",
-    \"status\": \"active\"
+    \"name\": \"consequatur\",
+    \"email\": \"carolyne.luettgen@example.org\",
+    \"role\": \"admin\",
+    \"status\": \"suspended\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/architecto"
+    "https://daneilel.screencraft.net.au/api/admin/users/1"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "name": "architecto",
-    "email": "zbailey@example.net",
-    "role": "staff",
-    "status": "active"
+    "name": "consequatur",
+    "email": "carolyne.luettgen@example.org",
+    "role": "admin",
+    "status": "suspended"
 };
 
 fetch(url, {
@@ -7657,20 +7667,20 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/admin/users/1';
 $response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'architecto',
-            'email' =&gt; 'zbailey@example.net',
-            'role' =&gt; 'staff',
-            'status' =&gt; 'active',
+            'name' =&gt; 'consequatur',
+            'email' =&gt; 'carolyne.luettgen@example.org',
+            'role' =&gt; 'admin',
+            'status' =&gt; 'suspended',
         ],
     ]
 );
@@ -7682,15 +7692,15 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/architecto'
+url = 'https://daneilel.screencraft.net.au/api/admin/users/1'
 payload = {
-    "name": "architecto",
-    "email": "zbailey@example.net",
-    "role": "staff",
-    "status": "active"
+    "name": "consequatur",
+    "email": "carolyne.luettgen@example.org",
+    "role": "admin",
+    "status": "suspended"
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -7754,15 +7764,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="PUTapi-admin-users--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-admin-users--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -7789,14 +7799,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="PUTapi-admin-users--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-admin-users--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>architecto</code></p>
+<p>The ID of the user. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -7805,10 +7815,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="PUTapi-admin-users--id-"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -7816,10 +7826,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="PUTapi-admin-users--id-"
-               value="zbailey@example.net"
+               value="carolyne.luettgen@example.org"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>zbailey@example.net</code></p>
+<p>Must be a valid email address. Example: <code>carolyne.luettgen@example.org</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>role</code></b>&nbsp;&nbsp;
@@ -7827,10 +7837,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="PUTapi-admin-users--id-"
-               value="staff"
+               value="admin"
                data-component="body">
     <br>
-<p>Example: <code>staff</code></p>
+<p>Example: <code>admin</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>admin</code></li> <li><code>staff</code></li> <li><code>client</code></li></ul>
         </div>
@@ -7840,10 +7850,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-admin-users--id-"
-               value="active"
+               value="suspended"
                data-component="body">
     <br>
-<p>Example: <code>active</code></p>
+<p>Example: <code>suspended</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>suspended</code></li> <li><code>banned</code></li></ul>
         </div>
@@ -7863,19 +7873,19 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/admin/users/architecto" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/admin/users/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/admin/users/architecto"
+    "https://daneilel.screencraft.net.au/api/admin/users/1"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7888,12 +7898,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/admin/users/architecto';
+$url = 'https://daneilel.screencraft.net.au/api/admin/users/1';
 $response = $client-&gt;delete(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -7907,9 +7917,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/admin/users/architecto'
+url = 'https://daneilel.screencraft.net.au/api/admin/users/1'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -7969,15 +7979,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="DELETEapi-admin-users--id-"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-admin-users--id-"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -8004,14 +8014,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-admin-users--id-"
-               value="architecto"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-admin-users--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>architecto</code></p>
+<p>The ID of the user. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -8033,33 +8043,33 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/profile" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/profile" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"architecto\",
-    \"email\": \"zbailey@example.net\",
-    \"password\": \"architecto\"
+    \"name\": \"consequatur\",
+    \"email\": \"carolyne.luettgen@example.org\",
+    \"password\": \"consequatur\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/profile"
+    "https://daneilel.screencraft.net.au/api/profile"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
 let body = {
-    "name": "architecto",
-    "email": "zbailey@example.net",
-    "password": "architecto"
+    "name": "consequatur",
+    "email": "carolyne.luettgen@example.org",
+    "password": "consequatur"
 };
 
 fetch(url, {
@@ -8071,19 +8081,19 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/profile';
+$url = 'https://daneilel.screencraft.net.au/api/profile';
 $response = $client-&gt;put(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'architecto',
-            'email' =&gt; 'zbailey@example.net',
-            'password' =&gt; 'architecto',
+            'name' =&gt; 'consequatur',
+            'email' =&gt; 'carolyne.luettgen@example.org',
+            'password' =&gt; 'consequatur',
         ],
     ]
 );
@@ -8095,14 +8105,14 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/profile'
+url = 'https://daneilel.screencraft.net.au/api/profile'
 payload = {
-    "name": "architecto",
-    "email": "zbailey@example.net",
-    "password": "architecto"
+    "name": "consequatur",
+    "email": "carolyne.luettgen@example.org",
+    "password": "consequatur"
 }
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -8162,15 +8172,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="PUTapi-profile"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-profile"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -8201,10 +8211,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="PUTapi-profile"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -8212,10 +8222,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="PUTapi-profile"
-               value="zbailey@example.net"
+               value="carolyne.luettgen@example.org"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>zbailey@example.net</code></p>
+<p>Must be a valid email address. Example: <code>carolyne.luettgen@example.org</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -8223,10 +8233,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="PUTapi-profile"
-               value="architecto"
+               value="consequatur"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>Example: <code>consequatur</code></p>
         </div>
         </form>
 
@@ -8244,19 +8254,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/profile/delete" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/profile/delete" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/profile/delete"
+    "https://daneilel.screencraft.net.au/api/profile/delete"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8269,12 +8279,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/profile/delete';
+$url = 'https://daneilel.screencraft.net.au/api/profile/delete';
 $response = $client-&gt;delete(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -8288,9 +8298,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/profile/delete'
+url = 'https://daneilel.screencraft.net.au/api/profile/delete'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -8350,15 +8360,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="DELETEapi-profile-delete"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-profile-delete"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -8402,19 +8412,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/jokes/1/like" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/jokes/1/like" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/1/like"
+    "https://daneilel.screencraft.net.au/api/jokes/1/like"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8427,12 +8437,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/1/like';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/1/like';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -8446,9 +8456,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/1/like'
+url = 'https://daneilel.screencraft.net.au/api/jokes/1/like'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -8508,15 +8518,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes--id--like"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes--id--like"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -8568,19 +8578,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/jokes/1/dislike" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/jokes/1/dislike" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/1/dislike"
+    "https://daneilel.screencraft.net.au/api/jokes/1/dislike"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8593,12 +8603,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/1/dislike';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/1/dislike';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -8612,9 +8622,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/1/dislike'
+url = 'https://daneilel.screencraft.net.au/api/jokes/1/dislike'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -8674,15 +8684,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes--id--dislike"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes--id--dislike"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -8734,19 +8744,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/jokes/1/remove-vote" \
-    --header "X-Api-Key: {YOUR_AUTH_KEY}" \
+    "https://daneilel.screencraft.net.au/api/jokes/1/remove-vote" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/jokes/1/remove-vote"
+    "https://daneilel.screencraft.net.au/api/jokes/1/remove-vote"
 );
 
 const headers = {
-    "X-Api-Key": "{YOUR_AUTH_KEY}",
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8759,12 +8769,12 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost:8000/api/jokes/1/remove-vote';
+$url = 'https://daneilel.screencraft.net.au/api/jokes/1/remove-vote';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
-            'X-Api-Key' =&gt; '{YOUR_AUTH_KEY}',
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
         ],
@@ -8778,9 +8788,9 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'http://localhost:8000/api/jokes/1/remove-vote'
+url = 'https://daneilel.screencraft.net.au/api/jokes/1/remove-vote'
 headers = {
-  'X-Api-Key': '{YOUR_AUTH_KEY}',
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
@@ -8840,15 +8850,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>X-Api-Key</code></b>&nbsp;&nbsp;
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="X-Api-Key" class="auth-value"               data-endpoint="POSTapi-jokes--id--remove-vote"
-               value="{YOUR_AUTH_KEY}"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-jokes--id--remove-vote"
+               value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
-<p>Example: <code>{YOUR_AUTH_KEY}</code></p>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;

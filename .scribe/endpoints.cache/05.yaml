@@ -22,7 +22,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -34,19 +34,19 @@ endpoints:
         name: search
         description: ''
         required: false
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
     cleanBodyParameters:
-      search: architecto
+      search: consequatur
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"success":false,"message":"Please log into your account.","data":{"id":5,"title":"Java Divorce","content":"Why did the two Java methods get a divorce? Because they had constant arguments.","user_id":5,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:29:09.000000Z","deleted_at":null}}'
+        status: 403
+        content: '{"success":false,"message":"You are not authorized to perform this action.","data":[]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -56,8 +56,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -79,7 +79,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -91,7 +91,7 @@ endpoints:
         name: name
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: b
+        example: vmqeopfuudtdsufvyvddq
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -101,22 +101,22 @@ endpoints:
         name: level
         description: 'Must be at least 1. Must not be greater than 999.'
         required: true
-        example: 22
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: b
-      level: 22
+      name: vmqeopfuudtdsufvyvddq
+      level: 1
     fileParameters: []
     responses: []
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -138,7 +138,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -146,14 +146,14 @@ endpoints:
         name: id
         description: 'The ID of the role.'
         required: true
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: consequatur
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -161,8 +161,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"success":false,"message":"Please log into your account.","data":{"id":4,"title":"LIGHTS","content":"How many programmers does it take to change a light bulb? None. That\u2019s a hardware problem.","user_id":6,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:47:13.000000Z","deleted_at":null}}'
+        status: 404
+        content: '{"success":false,"message":"Role not found","data":[]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -172,8 +172,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -196,7 +196,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -204,14 +204,14 @@ endpoints:
         name: id
         description: 'The ID of the role.'
         required: true
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: consequatur
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -221,8 +221,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -244,7 +244,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -252,14 +252,14 @@ endpoints:
         name: id
         description: 'The ID of the role.'
         required: true
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: consequatur
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -269,8 +269,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null

@@ -22,7 +22,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -30,14 +30,14 @@ endpoints:
         name: id
         description: 'The ID of the recover.'
         required: true
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: consequatur
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -47,8 +47,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -70,7 +70,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -78,14 +78,14 @@ endpoints:
         name: id
         description: 'The ID of the remove.'
         required: true
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: consequatur
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -95,8 +95,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -118,7 +118,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -132,8 +132,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -155,7 +155,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -169,8 +169,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -192,7 +192,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -204,8 +204,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"success":false,"message":"Please log into your account.","data":{"id":3,"title":"SQL Bar","content":"An SQL query walks into a bar, sees two tables, and asks: \"Can I join you?\"","user_id":4,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:45:40.000000Z","deleted_at":null}}'
+        status: 403
+        content: '{"success":false,"message":"You are not authorized to perform this action.","data":[]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -215,8 +215,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -238,7 +238,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -250,19 +250,19 @@ endpoints:
         name: search
         description: ''
         required: false
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
     cleanBodyParameters:
-      search: architecto
+      search: consequatur
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"success":false,"message":"Please log into your account.","data":{"id":5,"title":"Java Divorce","content":"Why did the two Java methods get a divorce? Because they had constant arguments.","user_id":5,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:29:09.000000Z","deleted_at":null}}'
+        status: 200
+        content: '{"success":true,"message":"Categories retrieved successfully","data":{"current_page":1,"data":[],"first_page_url":"https:\/\/daneilel.screencraft.net.au\/api\/categories?page=1","from":null,"last_page":1,"last_page_url":"https:\/\/daneilel.screencraft.net.au\/api\/categories?page=1","links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"https:\/\/daneilel.screencraft.net.au\/api\/categories?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"next_page_url":null,"path":"https:\/\/daneilel.screencraft.net.au\/api\/categories","per_page":5,"prev_page_url":null,"to":null,"total":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -272,8 +272,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -295,7 +295,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -307,7 +307,7 @@ endpoints:
         name: title
         description: ''
         required: true
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -317,22 +317,22 @@ endpoints:
         name: description
         description: ''
         required: true
-        example: 'Eius et animi quos velit et.'
+        example: 'Dolores dolorum amet iste laborum eius est dolor.'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      title: architecto
-      description: 'Eius et animi quos velit et.'
+      title: consequatur
+      description: 'Dolores dolorum amet iste laborum eius est dolor.'
     fileParameters: []
     responses: []
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -354,7 +354,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -362,14 +362,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: architecto
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -377,8 +377,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"success":false,"message":"Please log into your account.","data":{"id":8,"title":"Joke about pirates, maths, server","content":"New joke''s content","user_id":4,"created_at":"2025-10-09T06:33:50.000000Z","updated_at":"2025-10-09T06:33:50.000000Z","deleted_at":null}}'
+        status: 200
+        content: '{"success":true,"message":"Category retrieved successfully","data":{"id":1,"title":"Unknown","description":"Sorry, but we have no idea where to place this joke.","created_at":"2025-10-10T14:01:27.000000Z","updated_at":"2025-10-10T14:01:27.000000Z","deleted_at":null,"jokes":[]}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -388,8 +388,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -412,7 +412,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -420,14 +420,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: architecto
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -435,7 +435,7 @@ endpoints:
         name: title
         description: ''
         required: true
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -445,22 +445,22 @@ endpoints:
         name: description
         description: ''
         required: true
-        example: 'Eius et animi quos velit et.'
+        example: 'Dolores dolorum amet iste laborum eius est dolor.'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      title: architecto
-      description: 'Eius et animi quos velit et.'
+      title: consequatur
+      description: 'Dolores dolorum amet iste laborum eius est dolor.'
     fileParameters: []
     responses: []
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -482,7 +482,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -490,14 +490,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: architecto
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -507,8 +507,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null

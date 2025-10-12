@@ -20,7 +20,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -32,21 +32,21 @@ endpoints:
         name: password
         description: 'Must be at least 6 characters.'
         required: true
-        example: '|]|{+-'
+        example: 'O[2UZ5ij-e/dl4m{o,'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      password: '|]|{+-'
+      password: 'O[2UZ5ij-e/dl4m{o,'
     fileParameters: []
     responses: []
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null

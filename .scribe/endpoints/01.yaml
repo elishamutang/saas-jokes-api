@@ -20,7 +20,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -32,8 +32,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"success":false,"message":"Please log into your account.","data":{"id":1,"title":"Skeleton Fight","content":"Why don''t skeletons fight each other? Because they don''t have the guts.","user_id":1,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:29:09.000000Z","deleted_at":null}}'
+        status: 200
+        content: '{"success":true,"message":"User email already verified.","data":{"id":7,"name":"elisha","email":"elishamutang@outlook.com","email_verified_at":"2025-10-10T14:01:55.000000Z","created_at":"2025-10-10T14:01:36.000000Z","updated_at":"2025-10-10T14:01:55.000000Z","status":"active","deleted_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -43,8 +43,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -66,7 +66,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -74,7 +74,7 @@ endpoints:
         name: id
         description: 'The ID of the verify.'
         required: true
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -84,15 +84,15 @@ endpoints:
         name: hash
         description: ''
         required: true
-        example: architecto
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: architecto
-      hash: architecto
+      id: consequatur
+      hash: consequatur
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -100,8 +100,11 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"success":false,"message":"Please log into your account.","data":{"id":4,"title":"LIGHTS","content":"How many programmers does it take to change a light bulb? None. That\u2019s a hardware problem.","user_id":6,"created_at":"2025-10-09T06:29:09.000000Z","updated_at":"2025-10-09T06:47:13.000000Z","deleted_at":null}}'
+        status: 403
+        content: |-
+          {
+              "message": "Invalid signature."
+          }
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -111,8 +114,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
@@ -134,7 +137,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      X-Api-Key: '{YOUR_AUTH_KEY}'
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -148,8 +151,8 @@ endpoints:
     responseFields: []
     auth:
       - headers
-      - X-Api-Key
-      - 10|kcbmhxnlajUyAJYmTKbDrY3F3pUzfkCnk2LcFXgOccd91f58
+      - Authorization
+      - 'Bearer 3|vKleh0pY7Y6BjOcFE6YoKXP5b0xdvHe4Hv2DMhGEceac73be'
     controller: null
     method: null
     route: null
