@@ -10,16 +10,20 @@ use function Spatie\PestPluginTestTime\testTime;
 uses(RefreshDatabase::class);
 testTime()->freeze('2025-09-28 16:37:00');
 
+// Seed roles and permissions before running each test
+beforeEach(function() {
+    $this->seed(RolesAndPermissionsSeeder::class);
+});
+
 // Client users cannot browse all users
 test('client users cannot browse all users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(10)->create();
 
     // Create authenticated user
     $user = User::factory()->create([
         'email_verified_at' => now(),
+        'status' => 'active',
     ]);
 
     // Assign role
@@ -41,14 +45,13 @@ test('client users cannot browse all users', function() {
 
 // Staff level and higher can browse all users
 test('staff level and higher can browse all users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(10)->create();
 
     // Create authenticated user
     $user = User::factory()->create([
         'email_verified_at' => now(),
+        'status' => 'active',
     ]);
 
     // Assign role
@@ -71,14 +74,13 @@ test('staff level and higher can browse all users', function() {
 
 // Staff level and higher can paginate users
 test('staff level and higher can paginate users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(10)->create();
 
     // Create authenticated user
     $user = User::factory()->create([
         'email_verified_at' => now(),
+        'status' => 'active',
     ]);
 
     $user->assignRole('staff');
@@ -101,8 +103,6 @@ test('staff level and higher can paginate users', function() {
 
 // Staff level and higher can search for users
 test('staff level and higher can search for user based on name or email', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     $users = [
         [
@@ -155,11 +155,10 @@ test('staff level and higher can search for user based on name or email', functi
 
 // Staff level and higher can get a single user
 test('staff level and higher can get a single user', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare user
     $user = User::factory()->create([
         'email_verified_at' => now(),
+        'status' => 'active',
     ]);
 
     $user->assignRole('staff');
@@ -182,8 +181,6 @@ test('staff level and higher can get a single user', function() {
 
 // Staff can create client users
 test('staff can create client users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare user to be created
     $user = [
         'name' => 'New User',
@@ -214,8 +211,6 @@ test('staff can create client users', function() {
 
 // Staff cannot create users with staff or higher level roles
 test('staff cannot create staff or higher level users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare user to be created
     $user = [
         'name' => 'New User',
@@ -247,8 +242,6 @@ test('staff cannot create staff or higher level users', function() {
 
 // Admin can create users with client or staff roles
 test('admin can create users with client role', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare user to be created
     $user = [
         'name' => 'New User',
@@ -282,8 +275,6 @@ test('admin can create users with client role', function() {
 });
 
 test('admin can create users with staff role', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare user to be created
     $user = [
         'name' => 'New User',
@@ -317,8 +308,6 @@ test('admin can create users with staff role', function() {
 });
 
 test('admin cannot create users with admin role or higher', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare user to be created
     $user = [
         'name' => 'New User',
@@ -350,8 +339,6 @@ test('admin cannot create users with admin role or higher', function() {
 
 // Clients can update own user name and email
 test("clients can update own user name and email", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare user
     $user = User::factory()->create([
         'email_verified_at' => now(),
@@ -389,8 +376,6 @@ test("clients can update own user name and email", function() {
 
 // Staff can update client users' name and email
 test("staff can update client user name and email", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(3)->create();
 
@@ -429,10 +414,41 @@ test("staff can update client user name and email", function() {
     ]);
 });
 
+test("staff cannot update/ban admin users", function() {
+    // Prepare
+    $admin = User::factory()->create([
+        'status' => 'active',
+    ]);
+    $admin->assignRole('admin');
+
+    // Prepare authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+        'status' => 'active',
+    ]);
+
+    $user->assignRole('staff');
+    $this->actingAs($user);
+
+    // Send PUT request
+    $response = $this->putJson("/api/admin/users/{$admin->id}", [
+        'status' => 'banned'
+    ]);
+
+    // Assert
+    $response->assertStatus(403)
+        ->assertJson([
+            'message' => "This action is unauthorized."
+        ]);
+
+    $this->assertDatabaseHas('users', [
+        'id' => $admin->id,
+        'status' => 'active',
+    ]);
+});
+
 // Admin can update admin, staff or client users
 test("admin can update admin, staff or client users", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(3)->create();
 
@@ -471,10 +487,41 @@ test("admin can update admin, staff or client users", function() {
     ]);
 });
 
+test('admin cannot update/ban super-admin', function() {
+    // Prepare
+    $superAdmin = User::factory()->create([
+        'status' => 'active',
+    ]);
+    $superAdmin->assignRole('super-admin');
+
+    // Prepare authenticated user
+    $user = User::factory()->create([
+        'email_verified_at' => now(),
+        'status' => 'active',
+    ]);
+
+    $user->assignRole('admin');
+    $this->actingAs($user);
+
+    // Send PUT request
+    $response = $this->putJson("/api/admin/users/{$superAdmin->id}", [
+        'status' => 'banned',
+    ]);
+
+    // Assert
+    $response->assertStatus(403)
+        ->assertJson([
+            'message' => "This action is unauthorized."
+        ]);
+
+    $this->assertDatabaseHas('users', [
+        'id' => $superAdmin->id,
+        'status' => 'active',
+    ]);
+});
+
 // Super-admin can update any user
 test("super-admin can update any user", function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(3)->create();
 
@@ -515,8 +562,6 @@ test("super-admin can update any user", function() {
 
 // Delete users
 test('staff can delete client users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(5)->create();
 
@@ -549,8 +594,6 @@ test('staff can delete client users', function() {
 });
 
 test('staff cannot delete staff or higher level users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(5)->create();
 
@@ -580,8 +623,6 @@ test('staff cannot delete staff or higher level users', function() {
 });
 
 test('admin can delete staff users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(5)->create();
 
@@ -614,8 +655,6 @@ test('admin can delete staff users', function() {
 });
 
 test('admin cannot delete admin or higher level users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(5)->create();
 
@@ -645,8 +684,6 @@ test('admin cannot delete admin or higher level users', function() {
 });
 
 test('super-admin can delete any user', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     User::factory(5)->create();
 
@@ -679,8 +716,6 @@ test('super-admin can delete any user', function() {
 });
 
 test('super-admin cannot be deleted', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Authenticate user
     $authUser = User::factory()->create([
         'email_verified_at' => now(),
@@ -703,8 +738,6 @@ test('super-admin cannot be deleted', function() {
 });
 
 test('staff can only browse soft-deleted client users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     $users = User::factory(3)->create();
 
@@ -740,8 +773,6 @@ test('staff can only browse soft-deleted client users', function() {
 });
 
 test('admin can browse all soft-deleted users', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     $users = User::factory(3)->create();
 
@@ -777,8 +808,6 @@ test('admin can browse all soft-deleted users', function() {
 });
 
 test('staff can recover client user', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     $newUser = User::factory()->create([
         'status' => 'active',
@@ -806,8 +835,6 @@ test('staff can recover client user', function() {
 });
 
 test('admin can recover staff user', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     $newUser = User::factory()->create([
         'status' => 'active',
@@ -835,8 +862,6 @@ test('admin can recover staff user', function() {
 });
 
 test('admin can remove staff user or lower', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     $newUser = User::factory()->create([
         'status' => 'active',
@@ -864,8 +889,6 @@ test('admin can remove staff user or lower', function() {
 });
 
 test('super-admin can recover any user', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     $newUser = User::factory()->create([
         'status' => 'active',
@@ -893,8 +916,6 @@ test('super-admin can recover any user', function() {
 });
 
 test('super-admin can remove any user', function() {
-    $this->seed(RolesAndPermissionsSeeder::class);
-
     // Prepare users
     $newUser = User::factory()->create([
         'status' => 'active',

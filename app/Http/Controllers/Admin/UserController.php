@@ -133,7 +133,6 @@ class UserController extends Controller
                 }
             }
 
-            // TODO: Staff cannot ban admin, admin cannot ban super-admin.
             // If admin or higher suspends or bans a user, email_verified_at will become NULL and logout the user.
             if ($status && $status !== 'active') {
                 // Logout user
