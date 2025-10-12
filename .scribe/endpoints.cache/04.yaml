@@ -337,7 +337,7 @@ endpoints:
         name: role
         description: ''
         required: true
-        example: staff
+        example: admin
         type: string
         enumValues:
           - admin
@@ -350,7 +350,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: banned
+        example: suspended
         type: string
         enumValues:
           - active
@@ -363,7 +363,7 @@ endpoints:
         name: email_verified_at
         description: 'Must be a valid date.'
         required: false
-        example: '2025-10-11T10:14:22'
+        example: '2025-10-12T12:46:24'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -373,9 +373,9 @@ endpoints:
       name: consequatur
       email: carolyne.luettgen@example.org
       password: 'O[2UZ5ij-e/dl4m{o,'
-      role: staff
-      status: banned
-      email_verified_at: '2025-10-11T10:14:22'
+      role: admin
+      status: suspended
+      email_verified_at: '2025-10-12T12:46:24'
     fileParameters: []
     responses: []
     responseFields: []

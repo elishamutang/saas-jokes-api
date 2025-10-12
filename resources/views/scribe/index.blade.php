@@ -283,7 +283,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: October 11, 2025</li>
+        <li>Last updated: October 12, 2025</li>
     </ul>
 </div>
 
@@ -7191,9 +7191,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"name\": \"consequatur\",
     \"email\": \"carolyne.luettgen@example.org\",
     \"password\": \"O[2UZ5ij-e\\/dl4m{o,\",
-    \"role\": \"staff\",
-    \"status\": \"banned\",
-    \"email_verified_at\": \"2025-10-11T10:14:22\"
+    \"role\": \"admin\",
+    \"status\": \"suspended\",
+    \"email_verified_at\": \"2025-10-12T12:46:24\"
 }"
 </code></pre></div>
 
@@ -7213,9 +7213,9 @@ let body = {
     "name": "consequatur",
     "email": "carolyne.luettgen@example.org",
     "password": "O[2UZ5ij-e\/dl4m{o,",
-    "role": "staff",
-    "status": "banned",
-    "email_verified_at": "2025-10-11T10:14:22"
+    "role": "admin",
+    "status": "suspended",
+    "email_verified_at": "2025-10-12T12:46:24"
 };
 
 fetch(url, {
@@ -7240,9 +7240,9 @@ $response = $client-&gt;post(
             'name' =&gt; 'consequatur',
             'email' =&gt; 'carolyne.luettgen@example.org',
             'password' =&gt; 'O[2UZ5ij-e/dl4m{o,',
-            'role' =&gt; 'staff',
-            'status' =&gt; 'banned',
-            'email_verified_at' =&gt; '2025-10-11T10:14:22',
+            'role' =&gt; 'admin',
+            'status' =&gt; 'suspended',
+            'email_verified_at' =&gt; '2025-10-12T12:46:24',
         ],
     ]
 );
@@ -7259,9 +7259,9 @@ payload = {
     "name": "consequatur",
     "email": "carolyne.luettgen@example.org",
     "password": "O[2UZ5ij-e\/dl4m{o,",
-    "role": "staff",
-    "status": "banned",
-    "email_verified_at": "2025-10-11T10:14:22"
+    "role": "admin",
+    "status": "suspended",
+    "email_verified_at": "2025-10-12T12:46:24"
 }
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
@@ -7396,10 +7396,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="POSTapi-admin-users"
-               value="staff"
+               value="admin"
                data-component="body">
     <br>
-<p>Example: <code>staff</code></p>
+<p>Example: <code>admin</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>admin</code></li> <li><code>staff</code></li> <li><code>client</code></li></ul>
         </div>
@@ -7409,10 +7409,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-admin-users"
-               value="banned"
+               value="suspended"
                data-component="body">
     <br>
-<p>Example: <code>banned</code></p>
+<p>Example: <code>suspended</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>suspended</code></li> <li><code>banned</code></li></ul>
         </div>
@@ -7422,10 +7422,10 @@ Must be one of:
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="email_verified_at"                data-endpoint="POSTapi-admin-users"
-               value="2025-10-11T10:14:22"
+               value="2025-10-12T12:46:24"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-10-11T10:14:22</code></p>
+<p>Must be a valid date. Example: <code>2025-10-12T12:46:24</code></p>
         </div>
         </form>
 
